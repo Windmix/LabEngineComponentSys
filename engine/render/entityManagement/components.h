@@ -121,7 +121,11 @@ namespace Components
 		uint32_t numParticles = 2048;
 		Render::ParticleEmitter* particleEmitterLeft = nullptr;
 		Render::ParticleEmitter* particleEmitterRight = nullptr;
+
+		Render::ParticleEmitter* particleCanonLeft = nullptr;
+		Render::ParticleEmitter* particleCanonRight = nullptr;
 		float emitterOffset = -0.5f;
+		float canonEmitterOffset = 0.5f;
 	
 		// Allow external access to the emitter data (either as public member or getter method)
 	
@@ -133,17 +137,19 @@ namespace Components
 	{
 	public:
 		static constexpr ComponentType TYPE = ComponentType::INPUT;
-
+		//ship speed variables
 		float normalSpeed = 1.0f;
 		float boostSpeed = normalSpeed * 10.0f;
 		float accelerationFactor = 1.0f;
-
 		float currentSpeed = 0.0f;
 
 		float rotationZ = 0;
 		float rotXSmooth = 0;
 		float rotYSmooth = 0;
 		float rotZSmooth = 0;
+
+		float canonDefaultSpeed = 1.0f;
+		float canonLaunchSpeed = canonDefaultSpeed * 10.0f;
 
 		Input::Mouse* mouse = Input::GetDefaultMouse();
 		Input::Keyboard* kbd = Input::GetDefaultKeyboard();

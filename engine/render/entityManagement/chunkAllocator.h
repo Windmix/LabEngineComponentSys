@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <utility>  // For std::forward
+#include "world.h"
 
 
 template <typename T, size_t ChunkSize = 64>
@@ -38,12 +39,7 @@ private:
 template<typename T, size_t ChunkSize>
 ChunkAllocator<T, ChunkSize>::~ChunkAllocator()
 {
-    for (auto& chunk : chunks)
-    {
-        delete[] chunk.data;
-        delete[] chunk.freeList;
-    }
-    chunks.clear();
+
 }
 
 //---------------------------------------------------------------------------
@@ -106,12 +102,13 @@ void ChunkAllocator<T, ChunkSize>::Deallocate(T* ptr)
         ptr->~T();
         chunk.freeList[indexInChunk] = false;
         chunk.allocatedCount--;
-
-        // If chunk is empty, deallocate it
+        //// If chunk is empty, deallocate it
         if (chunk.allocatedCount == 0)
         {
             DeallocateChunk(chunkIndex);
         }
+       
+
     }
 }
 

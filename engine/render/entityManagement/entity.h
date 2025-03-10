@@ -38,14 +38,7 @@ inline Entity::Entity(uint32_t entityID)
 
 inline Entity::~Entity()
 {
-	for (auto component : components)
-	{
-		if (component)
-		{
-			delete component;
-			component = nullptr;
-		}
-	}
+
 }
 
 inline void Entity::AddComponent(ComponentBase* component, ComponentType type, EntityType eType)
