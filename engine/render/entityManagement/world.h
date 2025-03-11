@@ -21,11 +21,12 @@ public:
     ChunkAllocator<Components::PlayerInputComponent, 64> controlInputChunk;
     ChunkAllocator<Components::ParticleEmitterComponent, 64> particleEmitterChunk;
     ChunkAllocator<Render::ParticleEmitter, 64> ChunkOfPartcles;
+    ChunkAllocator<Components::AINavNodeComponent, 64> navNodeChunk;
 
 
-    // Vector to store active entities (to track them)
+    // Vector to store active entities (to track them) , the total Ammount
     std::vector<Entity*> entities;
-    uint32_t nextEntityId = 0;
+    std::vector<Entity*> nodes;
 
     //saving for destroyed ships
     uint32_t savedID = 0;
@@ -51,17 +52,20 @@ public:
 
 
     // Destroy an entity and deallocate all components
-    void DestroyEntity(uint32_t entityId);
+    void DestroyEntity(uint32_t entityId, EntityType eType);
     void Cleanup();
     void DestroyWorld();
 
     void CreatePlayerShip(bool isRespawning);
     void CreateAsteroid(float spread);
+    void CreatePathNode(float xOffset, float yOffset, float zOffset, float deltaXYZ);
+
 private:
 
+    void UpdateNode(Entity* entity, float dt);
     void UpdateShip(Entity* entity, float dt);
     void UpdateAsteroid(Entity* entity, float dt);
-
+    void drawNode(Entity* entity);
     void draw(Entity* entity);
 
 };
@@ -97,18 +101,28 @@ inline Entity* World::createEntity(EntityType etype, bool isRespawning)
 
     // Allocate an entity from the chunk allocator
     Entity* entity = entityChunk.Allocate();
+    entity->eType = etype;
+
     if (!isRespawning)
     {
-        entity->id = nextEntityId++;
+        // Count how many existing entities of the same type already exist
+        int count = 0;
+        for (auto ent : entities)
+        {
+            if (ent->eType == entity->eType)
+            {
+                count++;
+            }
+        }
+
+        entity->id = count; // This ensures sequential IDs per type
     }
     else
     {
         entity->id = savedID;
     }
-    entity->eType = etype;
-
-
     entities.push_back(entity);
+  
 
     return entity;
 }
@@ -141,15 +155,19 @@ inline void World::Update(float dt)
     {
         UpdateAsteroid(entity, dt);
         UpdateShip(entity, dt);
+        UpdateNode(entity, dt);
         draw(entity);
        
     }
 }
 
 
-inline void World::DestroyEntity(uint32_t entityId)
+inline void World::DestroyEntity(uint32_t entityId, EntityType eType)
 {
-    auto it = std::find_if(entities.begin(), entities.end(), [entityId](Entity* entity) { return entity->id == entityId; });
+    auto it = std::find_if(entities.begin(), entities.end(), [entityId, eType](Entity* entity)
+    {
+            return entity->id == entityId && entity->eType == eType;
+    });
 
     if (it != entities.end())
     {
@@ -163,15 +181,15 @@ inline void World::DestroyEntity(uint32_t entityId)
             {
                 transformChunk.Deallocate(transformComp);
             }
-            else if (auto* renderableComp = dynamic_cast<Components::RenderableComponent*>(component))
+            if (auto* renderableComp = dynamic_cast<Components::RenderableComponent*>(component))
             {
                 renderableChunk.Deallocate(renderableComp);
             }
-            else if (auto* colliderComp = dynamic_cast<Components::ColliderComponent*>(component))
+            if (auto* colliderComp = dynamic_cast<Components::ColliderComponent*>(component))
             {
                 colliderChunk.Deallocate(colliderComp);
             }
-            else if (auto* rigidBodyComp = dynamic_cast<Components::RigidBodyComponent*>(component))
+            if (auto* rigidBodyComp = dynamic_cast<Components::RigidBodyComponent*>(component))
             {
                 rigidBodyChunk.Deallocate(rigidBodyComp);
             }
@@ -317,13 +335,13 @@ inline void World::CreatePlayerShip(bool isRespawning)
             .theta = glm::radians(0.0f),
             .startSpeed = 1.2f,
             .endSpeed = 0.0f,
-            .startScale = 0.025f,
+            .startScale = 0.01f,
             .endScale = 0.0f,
             .decayTime = 2.58f,
             .randomTimeOffsetDist = 2.58f,
             .looping = 1,
             .emitterType = 1,
-            .discRadius = 0.020f
+            .discRadius = 0.080f
         };
 
 
@@ -334,21 +352,21 @@ inline void World::CreatePlayerShip(bool isRespawning)
 
 
         particleEmitter->particleCanonLeft->data = {
-            .origin = glm::vec4(glm::vec3(newTransform->transform[3]) + (glm::vec3(newTransform->transform[3]) * particleEmitter->canonEmitterOffset), 1.0f),
-            .dir = glm::vec4(glm::vec3(newTransform->transform[3]), 0),
-            .startColor = glm::vec4(0.0f, 0.76f, 0.00f, 1.0f) * 2.0f,
-            .endColor = glm::vec4(0,0,0,1.0f),
-            .numParticles = particleEmitter->numParticles,
-            .theta = glm::radians(1.0),
-            .startSpeed = 1.2f,
-            .endSpeed = 0.0f,
-            .startScale = 0.1f,
-            .endScale = 0.2f,
-            .decayTime = 0.6f,
-            .randomTimeOffsetDist = 0.01f,
-            .looping = 1,
-            .emitterType = 1,
-            .discRadius = 0.020f
+           .origin = glm::vec4(glm::vec3(newTransform->transform[3]) + (glm::vec3(newTransform->transform[2]) * particleEmitter->canonEmitterOffset), 1.0f),
+           .dir = glm::vec4(glm::vec3(newTransform->transform[2]), 0),
+           .startColor = glm::vec4(0.0f, 1.0f, 0.0f, 1.0f) * 3.0f,
+           .endColor = glm::vec4(0,0,0,1.0f),
+           .numParticles = particleEmitter->numParticles,
+           .theta = glm::radians(0.0f),
+           .startSpeed = -0.0f,
+           .endSpeed = -0.0f,
+           .startScale = 0.02f,
+           .endScale = 0.015f,
+           .decayTime = 0.5f,
+           .randomTimeOffsetDist = 0.00001f,
+           .looping = 0,
+           .emitterType = 1,
+           .discRadius = 0.1f
         };
 
         particleEmitter->particleCanonRight->data = particleEmitter->particleCanonLeft->data;
@@ -414,21 +432,21 @@ inline void World::CreatePlayerShip(bool isRespawning)
         Render::ParticleSystem::Instance()->AddEmitter(particleEmitter->particleEmitterRight);
 
         particleEmitter->particleCanonLeft->data = {
-            .origin = glm::vec4(glm::vec3(newTransform->transform[3]) + (glm::vec3(newTransform->transform[2]) * particleEmitter->canonEmitterOffset), 1.0f),
-            .dir = glm::vec4(glm::vec3(newTransform->transform[2]), 0),
-            .startColor = glm::vec4(0.0f, 0.76f, 0.00f, 1.0f) * 2.0f,
-            .endColor = glm::vec4(0,0,0,1.0f),
-            .numParticles = particleEmitter->numParticles,
-            .theta = glm::radians(0.0f),
-            .startSpeed = 100.0f,
-            .endSpeed = 30.0f,
-            .startScale = 0.02f,
-            .endScale = 0.0f,
-            .decayTime = 0.3f,
-            .randomTimeOffsetDist = 2.58f,
-            .looping = 1,
-            .emitterType = 1,
-            .discRadius = 0.020f
+           .origin = glm::vec4(glm::vec3(newTransform->transform[3]) + (glm::vec3(newTransform->transform[2]) * particleEmitter->canonEmitterOffset), 1.0f),
+           .dir = glm::vec4(glm::vec3(newTransform->transform[2]), 0),
+           .startColor = glm::vec4(0.0f, 1.0f, 0.0f, 1.0f) * 3.0f,
+           .endColor = glm::vec4(0,0,0,1.0f),
+           .numParticles = particleEmitter->numParticles,
+           .theta = glm::radians(0.0f),
+           .startSpeed = -0.0f,
+           .endSpeed = -0.0f,
+           .startScale = 0.02f,
+           .endScale = 0.015f,
+           .decayTime = 0.5f,
+           .randomTimeOffsetDist = 0.00001f,
+           .looping = 0,
+           .emitterType = 1,
+           .discRadius = 0.1f
         };
 
         particleEmitter->particleCanonRight->data = particleEmitter->particleCanonLeft->data;
@@ -503,6 +521,43 @@ inline void World::CreateAsteroid(float spread)
         collider->colliderID = Physics::CreateCollider(colliderMeshes[resourceIndex], newTransform->transform);
 
     }
+}
+inline void World::CreatePathNode(float xOffset, float yOffset, float zOffset, float deltaXYZ)
+{
+    const glm::vec3 EndPoints[6] =
+    {
+        glm::vec3(-1.0f, 0.0f, 0.0f),  // left
+        glm::vec3(1.0f, 0.0f, 0.0f),  // right
+
+        glm::vec3(0.0f, -1.0f, 0.0f),  // down
+        glm::vec3(0.0f, 1.0f, 0.0f),  // up
+
+        glm::vec3(0.0f, 0.0f, -1.0f),  // backward
+        glm::vec3(0.0f, 0.0f, 1.0f),  // forward
+       
+        
+    };
+
+    Entity* node = createEntity(EntityType::Node, false);
+
+    Components::TransformComponent* newTransform = transformChunk.Allocate();
+    node->AddComponent(newTransform, ComponentType::TRANSFORM, EntityType::Node);
+    newTransform->transform[3] = glm::vec4(-100.0f + xOffset * deltaXYZ, -100.0f + yOffset * deltaXYZ, -100.0f + zOffset * deltaXYZ, 0);
+
+
+    Components::AINavNodeComponent* NodeComp = navNodeChunk.Allocate();
+    node->AddComponent(NodeComp, ComponentType::NAVNODE, EntityType::Node);
+
+    for (int i = 0; i < sizeof(EndPoints) / sizeof(glm::vec3); i++)
+    {
+        NodeComp->EndPoints[i] = EndPoints[i];
+    }
+    // pushback for use of the Debug menu
+    nodes.push_back(node);
+}
+inline void World::UpdateNode(Entity* entity, float dt)
+{
+    drawNode(entity);
 }
 inline void World::UpdateShip(Entity* entity, float dt)
 {
@@ -587,17 +642,21 @@ inline void World::UpdateShip(Entity* entity, float dt)
             float isSpacePressed = playerInputComponent->kbd->held[Input::Key::Space] ? 1.0f : 0.0f;
             if (isSpacePressed >= 1.0f)
             {
-                particleComponent->particleCanonLeft->data.startSpeed = -(1000.2 + (3.0f + t));
-                particleComponent->particleCanonLeft->data.endSpeed = -(1000.2 + (3.0f + t));
-                particleComponent->particleCanonRight->data.startSpeed = -(1000.2 + (3.0f + t));
-                particleComponent->particleCanonRight->data.endSpeed = -(1000.2 + (3.0f + t));
+                particleComponent->particleCanonLeft->data.looping = 1;
+                particleComponent->particleCanonRight->data.looping = 1;
+
+                particleComponent->particleCanonLeft->data.randomTimeOffsetDist = 0.0001;
+                particleComponent->particleCanonRight->data.randomTimeOffsetDist = 0.0001;
+
+                particleComponent->particleCanonLeft->data.startSpeed = -500.0f;
+                particleComponent->particleCanonLeft->data.endSpeed = -500.0f;
+                particleComponent->particleCanonRight->data.startSpeed = -500.0f;
+                particleComponent->particleCanonRight->data.endSpeed = -500.0f;
             }
             else
             {
-                particleComponent->particleCanonLeft->data.startSpeed =  t;
-                particleComponent->particleCanonLeft->data.endSpeed = t;
-                particleComponent->particleCanonRight->data.startSpeed = t;
-                particleComponent->particleCanonRight->data.endSpeed = t;
+                particleComponent->particleCanonLeft->data.looping = 0;
+                particleComponent->particleCanonRight->data.looping = 0;
             }
 
             //check collisions
@@ -621,9 +680,12 @@ inline void World::UpdateShip(Entity* entity, float dt)
                 //if hit asteroid, one shot
                 if (hit)
                 {
+
+                    particleComponent->particleCanonLeft->data.looping = 0;
+                    particleComponent->particleCanonRight->data.looping = 0;
                     savedID = entity->id;
                     CreatePlayerShip(true);
-                    DestroyEntity(entity->id);
+                    DestroyEntity(entity->id, entity->eType);
                     hit = false;
 
                 }
@@ -644,13 +706,106 @@ inline void World::UpdateAsteroid(Entity* entity, float dt)
         transformComponent->transform = glm::rotate(transformComponent->transform, dt * glm::radians(transformComponent->rotationSpeed), transformComponent->rotationAxis);
     }
 }
-inline void World::draw(Entity* entity)
+inline void World::drawNode(Entity* entity)
 {
-    auto renderableComponent = entity->GetComponent<Components::RenderableComponent>();
-    if (renderableComponent)
+    auto navNodeComponent = entity->GetComponent< Components::AINavNodeComponent>();
+    if (entity->eType == EntityType::Node && Core::CVarReadInt(navNodeComponent->r_draw_Node_Axis) > 0) // nodes
     {
-        Debug::DrawDebugText(std::to_string(entity->GetComponent<Components::RenderableComponent>()->ownerId).c_str(), entity->GetComponent<Components::TransformComponent>()->transform[3], { 0.9f,0.9f,1,1 });
+        int drawId = Core::CVarReadInt(navNodeComponent->r_draw_Node_Axis_id);
+        auto transformComponent = entity->GetComponent<Components::TransformComponent>();
 
-        Render::RenderDevice::Draw(renderableComponent->modelId, entity->GetComponent<Components::TransformComponent>()->transform);
+        for (size_t i = 0; i < nodes.size(); i++)
+        {
+            if ( entity->id == drawId)
+            {
+                glm::vec3 pos = glm::vec3(transformComponent->transform[3]);
+
+                // -X(Red)
+                glm::vec3 dirXminus = transformComponent->transform * glm::vec4(glm::normalize(navNodeComponent->EndPoints[0]), 0.0f);
+                float lenXminus = glm::length(navNodeComponent->EndPoints[0]);
+                Debug::DrawLine(pos, pos + dirXminus * lenXminus, 1.0f, glm::vec4(1, 0, 0, 1), glm::vec4(1, 0, 0, 1), Debug::RenderMode::AlwaysOnTop);
+
+                // +X (Light Red)
+                glm::vec3 dirXplus = transformComponent->transform * glm::vec4(glm::normalize(navNodeComponent->EndPoints[1]), 0.0f);
+                float lenXplus = glm::length(navNodeComponent->EndPoints[1]);
+                Debug::DrawLine(pos, pos + dirXplus * lenXplus, 1.0f, glm::vec4(1.5f, 0.4f, 0.4f, 1), glm::vec4(1.5f, 0.4f, 0.4f, 1), Debug::RenderMode::AlwaysOnTop);
+
+                // -Y (Green)
+                glm::vec3 dirYminus = transformComponent->transform * glm::vec4(glm::normalize(navNodeComponent->EndPoints[2]), 0.0f);
+                float lenYminus = glm::length(navNodeComponent->EndPoints[2]);
+                Debug::DrawLine(pos, pos + dirYminus * lenYminus, 1.0f, glm::vec4(0, 1, 0, 1), glm::vec4(0, 1, 0, 1), Debug::RenderMode::AlwaysOnTop);
+
+                // +Y (Light Green)
+                glm::vec3 dirYplus = transformComponent->transform * glm::vec4(glm::normalize(navNodeComponent->EndPoints[3]), 0.0f);
+                float lenYplus = glm::length(navNodeComponent->EndPoints[3]);
+                Debug::DrawLine(pos, pos + dirYplus * lenYplus, 1.0f, glm::vec4(0.4f, 1.5f, 0.4f, 1), glm::vec4(0.4f, 1.5f, 0.4f, 1), Debug::RenderMode::AlwaysOnTop);
+
+                // -Z (Blue)
+                glm::vec3 dirZminus = transformComponent->transform * glm::vec4(glm::normalize(navNodeComponent->EndPoints[4]), 0.0f);
+                float lenZminus = glm::length(navNodeComponent->EndPoints[4]);
+                Debug::DrawLine(pos, pos + dirZminus * lenZminus, 1.0f, glm::vec4(0, 0, 1, 1), glm::vec4(0, 0, 1, 1), Debug::RenderMode::AlwaysOnTop);
+
+                // +Z (Light Blue)
+                glm::vec3 dirZplus = transformComponent->transform * glm::vec4(glm::normalize(navNodeComponent->EndPoints[5]), 0.0f);
+                float lenZplus = glm::length(navNodeComponent->EndPoints[5]);
+                Debug::DrawLine(pos, pos + dirZplus * lenZplus, 1.0f, glm::vec4(0.4f, 0.4f, 1.5f, 1), glm::vec4(0.4f, 0.4f, 1.5f, 1), Debug::RenderMode::AlwaysOnTop);
+                Debug::DrawDebugText(std::to_string(entity->id).c_str(), entity->GetComponent<Components::TransformComponent>()->transform[3], { 0.9f,0.9f,1,1 });
+            }
+        }
+        if (drawId < 0)
+        {
+            glm::vec3 pos = glm::vec3(transformComponent->transform[3]);
+
+            // -X(Red)
+            glm::vec3 dirXminus = transformComponent->transform * glm::vec4(glm::normalize(navNodeComponent->EndPoints[0]), 0.0f);
+            float lenXminus = glm::length(navNodeComponent->EndPoints[0]);
+            Debug::DrawLine(pos, pos + dirXminus * lenXminus, 1.0f, glm::vec4(1, 0, 0, 1), glm::vec4(1, 0, 0, 1), Debug::RenderMode::AlwaysOnTop);
+
+            // +X (Light Red)
+            glm::vec3 dirXplus = transformComponent->transform * glm::vec4(glm::normalize(navNodeComponent->EndPoints[1]), 0.0f);
+            float lenXplus = glm::length(navNodeComponent->EndPoints[1]);
+            Debug::DrawLine(pos, pos + dirXplus * lenXplus, 1.0f, glm::vec4(1.5f, 0.4f, 0.4f, 1), glm::vec4(1.5f, 0.4f, 0.4f, 1), Debug::RenderMode::AlwaysOnTop);
+
+            // -Y (Green)
+            glm::vec3 dirYminus = transformComponent->transform * glm::vec4(glm::normalize(navNodeComponent->EndPoints[2]), 0.0f);
+            float lenYminus = glm::length(navNodeComponent->EndPoints[2]);
+            Debug::DrawLine(pos, pos + dirYminus * lenYminus, 1.0f, glm::vec4(0, 1, 0, 1), glm::vec4(0, 1, 0, 1), Debug::RenderMode::AlwaysOnTop);
+
+            // +Y (Light Green)
+            glm::vec3 dirYplus = transformComponent->transform * glm::vec4(glm::normalize(navNodeComponent->EndPoints[3]), 0.0f);
+            float lenYplus = glm::length(navNodeComponent->EndPoints[3]);
+            Debug::DrawLine(pos, pos + dirYplus * lenYplus, 1.0f, glm::vec4(0.4f, 1.5f, 0.4f, 1), glm::vec4(0.4f, 1.5f, 0.4f, 1), Debug::RenderMode::AlwaysOnTop);
+
+            // -Z (Blue)
+            glm::vec3 dirZminus = transformComponent->transform * glm::vec4(glm::normalize(navNodeComponent->EndPoints[4]), 0.0f);
+            float lenZminus = glm::length(navNodeComponent->EndPoints[4]);
+            Debug::DrawLine(pos, pos + dirZminus * lenZminus, 1.0f, glm::vec4(0, 0, 1, 1), glm::vec4(0, 0, 1, 1), Debug::RenderMode::AlwaysOnTop);
+
+            // +Z (Light Blue)
+            glm::vec3 dirZplus = transformComponent->transform * glm::vec4(glm::normalize(navNodeComponent->EndPoints[5]), 0.0f);
+            float lenZplus = glm::length(navNodeComponent->EndPoints[5]);
+            Debug::DrawLine(pos, pos + dirZplus * lenZplus, 1.0f, glm::vec4(0.4f, 0.4f, 1.5f, 1), glm::vec4(0.4f, 0.4f, 1.5f, 1), Debug::RenderMode::AlwaysOnTop);
+            Debug::DrawDebugText(std::to_string(entity->id).c_str(), entity->GetComponent<Components::TransformComponent>()->transform[3], { 0.9f,0.9f,1,1 });
+        }
+
+        // Physics::RaycastPayload payload = Physics::Raycast(glm::vec3(transformComponent->transform[3]), dir, len);
+
     }
 }
+inline void World::draw(Entity* entity) // literally draw everything that renders
+{
+    auto renderableComponent = entity->GetComponent<Components::RenderableComponent>();
+   /* auto Aicomponent = entity->GetComponent<Components::AINavNodeComponent>();*/
+    auto trans = entity->GetComponent<Components::TransformComponent>();
+    if (renderableComponent)
+    {
+        Render::RenderDevice::Draw(renderableComponent->modelId, entity->GetComponent<Components::TransformComponent>()->transform);
+        Debug::DrawDebugText(std::to_string(renderableComponent->ownerId).c_str(), entity->GetComponent<Components::TransformComponent>()->transform[3], { 0.9f,0.9f,1,1 });
+    }
+   /* if (Aicomponent)
+    {
+        Debug::DrawDebugText(std::to_string(Aicomponent->ownerId).c_str(), entity->GetComponent<Components::TransformComponent>()->transform[3], { 0.9f,0.9f,1,1 });
+    }*/
+
+}
+   

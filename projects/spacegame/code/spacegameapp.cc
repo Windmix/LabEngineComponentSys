@@ -98,13 +98,29 @@ SpaceGameApp::Run()
 
 
     // Setup asteroids near
-    for (int i = 0; i < 100; i++)
+    for (int i = 0; i < 10; i++)
     {
         world->CreateAsteroid(100.0f);
     }
-    for (int i = 0; i < 50; i++)
+    for (int i = 0; i < 10; i++)
     {
         world->CreateAsteroid(60.0f);
+    }
+
+    //gridbased nodes
+    int size3D = 10;
+    float distanceBetweenPoints = 20.0f;
+    for (int i = 0; i < size3D; i++)
+    {
+        for (int j = 0; j < size3D; j++)
+        {
+            for (int k = 0; k < size3D; k++)
+            {
+                world->CreatePathNode(k, j, i, distanceBetweenPoints);
+            }
+        }
+      
+
     }
 
 
@@ -147,6 +163,7 @@ SpaceGameApp::Run()
    
 
     world->CreatePlayerShip(false);
+   
 
 
 
@@ -222,6 +239,8 @@ SpaceGameApp::RenderUI()
 	if (this->window->IsOpen())
 	{
         ImGui::Begin("Debug");
+
+        // light
         Core::CVar* r_draw_light_spheres = Core::CVarGet("r_draw_light_spheres");
         int drawLightSpheres = Core::CVarReadInt(r_draw_light_spheres);
         if (ImGui::Checkbox("Draw Light Spheres", (bool*)&drawLightSpheres))
@@ -232,6 +251,20 @@ SpaceGameApp::RenderUI()
         if (ImGui::InputInt("LightSphereId", (int*)&lightSphereId))
             Core::CVarWriteInt(r_draw_light_sphere_id, lightSphereId);
 
+
+        // nodes
+        Core::CVar* r_draw_Node_Axis = Core::CVarGet("r_draw_Node_Axis");
+        int drawNodeAxis = Core::CVarReadInt(r_draw_Node_Axis);
+        if (ImGui::Checkbox("Draw Node Axis", (bool*)&drawNodeAxis))
+        {
+            Core::CVarWriteInt(r_draw_Node_Axis, drawNodeAxis);
+
+        }
+          
+        Core::CVar* r_draw_Node_Axis_id = Core::CVarGet("r_draw_Node_Axis_id");
+        int nodeAxisID = Core::CVarReadInt(r_draw_Node_Axis_id);
+        if (ImGui::InputInt("NodeId", (int*)&nodeAxisID))
+            Core::CVarWriteInt(r_draw_Node_Axis_id, nodeAxisID);
 
         
         ImGui::End();

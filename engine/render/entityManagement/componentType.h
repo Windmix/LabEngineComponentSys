@@ -10,5 +10,6 @@ enum class ComponentType : uint32_t
 	FORCE = 1 << 4,				// 00010000
 	RENDERABLE = 1 << 5,		// 00100000
 	INPUT = 1 << 6,				// 01000000 
-	PARTICLE_EMITTER = 1 << 7	// 10000000
+	PARTICLE_EMITTER = 1 << 7,	// 10000000
+	NAVNODE = 1 << 8            // 00000001 00000000
 };

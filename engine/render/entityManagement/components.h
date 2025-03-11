@@ -23,11 +23,6 @@ namespace Components
 {
 	class TransformComponent : public ComponentBase
 	{
-	private:
-		void Translate(const glm::vec3& translation);
-		void Rotate(float angle, const glm::vec3& axis);
-		void translationRotate(float angle, const glm::vec3& axis, const glm::vec3& translation);
-		void Scale(const glm::vec3& scale);
 
 	public:
 		glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f);
@@ -154,6 +149,21 @@ namespace Components
 		Input::Mouse* mouse = Input::GetDefaultMouse();
 		Input::Keyboard* kbd = Input::GetDefaultKeyboard();
 		PlayerInputComponent() {}
+	};
+	
+	class AINavNodeComponent : public ComponentBase
+	{
+	public:
+		static constexpr ComponentType TYPE = ComponentType::NAVNODE;
+
+		Core::CVar* r_draw_Node_Axis = Core::CVarCreate(Core::CVarType::CVar_Int, "r_draw_Node_Axis", "0");
+		Core::CVar* r_draw_Node_Axis_id = Core::CVarCreate(Core::CVarType::CVar_Int, "r_draw_Node_Axis_id", " - 1");
+		
+		
+
+		glm::vec3 EndPoints[6];
+		AINavNodeComponent* parentNode = nullptr;
+
 	};
 
 }
