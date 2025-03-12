@@ -155,14 +155,50 @@ namespace Components
 	{
 	public:
 		static constexpr ComponentType TYPE = ComponentType::NAVNODE;
+		
 
 		Core::CVar* r_draw_Node_Axis = Core::CVarCreate(Core::CVarType::CVar_Int, "r_draw_Node_Axis", "0");
 		Core::CVar* r_draw_Node_Axis_id = Core::CVarCreate(Core::CVarType::CVar_Int, "r_draw_Node_Axis_id", " - 1");
-		
-		
 
 		glm::vec3 EndPoints[6];
-		AINavNodeComponent* parentNode = nullptr;
+		
+
+	};
+
+	class AIinputController : public ComponentBase
+	{
+	public:
+		static constexpr ComponentType TYPE = ComponentType::AI_CONTROLLER;
+		//Ai path
+		
+
+		//ship speed variables
+		float normalSpeed = 1.0f;
+		float boostSpeed = normalSpeed * 10.0f;
+		float accelerationFactor = 1.0f;
+		float currentSpeed = 0.0f;
+
+		float rotationZ = 0;
+		float rotXSmooth = 0;
+		float rotYSmooth = 0;
+		float rotZSmooth = 0;
+
+		float canonDefaultSpeed = 1.0f;
+		float canonLaunchSpeed = canonDefaultSpeed * 10.0f;
+
+		// AiController inputs
+		float rotationInputX = 0;
+		float rotationInputY = 0;
+		float rotationInputZ = 0;
+
+		bool isForward = false;
+		bool isBoosting = false;
+		bool isShooting = false;
+
+		
+
+
+		AIinputController() {}
 
 	};
 

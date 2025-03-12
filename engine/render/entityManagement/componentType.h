@@ -11,5 +11,6 @@ enum class ComponentType : uint32_t
 	RENDERABLE = 1 << 5,		// 00100000
 	INPUT = 1 << 6,				// 01000000 
 	PARTICLE_EMITTER = 1 << 7,	// 10000000
-	NAVNODE = 1 << 8            // 00000001 00000000
+	NAVNODE = 1 << 8,           // 00000001 00000000
+	AI_CONTROLLER = 1 << 9      // 00000001 00000000 00000000
 };

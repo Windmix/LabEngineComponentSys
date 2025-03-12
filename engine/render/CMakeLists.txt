@@ -62,6 +62,9 @@ SET(files_render_entityManagement
 	entityManagement/world.h
 	entityManagement/componentType.h
 	entityManagement/entityType.h
+	entityManagement/AstarAlgorithm.h
+	entityManagement/AstarAlgorithm.cpp
+	entityManagement/State.h
 	)
 SOURCE_GROUP("entityManagement" FILES ${files_render_entityManagement})
 

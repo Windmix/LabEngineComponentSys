@@ -23,6 +23,7 @@
 #include "./render/entityManagement/world.h""
 #include <crtdbg.h>
 #include <render/entityManagement/chunkAllocator.h>
+#include "render/entityManagement/AstarAlgorithm.h"
 
 using namespace Display;
 using namespace Render;
@@ -89,13 +90,10 @@ SpaceGameApp::Run()
     Camera* cam = CameraManager::GetCamera(CAMERA_MAIN);
     cam->projection = projection;
 
-    // load all resources
-  
-    //síngleton
+    //síngleton world
     World* world = World::instance();
+    //AstartAlgorithm* aStar = AstartAlgorithm::Instance();
    
-
-
 
     // Setup asteroids near
     for (int i = 0; i < 10; i++)
@@ -109,6 +107,8 @@ SpaceGameApp::Run()
 
     //gridbased nodes
     int size3D = 10;
+    world->NodestackSizescubicRoot = size3D;
+
     float distanceBetweenPoints = 20.0f;
     for (int i = 0; i < size3D; i++)
     {
@@ -122,8 +122,6 @@ SpaceGameApp::Run()
       
 
     }
-
-
     // Setup skybox
     std::vector<const char*> skybox
     {
@@ -134,6 +132,7 @@ SpaceGameApp::Run()
         "assets/space/bg.png",
         "assets/space/bg.png"
     };
+
     TextureResourceId skyboxId = TextureResource::LoadCubemap("skybox", skybox, true);
     RenderDevice::SetSkybox(skyboxId);
     
@@ -141,28 +140,27 @@ SpaceGameApp::Run()
 
     const int numLights = 40;
     Render::PointLightId lights[numLights];
+
     // Setup lights
     for (int i = 0; i < numLights; i++)
     {
         glm::vec3 translation = glm::vec3(
             Core::RandomFloatNTP() * 20.0f,
             Core::RandomFloatNTP() * 20.0f,
-            Core::RandomFloatNTP() * 20.0f
-        );
+            Core::RandomFloatNTP() * 20.0f);
         glm::vec3 color = glm::vec3(
             Core::RandomFloat(),
             Core::RandomFloat(),
-            Core::RandomFloat()
-        );
+            Core::RandomFloat());
         lights[i] = Render::LightServer::CreatePointLight(translation, color, Core::RandomFloat() * 4.0f, 1.0f + (15 + Core::RandomFloat() * 10.0f));
     }
- 
-    //SpaceShip ship;
-    //ship.model = LoadModel("assets/space/spaceship.glb");
 
-   
-
+    for (int i = 0; i < 1; i++)
+    {
+        world->CreateEnemyShip(false);
+    }
     world->CreatePlayerShip(false);
+
    
 
 

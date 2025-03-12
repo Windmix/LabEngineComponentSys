@@ -11,14 +11,19 @@ class Entity
 {
 public:
 	EntityId id;
-
-	
 	EntityType eType;
-
 	std::vector<ComponentBase*> components;
 
+	//aiStuff
+	Entity* parentNode = nullptr;
+	std::vector<Entity*> path;
+
+	int gCost = 0;  // Cost from start to current node
+	int hCost = 0;  // Heuristic cost from current node to end
+	int Fcost = gCost + hCost;
 
 	Entity() {}
+	int CalculateHCost(glm::vec3 goal);
 	Entity(uint32_t entityID);
 	~Entity();
 
@@ -27,8 +32,18 @@ public:
 	template<typename T>
 	T* GetComponent();
 
+	
 };
 //--------------------------------------------------------------------------------------------
+
+int Entity::CalculateHCost(glm::vec3 goal)
+{
+	auto transFormComponent = GetComponent<Components::TransformComponent>();
+	int dx = std::abs(transFormComponent->transform[3].x - goal.x);
+	int dy = std::abs(transFormComponent->transform[3].y - goal.y);
+	int dz = std::abs(transFormComponent->transform[3].z - goal.z);
+	return (dx + dy + dz) * 10;
+}
 
 inline Entity::Entity(uint32_t entityID)
 {
