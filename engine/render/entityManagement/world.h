@@ -1,13 +1,12 @@
-#pragma once
-#include <vector>
-#include "entity.h"
+﻿#pragma once
+
+#include "AstarAlgorithm.h"
 #include "chunkAllocator.h"
 #include "components.h"  // Assuming components are declared here
 #include "render/renderdevice.h"
 #include <render/model.h>
+#include "pureEntityData.h"
 
-
-class AstarAlgortihm;
 
 
 class World
@@ -27,16 +26,13 @@ public:
     ChunkAllocator<Components::AINavNodeComponent, 64> navNodeChunk;
 
 
-    // Vector to store active entities (to track them) , the total Ammount
-    std::vector<Entity*> entities;
-    std::unordered_map<int, Entity*> gridNodes;
-    std::vector<Entity*> nodes;
-
-    int NodestackSizescubicRoot = 0;
+    PureEntityData* pureEntityData;
+   
 
     //saving for destroyed ships
     uint32_t savedID = 0;
-    
+
+    int randomIndex;
 
     World();
     ~World();
@@ -56,7 +52,7 @@ public:
     // Update all entities
     void Update(float dt);
 
-    std::vector<Entity*> getNeighbors(Entity* entity);
+   
     // Destroy an entity and deallocate all components
     void DestroyEntity(uint32_t entityId, EntityType eType);
     void Cleanup();
@@ -69,6 +65,7 @@ public:
     void CreatePathNode(float xOffset, float yOffset, float zOffset, float deltaXYZ);
 
     Entity* randomGetNode();
+    Entity* getclosestNodeFromAIship(Entity* ship);
 
 private:
 
@@ -85,12 +82,20 @@ private:
 
 
 static World* _instance; // singleton
-inline World::World() {}
+
+
+inline World::World()
+{
+
+   pureEntityData = PureEntityData::instance();
+
+}
 
 inline World::~World()
 {
-
+    pureEntityData->destroy();
 }
+
 inline World* World::instance()
 {
     if (!_instance) 
@@ -120,7 +125,7 @@ inline Entity* World::createEntity(EntityType etype, bool isRespawning)
     {
         // Count how many existing entities of the same type already exist
         int count = 0;
-        for (auto ent : entities)
+        for (auto ent : pureEntityData->entities)
         {
             if (ent->eType == entity->eType)
             {
@@ -134,7 +139,7 @@ inline Entity* World::createEntity(EntityType etype, bool isRespawning)
     {
         entity->id = savedID;
     }
-    entities.push_back(entity);
+    pureEntityData->entities.push_back(entity);
   
 
     return entity;
@@ -151,8 +156,8 @@ inline void World::AttachComponentToEntity(uint32_t entityId, ComponentBase* com
 
 inline Entity* World::GetEntity(uint32_t entityId)
 {
-    auto it = std::find_if(entities.begin(), entities.end(), [entityId](const Entity* entity) { return entity->id == entityId; });
-    if (it != entities.end())
+    auto it = std::find_if(pureEntityData->entities.begin(), pureEntityData->entities.end(), [entityId](const Entity* entity) { return entity->id == entityId; });
+    if (it != pureEntityData->entities.end())
     {
         return *it;
     }
@@ -162,10 +167,12 @@ inline Entity* World::GetEntity(uint32_t entityId)
 
 inline void World::Update(float dt)
 {
+    //RNG
 
     //updates everything
-    for (Entity* entity : entities)
+    for (Entity* entity : pureEntityData->entities)
     {
+        
         UpdateAsteroid(entity, dt);
         UpdateAiShip(entity, dt);
         UpdateShip(entity, dt);
@@ -175,98 +182,17 @@ inline void World::Update(float dt)
     }
 }
 
-inline std::vector<Entity*> World::getNeighbors(Entity* entity)
-{
-    std::vector<Entity*>  neighbors;
 
-    int currentID = entity->id;
-
-    std::vector<int> neighborIDs =
-    {
-        currentID - 1,          // Left (X -1)
-        currentID + 1,          // Right (X +1)
-        currentID + NodestackSizescubicRoot,  // Up (Y +1)
-        currentID - NodestackSizescubicRoot,  // Down (Y -1)
-        currentID + NodestackSizescubicRoot * NodestackSizescubicRoot, // Forward (Z +1)
-        currentID - NodestackSizescubicRoot * NodestackSizescubicRoot, // Backward (Z -1)
-        currentID + NodestackSizescubicRoot - 1,  // Up-left (X -1, Y +1)
-        currentID + NodestackSizescubicRoot + 1,  // Up-right (X +1, Y +1)
-        currentID - NodestackSizescubicRoot - 1,  // Down-left (X -1, Y -1)
-        currentID - NodestackSizescubicRoot + 1,  // Down-right (X +1, Y -1)
-        currentID + NodestackSizescubicRoot * NodestackSizescubicRoot - 1, // Forward-left (X -1, Z +1)
-        currentID + NodestackSizescubicRoot * NodestackSizescubicRoot + 1, // Forward-right (X +1, Z +1)
-        currentID - NodestackSizescubicRoot * NodestackSizescubicRoot - 1, // Backward-left (X -1, Z -1)
-        currentID - NodestackSizescubicRoot * NodestackSizescubicRoot + 1, // Backward-right (X +1, Z -1)
-        currentID + NodestackSizescubicRoot - NodestackSizescubicRoot * NodestackSizescubicRoot, // Up-forward (Y +1, Z +1)
-        currentID + NodestackSizescubicRoot + NodestackSizescubicRoot * NodestackSizescubicRoot, // Up-backward (Y +1, Z -1)
-        currentID - NodestackSizescubicRoot - NodestackSizescubicRoot * NodestackSizescubicRoot, // Down-forward (Y -1, Z +1)
-        currentID - NodestackSizescubicRoot + NodestackSizescubicRoot * NodestackSizescubicRoot  // Down-backward (Y -1, Z -1)
-    };
-
-    for (int neighborID : neighborIDs)
-    {
-        // Check if the neighbor ID exists in the gameObjects map
-        auto neighbor = gridNodes.find(neighborID);
-
-        if (neighbor != gridNodes.end())
-        {
-            bool isDiagonal =
-                (neighborID == currentID + NodestackSizescubicRoot - 1 ||   // Up-left (X -1, Y +1)
-                    neighborID == currentID + NodestackSizescubicRoot + 1 ||   // Up-right (X +1, Y +1)
-                    neighborID == currentID - NodestackSizescubicRoot - 1 ||   // Down-left (X -1, Y -1)
-                    neighborID == currentID - NodestackSizescubicRoot + 1 ||   // Down-right (X +1, Y -1)
-                    neighborID == currentID + NodestackSizescubicRoot * NodestackSizescubicRoot - 1 || // Forward-left (X -1, Z +1)
-                    neighborID == currentID + NodestackSizescubicRoot * NodestackSizescubicRoot + 1 || // Forward-right (X +1, Z +1)
-                    neighborID == currentID - NodestackSizescubicRoot * NodestackSizescubicRoot - 1 || // Backward-left (X -1, Z -1)
-                    neighborID == currentID - NodestackSizescubicRoot * NodestackSizescubicRoot + 1 || // Backward-right (X +1, Z -1)
-                    neighborID == currentID + NodestackSizescubicRoot - NodestackSizescubicRoot * NodestackSizescubicRoot || // Up-forward (Y +1, Z +1)
-                    neighborID == currentID + NodestackSizescubicRoot + NodestackSizescubicRoot * NodestackSizescubicRoot || // Up-backward (Y +1, Z -1)
-                    neighborID == currentID - NodestackSizescubicRoot - NodestackSizescubicRoot * NodestackSizescubicRoot || // Down-forward (Y -1, Z +1)
-                    neighborID == currentID - NodestackSizescubicRoot + NodestackSizescubicRoot * NodestackSizescubicRoot);  // Down-backward (Y -1, Z -1)
-
-            if (isDiagonal)
-            {
-                // For diagonal moves, check if the adjacent neighbors are walkable
-                int dx, dy, dz;
-
-                // Calculate the current 3D position (x, y, z) from the currentID
-                int currentX = currentID % NodestackSizescubicRoot;  // X-coordinate
-                int currentY = (currentID / NodestackSizescubicRoot) % NodestackSizescubicRoot;  // Y-coordinate
-                int currentZ = currentID / (NodestackSizescubicRoot * NodestackSizescubicRoot);  // Z-coordinate
-
-                // Calculate the neighbor's 3D position (x, y, z) from the neighborID
-                int neighborX = neighborID % NodestackSizescubicRoot;
-                int neighborY = (neighborID / NodestackSizescubicRoot) % NodestackSizescubicRoot;
-                int neighborZ = neighborID / (NodestackSizescubicRoot * NodestackSizescubicRoot);
-
-                // Calculate the differences in all three axes (X, Y, Z)
-                dx = neighborX - currentX;
-                dy = neighborY - currentY;
-                dz = neighborZ - currentZ;
-
-                // Now, you can use these differences (dx, dy, dz) to check adjacent neighbors
-                int horizontalID = currentID + dx;  // Horizontal neighbor
-                int verticalID = currentID + dy * NodestackSizescubicRoot; // Vertical neighbor
-                int depthID = currentID + dz * NodestackSizescubicRoot * NodestackSizescubicRoot; // Depth neighbor
-
-                auto horizontalNeighbor = gridNodes.find(horizontalID);
-                auto verticalNeighbor = gridNodes.find(verticalID);
-                auto depthNeighbor = gridNodes.find(depthID);
-            }
-            neighbors.push_back(neighbor->second);
-        }
-    }
-}
 
 
 inline void World::DestroyEntity(uint32_t entityId, EntityType eType)
 {
-    auto it = std::find_if(entities.begin(), entities.end(), [entityId, eType](Entity* entity)
+    auto it = std::find_if(pureEntityData->entities.begin(), pureEntityData->entities.end(), [entityId, eType](Entity* entity)
     {
             return entity->id == entityId && entity->eType == eType;
     });
 
-    if (it != entities.end())
+    if (it != pureEntityData->entities.end())
     {
         Entity* entityToDelete = *it;
 
@@ -315,7 +241,7 @@ inline void World::DestroyEntity(uint32_t entityId, EntityType eType)
         entityChunk.Deallocate(entityToDelete);
 
         // Remove the entity from the entity vector
-        entities.erase(it);
+        pureEntityData->entities.erase(it);
     }
 
 }
@@ -324,7 +250,7 @@ inline void World::Cleanup()
 {
     // Deallocate all entities and their components
     // Deallocate all entities and their components
-    for (Entity* entity : entities)
+    for (Entity* entity : pureEntityData->entities)
     {
         for (auto* component : entity->components)
         {
@@ -374,7 +300,7 @@ inline void World::Cleanup()
     }
 
     // Clear the entity list after deallocation
-    entities.clear();
+    pureEntityData->entities.clear();
 }
 
 inline void World::DestroyWorld()
@@ -421,7 +347,7 @@ inline void World::CreatePlayerShip(bool isRespawning)
 
         Components::TransformComponent* newTransform = transformChunk.Allocate();
         spaceship->AddComponent(newTransform, ComponentType::TRANSFORM, EntityType::SpaceShip);
-        /* newTransform->transform[3] = glm::vec4(0.0f + i*2, 0.0f + i*2, 0.0f + i*2, 0.0f);*/
+        newTransform->transform[3] = glm::vec4(0.0f, 0.0f + 10.0f, 0.0f, 0.0f);
 
         Components::RenderableComponent* renderable = renderableChunk.Allocate(shipModel);
         spaceship->AddComponent(renderable, ComponentType::RENDERABLE, EntityType::SpaceShip);
@@ -609,29 +535,29 @@ inline void World::CreateEnemyShip(bool isRespawning)
 
     if (!isRespawning)
     {
-        Entity* AIspaceship = createEntity(EntityType::SpaceShip, isRespawning);
+        Entity* AIspaceship = createEntity(EntityType::EnemyShip, isRespawning);
 
         Components::TransformComponent* newTransform = transformChunk.Allocate();
-        AIspaceship->AddComponent(newTransform, ComponentType::TRANSFORM, EntityType::SpaceShip);
-        /* newTransform->transform[3] = glm::vec4(0.0f + i*2, 0.0f + i*2, 0.0f + i*2, 0.0f);*/
+        AIspaceship->AddComponent(newTransform, ComponentType::TRANSFORM, EntityType::EnemyShip);
+        //newTransform->transform[3] = glm::vec4(0.0f, 0.0f, 0.0f, 0.0f);
 
         Components::RenderableComponent* renderable = renderableChunk.Allocate(shipModel);
-        AIspaceship->AddComponent(renderable, ComponentType::RENDERABLE, EntityType::SpaceShip);
+        AIspaceship->AddComponent(renderable, ComponentType::RENDERABLE, EntityType::EnemyShip);
 
         Components::ColliderComponent* collider = colliderChunk.Allocate();
-        AIspaceship->AddComponent(collider, ComponentType::COLLIDER, EntityType::SpaceShip);
+        AIspaceship->AddComponent(collider, ComponentType::COLLIDER, EntityType::EnemyShip);
         for (int i = 0; i < sizeof(colliderEndPoints) / sizeof(glm::vec3); i++)
         {
             collider->colliderEndPoints[i] = colliderEndPoints[i];
         }
         Components::CameraComponent* camera = cameraChunk.Allocate();
-        AIspaceship->AddComponent(camera, ComponentType::CAMERA, EntityType::SpaceShip);
+        AIspaceship->AddComponent(camera, ComponentType::CAMERA, EntityType::EnemyShip);
 
         Components::AIinputController* controllinput = AiControllerChunk.Allocate();
-        AIspaceship->AddComponent(controllinput, ComponentType::AI_CONTROLLER, EntityType::SpaceShip);
+        AIspaceship->AddComponent(controllinput, ComponentType::AI_CONTROLLER, EntityType::EnemyShip);
 
         Components::ParticleEmitterComponent* particleEmitter = particleEmitterChunk.Allocate();
-        AIspaceship->AddComponent(particleEmitter, ComponentType::PARTICLE_EMITTER, EntityType::SpaceShip);
+        AIspaceship->AddComponent(particleEmitter, ComponentType::PARTICLE_EMITTER, EntityType::EnemyShip);
 
 
         particleEmitter->particleEmitterLeft = ChunkOfPartcles.Allocate(particleEmitter->numParticles);
@@ -868,17 +794,50 @@ inline void World::CreatePathNode(float xOffset, float yOffset, float zOffset, f
         NodeComp->EndPoints[i] = EndPoints[i];
     }
     // pushback for use of the Debug menu
-    nodes.push_back(node);
+    pureEntityData->nodes.push_back(node);
 
     //give it to the map too
-    gridNodes[node->id] = node;
+    pureEntityData->gridNodes[node->id] = node;
    
 }
 inline Entity* World::randomGetNode()
 {
-    // Get a random index
-    int randomIndex = std::rand() % nodes.size();
-    return gridNodes[randomIndex];
+    randomIndex = std::rand() % pureEntityData->nodes.size();
+    return pureEntityData->gridNodes[randomIndex];
+}
+inline Entity* World::getclosestNodeFromAIship(Entity* ship)
+{
+    Entity* closestNode = nullptr;
+    float minDistanceSquared = std::numeric_limits<float>::max();  // Use squared distance to avoid sqrt
+    auto shipPosition = glm::vec3(ship->GetComponent<Components::TransformComponent>()->transform[3]);
+
+    for (auto& node : pureEntityData->nodes)
+    {
+        // Ensure the node has a TransformComponent and is valid
+        auto nodeTransform = node->GetComponent<Components::TransformComponent>();
+        if (nodeTransform == nullptr)
+        {
+            continue;  // Skip if the node doesn't have a TransformComponent
+        }
+
+        // Get the position of the node
+        auto nodePosition = glm::vec3(nodeTransform->transform[3]);
+
+        // Calculate the squared distance
+        glm::vec3 vectorShipPos2NodePos = nodePosition - shipPosition;
+        float distanceSquared = glm::dot(vectorShipPos2NodePos, vectorShipPos2NodePos);
+
+        // Update closest node if a new minimum distance is found
+        if (distanceSquared < minDistanceSquared)
+        {
+            minDistanceSquared = distanceSquared;
+            closestNode = node;
+        }
+    }
+
+    return closestNode;
+
+    
 }
 inline void World::UpdateNode(Entity* entity, float dt)
 {
@@ -1025,21 +984,53 @@ inline void World::UpdateShip(Entity* entity, float dt)
 }
 inline void World::UpdateAiShip(Entity* entity, float dt)
 {
-    if (entity->eType == EntityType::SpaceShip) //playerShip
+    if (entity->eType == EntityType::EnemyShip) //playerShip
     {
         auto aiInputComponent = entity->GetComponent<Components::AIinputController>();
         auto transformComponent = entity->GetComponent<Components::TransformComponent>();
         auto cameraComponent = entity->GetComponent<Components::CameraComponent>();
         auto colliderComponent = entity->GetComponent< Components::ColliderComponent>();
         auto particleComponent = entity->GetComponent<Components::ParticleEmitterComponent>();
- /*       AstartAlgorithm* astar = AstartAlgorithm::Instance();
+
+        AstarAlgorithm* astar = AstarAlgorithm::Instance();
         auto World = _instance;
 
-        if (entity->path.empty())
-        {
-            auto randomDestination = randomGetNode();
-            entity->path = astar->findPath(entity, randomDestination, World);
-        }*/
+    
+
+        auto  closestNodeFromship = getclosestNodeFromAIship(entity);
+
+            if (entity->path.empty())
+            {
+                auto randomDestination = randomGetNode();
+
+                auto entities = pureEntityData->getNeighbors(closestNodeFromship);
+
+                entity->path = astar->findPath(closestNodeFromship, randomDestination);
+            }
+            if (!entity->path.empty())
+            {
+                for(auto node : entity->path)
+                {
+                    auto nextNode = node->parentNode;
+                    auto currentNode = node;
+
+                    if (nextNode != nullptr)
+                    {
+                        auto transformComponentdestNode = nextNode->GetComponent<Components::TransformComponent>();
+                        auto transformComponentprevNode = currentNode->GetComponent<Components::TransformComponent>();
+                        Debug::DrawLine(transformComponentprevNode->transform[3], transformComponentdestNode->transform[3], 1.0f, glm::vec4(0, 1, 1, 1), glm::vec4(0, 1, 1, 1), Debug::RenderMode::AlwaysOnTop);
+
+                    }
+                   
+                }
+              
+            }
+            
+          
+          
+            
+       
+       
 
         if (aiInputComponent && transformComponent && cameraComponent)
         {
@@ -1183,7 +1174,7 @@ inline void World::drawNode(Entity* entity)
         int drawId = Core::CVarReadInt(navNodeComponent->r_draw_Node_Axis_id);
         auto transformComponent = entity->GetComponent<Components::TransformComponent>();
 
-        for (size_t i = 0; i < nodes.size(); i++)
+        for (size_t i = 0; i < pureEntityData->nodes.size(); i++)
         {
             if ( entity->id == drawId)
             {

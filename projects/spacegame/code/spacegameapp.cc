@@ -107,7 +107,7 @@ SpaceGameApp::Run()
 
     //gridbased nodes
     int size3D = 10;
-    world->NodestackSizescubicRoot = size3D;
+    world->pureEntityData->NodestackSizescubicRoot = size3D;
 
     float distanceBetweenPoints = 20.0f;
     for (int i = 0; i < size3D; i++)
@@ -180,7 +180,7 @@ SpaceGameApp::Run()
 		glCullFace(GL_BACK);
         
         this->window->Update();
-       
+     
 
         if (kbd->pressed[Input::Key::Code::End])
         {

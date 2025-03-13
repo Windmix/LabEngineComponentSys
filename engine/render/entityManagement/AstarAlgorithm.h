@@ -1,59 +1,71 @@
 #pragma once
 #include <unordered_set>
 #include <queue>
-#include "world.h"
+#include "pureEntityData.h"
 
 struct CompareGameObjectX
 {
     bool operator()(Entity* a, Entity* b); // min-heap behavior
 };
 
-
-// Forward declaration of classes
-class Entity;
-
-class AstartAlgorithm
+class AstarAlgorithm
 {
-    static AstartAlgorithm* _instance;
+    PureEntityData* entityData;
     bool containsInOpenList(Entity* gameobject);
 public:
+    AstarAlgorithm();
+    ~AstarAlgorithm();
+    
+    static AstarAlgorithm* _instance;
     // storage
     std::priority_queue<Entity*, std::vector<Entity*>, CompareGameObjectX> openList;
     std::unordered_set<Entity*> closedList;
     std::unordered_set<Entity*> openSet;
 
     //singleton instance
-    static AstartAlgorithm* Instance();
+    static AstarAlgorithm* Instance();
     static void destroy();
 
-    // Methods
-    std::vector<Entity*> findPath(Entity* start, Entity* end, World* map);
+    // Method
+
+    std::vector<Entity*> findPath(Entity* start, Entity* end);
     int getDistance(Entity* objectA, Entity* objectB);
     std::vector<Entity*> retracePath(Entity* startObject, Entity* endObject);
 };
 
+AstarAlgorithm* AstarAlgorithm::_instance = nullptr;
 
 
 inline bool CompareGameObjectX::operator()(Entity* a, Entity* b)
 {
-    return a->Fcost > b->Fcost; // Lower fCost = higher priority
+    return a->FCost() > b->FCost(); // Lower fCost = higher priority
 }
 
-inline bool AstartAlgorithm::containsInOpenList(Entity* gameobject)
+inline bool AstarAlgorithm::containsInOpenList(Entity* gameobject)
 {
     return openSet.find(gameobject) != openSet.end();
 }
 
-inline AstartAlgorithm* AstartAlgorithm::Instance()
+inline AstarAlgorithm::AstarAlgorithm()
+{
+    entityData = PureEntityData::instance();
+}
+
+inline AstarAlgorithm::~AstarAlgorithm()
+{
+    entityData->destroy();
+}
+
+inline AstarAlgorithm* AstarAlgorithm::Instance()
 {
     if (!_instance)
     {
-        _instance = new  AstartAlgorithm();
+        _instance = new  AstarAlgorithm();
     }
     return _instance;
 }
 
-inline void AstartAlgorithm::destroy()
+inline void AstarAlgorithm::destroy()
 {
     if (_instance)
     {
@@ -61,8 +73,7 @@ inline void AstartAlgorithm::destroy()
         _instance = nullptr;
     }
 }
-
-inline std::vector<Entity*> AstartAlgorithm::findPath(Entity* start, Entity* end, World* map)
+inline std::vector<Entity*> AstarAlgorithm::findPath(Entity* start, Entity* end)
 {
     openList = {};
     openSet.clear();
@@ -85,7 +96,7 @@ inline std::vector<Entity*> AstartAlgorithm::findPath(Entity* start, Entity* end
             return retracePath(start, end);
         }
 
-        for (Entity* neighbor : map->getNeighbors(current))
+        for (Entity* neighbor : entityData->getNeighbors(current))
         {
 
             if (closedList.contains(neighbor))
@@ -112,24 +123,26 @@ inline std::vector<Entity*> AstartAlgorithm::findPath(Entity* start, Entity* end
     return retracePath(start, current);
 }
 
-inline int AstartAlgorithm::getDistance(Entity* objectA, Entity* objectB)
+
+inline int AstarAlgorithm::getDistance(Entity* objectA, Entity* objectB)
 {
-    auto transFormComponentA = objectA->GetComponent< Components::TransformComponent>();
-    auto transFormComponentB = objectB->GetComponent< Components::TransformComponent>();
+    //Heuristic Formula
+    auto transA = objectA->GetComponent<Components::TransformComponent>();
+    auto transB = objectB->GetComponent<Components::TransformComponent>();
 
+    int dx = abs(static_cast<int>(transA->transform[3].x - transB->transform[3].x));
+    int dy = abs(static_cast<int>(transA->transform[3].y - transB->transform[3].y));
+    int dz = abs(static_cast<int>(transA->transform[3].z - transB->transform[3].z));
 
-    int distX = abs(transFormComponentA->transform[3].x - transFormComponentB->transform[3].x);
-    int distY = abs(transFormComponentA->transform[3].y - transFormComponentB->transform[3].y);
-    int distZ = abs(transFormComponentA->transform[3].z - transFormComponentB->transform[3].z);
+    int minD = std::min({ dx, dy, dz });
+    int maxD = std::max({ dx, dy, dz });
 
-    int minDist = std::min({ distX, distY, distZ });
-    int midDist = std::max(std::min(distX, distY), std::min(std::max(distX, distY), distZ));
-    int maxDist = std::max({ distX, distY, distZ });
+    int midD = dx + dy + dz - minD - maxD;
 
-    return 17 * minDist + 14 * (midDist - minDist) + 10 * (maxDist - midDist);
+    return 17 * minD + 14 * (midD - minD) + 10 * (maxD - midD);
 }
 
-inline std::vector<Entity*> AstartAlgorithm::retracePath(Entity* startObject, Entity* endObject)
+inline std::vector<Entity*> AstarAlgorithm::retracePath(Entity* startObject, Entity* endObject)
 {
     std::vector<Entity*> path;
     Entity* current = endObject;
