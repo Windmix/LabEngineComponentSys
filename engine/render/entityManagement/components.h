@@ -49,6 +49,7 @@ namespace Components
 		Physics::ColliderMeshId collidermeshId;
 		Physics::ColliderId colliderID;
 		glm::vec3 colliderEndPoints[17];
+
 		ColliderComponent() {}
 		ColliderComponent(Physics::ColliderMeshId colliderId) : collidermeshId(colliderId) {}
 	
@@ -76,6 +77,10 @@ namespace Components
 	class CameraComponent : public ComponentBase
 	{
 	public:
+
+		Core::CVar* r_camera = Core::CVarCreate(Core::CVarType::CVar_Int, "r_Camera", "0");
+		Core::CVar* r_camera_id = Core::CVarCreate(Core::CVarType::CVar_Int, "r_Camera_id", "0");
+
 		static constexpr ComponentType TYPE = ComponentType::CAMERA;
 		glm::vec3 camPos = glm::vec3(0, 1.0f, -2.0f);
 		const float accelerationFactor = 1.0f;

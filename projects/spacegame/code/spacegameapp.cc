@@ -95,21 +95,22 @@ SpaceGameApp::Run()
     //AstartAlgorithm* aStar = AstartAlgorithm::Instance();
    
 
+    // Setup asteroids far
+    for (int i = 0; i < 150; i++)
+    {
+        world->CreateAsteroid(200.0f);
+    }
     // Setup asteroids near
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < 130; i++)
     {
         world->CreateAsteroid(100.0f);
-    }
-    for (int i = 0; i < 10; i++)
-    {
-        world->CreateAsteroid(60.0f);
     }
 
     //gridbased nodes
     int size3D = 10;
     world->pureEntityData->NodestackSizescubicRoot = size3D;
 
-    float distanceBetweenPoints = 20.0f;
+    float distanceBetweenPoints = 30.0f;
     for (int i = 0; i < size3D; i++)
     {
         for (int j = 0; j < size3D; j++)
@@ -155,7 +156,7 @@ SpaceGameApp::Run()
         lights[i] = Render::LightServer::CreatePointLight(translation, color, Core::RandomFloat() * 4.0f, 1.0f + (15 + Core::RandomFloat() * 10.0f));
     }
 
-    for (int i = 0; i < 1; i++)
+    for (int i = 0; i < 8; i++)
     {
         world->CreateEnemyShip(false);
     }
@@ -263,6 +264,20 @@ SpaceGameApp::RenderUI()
         int nodeAxisID = Core::CVarReadInt(r_draw_Node_Axis_id);
         if (ImGui::InputInt("NodeId", (int*)&nodeAxisID))
             Core::CVarWriteInt(r_draw_Node_Axis_id, nodeAxisID);
+
+        // camera
+        Core::CVar* r_camera = Core::CVarGet("r_Camera");
+        int drawCamera = Core::CVarReadInt(r_camera);
+        if (ImGui::Checkbox("Camera", (bool*)&drawCamera))
+        {
+            Core::CVarWriteInt(r_camera, drawCamera);
+
+        }
+
+        Core::CVar* r_camera_id = Core::CVarGet("r_Camera_id");
+        int drawCameraId = Core::CVarReadInt(r_camera_id);
+        if (ImGui::InputInt("CameraId", (int*)&drawCameraId))
+            Core::CVarWriteInt(r_camera_id, drawCameraId);
 
         
         ImGui::End();
