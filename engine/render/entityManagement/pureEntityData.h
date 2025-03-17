@@ -8,7 +8,6 @@ public:
     static PureEntityData* _instance;
     // Vector to store active entities (to track them) , the total Ammount
     std::vector<Entity*> entities;
-    std::vector<Entity*> ships;
     std::unordered_map<int, Entity*> gridNodes;
     std::vector<Entity*> nodes;
    // std::vector<Components::CameraComponent*> allCameras;

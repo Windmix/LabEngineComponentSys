@@ -86,7 +86,7 @@ namespace Components
 		const float accelerationFactor = 1.0f;
 		const float camOffsetY = 1.0f;
 		const float cameraSmoothFactor = 10.0f;
-		Render::Camera* theCam = Render::CameraManager::GetCamera(CAMERA_MAIN);
+		Render::Camera* theCam = nullptr;
 		
 		
 	};
@@ -160,7 +160,7 @@ namespace Components
 	{
 	public:
 		static constexpr ComponentType TYPE = ComponentType::NAVNODE;
-		
+		Core::CVar* r_draw_path = Core::CVarCreate(Core::CVarType::CVar_Int, "r_draw_path", "0");
 
 		Core::CVar* r_draw_Node_Axis = Core::CVarCreate(Core::CVarType::CVar_Int, "r_draw_Node_Axis", "0");
 		Core::CVar* r_draw_Node_Axis_id = Core::CVarCreate(Core::CVarType::CVar_Int, "r_draw_Node_Axis_id", " - 1");

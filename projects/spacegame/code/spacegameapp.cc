@@ -156,7 +156,7 @@ SpaceGameApp::Run()
         lights[i] = Render::LightServer::CreatePointLight(translation, color, Core::RandomFloat() * 4.0f, 1.0f + (15 + Core::RandomFloat() * 10.0f));
     }
 
-    for (int i = 0; i < 8; i++)
+    for (int i = 0; i < 3; i++)
     {
         world->CreateEnemyShip(false);
     }
@@ -250,6 +250,14 @@ SpaceGameApp::RenderUI()
         if (ImGui::InputInt("LightSphereId", (int*)&lightSphereId))
             Core::CVarWriteInt(r_draw_light_sphere_id, lightSphereId);
 
+        //draw AI path
+        Core::CVar* r_draw_path = Core::CVarGet("r_draw_path");
+        int drawPath = Core::CVarReadInt(r_draw_path);
+        if (ImGui::Checkbox("draw AI path", (bool*)&drawPath))
+        {
+            Core::CVarWriteInt(r_draw_path, drawPath);
+
+        }
 
         // nodes
         Core::CVar* r_draw_Node_Axis = Core::CVarGet("r_draw_Node_Axis");
