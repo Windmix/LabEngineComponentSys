@@ -49,6 +49,7 @@ namespace Components
 		Physics::ColliderMeshId collidermeshId;
 		Physics::ColliderId colliderID;
 		glm::vec3 colliderEndPoints[17];
+		glm::vec3 rayCastPoints[8];
 
 		ColliderComponent() {}
 		ColliderComponent(Physics::ColliderMeshId colliderId) : collidermeshId(colliderId) {}

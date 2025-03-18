@@ -39,6 +39,7 @@ public:
 	float nodeArrivalTimer = 0.0f;
 	bool hasReachedTheStartNode = false;
 	bool closestNodeCalled = false;
+	bool isAvoidingAsteroids = false;
 	
 };
 //--------------------------------------------------------------------------------------------

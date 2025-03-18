@@ -103,7 +103,7 @@ SpaceGameApp::Run()
     // Setup asteroids near
     for (int i = 0; i < 130; i++)
     {
-        world->CreateAsteroid(100.0f);
+        world->CreateAsteroid(40.0f);
     }
 
     //gridbased nodes
@@ -276,7 +276,7 @@ SpaceGameApp::RenderUI()
         // camera
         Core::CVar* r_camera = Core::CVarGet("r_Camera");
         int drawCamera = Core::CVarReadInt(r_camera);
-        if (ImGui::Checkbox("Camera", (bool*)&drawCamera))
+        if (ImGui::Checkbox("Camera_player/camera_enemy", (bool*)&drawCamera))
         {
             Core::CVarWriteInt(r_camera, drawCamera);
 

@@ -6,6 +6,7 @@
 #include "render/renderdevice.h"
 #include <render/model.h>
 #include "pureEntityData.h"
+#include <gtx/quaternion.hpp>
 
 
 
@@ -180,7 +181,7 @@ inline void World::Update(float dt)
     {
         
         UpdateAsteroid(entity, dt);
-        UpdateAiShip(entity, dt);
+       UpdateAiShip(entity, dt);
         UpdateShip(entity, dt);
         UpdateNode(entity, dt);
         draw(entity);
@@ -355,8 +356,6 @@ inline void World::CreatePlayerShip(bool isRespawning)
         glm::vec3(0.0, 0.739624, 0.102582),  // top fin
         glm::vec3(0.0, -0.244758, 0.284825),  // bottom
     };
-   
-   
 
     if (!isRespawning)
     {
@@ -375,6 +374,7 @@ inline void World::CreatePlayerShip(bool isRespawning)
         {
             collider->colliderEndPoints[i] = colliderEndPoints[i];
         }
+       
         Components::CameraComponent* camera = cameraChunk.Allocate();
         spaceship->AddComponent(camera, ComponentType::CAMERA, EntityType::SpaceShip);
         camera->theCam = Render::CameraManager::GetCamera(CAMERA_MAIN);
@@ -549,6 +549,21 @@ inline void World::CreateEnemyShip(bool isRespawning)
         glm::vec3(0.0, 0.739624, 0.102582),  // top fin
         glm::vec3(0.0, -0.244758, 0.284825),  // bottom
     };
+    const glm::vec3 rayCastEndPoints[8] =
+    {
+        glm::vec3(1.33578, 0.0, 0.088893),// left wing front
+        glm::vec3(1.33578, 0, 30.0),// dest left wing front
+
+        glm::vec3(-1.33578, 0.0, 0.088893), // right wing front
+        glm::vec3(-1.33578, 0, 30.0),// dest left wing front
+
+
+        glm::vec3(0.0, 0.525049, 0.0), // top
+        glm::vec3(0.0, 10, 30.0), // dest top
+
+        glm::vec3(0.0, -0.525049, 0.0),// bot 
+        glm::vec3(0.0, -10, 30.0), // dest bot
+    };
 
 
 
@@ -568,6 +583,10 @@ inline void World::CreateEnemyShip(bool isRespawning)
         for (int i = 0; i < sizeof(colliderEndPoints) / sizeof(glm::vec3); i++)
         {
             collider->colliderEndPoints[i] = colliderEndPoints[i];
+        }
+        for (int i = 0; i < sizeof(collider->rayCastPoints) / sizeof(glm::vec3); i++)
+        {
+            collider->rayCastPoints[i] = rayCastEndPoints[i];
         }
         Components::AIinputController* controllinput = AiControllerChunk.Allocate();
         AIspaceship->AddComponent(controllinput, ComponentType::AI_CONTROLLER, EntityType::EnemyShip);
@@ -649,6 +668,10 @@ inline void World::CreateEnemyShip(bool isRespawning)
         for (int i = 0; i < sizeof(colliderEndPoints) / sizeof(glm::vec3); i++)
         {
             collider->colliderEndPoints[i] = colliderEndPoints[i];
+        }
+        for (int i = 0; i < sizeof(collider->rayCastPoints) / sizeof(glm::vec3); i++)
+        {
+            collider->rayCastPoints[i] = rayCastEndPoints[i];
         }
 
         Components::AIinputController* controllinput = AiControllerChunk.Allocate();
@@ -1003,7 +1026,7 @@ inline void World::UpdateShip(Entity* entity, float dt)
 }
 inline void World::UpdateAiShip(Entity* entity, float dt)
 {
-    if (entity->eType == EntityType::EnemyShip && entity) // PlayerShip
+    if (entity->eType == EntityType::EnemyShip && entity)
     {
         auto aiInputComponent = entity->GetComponent<Components::AIinputController>();
         auto transformComponent = entity->GetComponent<Components::TransformComponent>();
@@ -1015,11 +1038,11 @@ inline void World::UpdateAiShip(Entity* entity, float dt)
         Entity* closestNodeFromShip;
         glm::vec3 targetDirection;
         glm::quat targetRotation;
-        glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f); // Up vector
+        glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
 
         Debug::DrawDebugText(std::to_string(aiInputComponent->currentSpeed).c_str(), transformComponent->transform[3], { 0.9f,0.9f,1,1 });
 
-        // Find the closest node if not already called
+        // Find the closest node
         if (!entity->closestNodeCalled)
         {
             closestNodeFromShip = getclosestNodeFromAIship(entity);
@@ -1028,12 +1051,12 @@ inline void World::UpdateAiShip(Entity* entity, float dt)
         auto closeNodeTranscomp = closestNodeFromShip->GetComponent<Components::TransformComponent>();
         glm::vec3 currentPos = glm::vec3(transformComponent->transform[3]);
 
-        //make sure it is not nullptr
+        //make sure it is not nullptr, then try next update
         if (closeNodeTranscomp == nullptr)
         {
             return;
         }
-        // If the ship hasn't reached the start node
+        // If the ship hasn't reached the start node, go to start node
         if (!entity->hasReachedTheStartNode)
         {
             glm::vec3 targetPos = glm::vec3(closeNodeTranscomp->transform[3]);
@@ -1050,164 +1073,165 @@ inline void World::UpdateAiShip(Entity* entity, float dt)
                 auto randomDestination = randomGetNode();
                 entity->path = astar->findPath(closestNodeFromShip, randomDestination);
             }
-           
+
             else
             {
-                // Smoothly rotate towards the target
+                // Normalize the direction to the target
                 targetDirection = glm::normalize(fromCurrent2Target);
-                glm::vec3 currentForward = glm::vec3(0, 0, 1); // Assuming z-axis is forward
+                glm::vec3 currentForward = glm::vec3(0, 0, 1);
 
-                // Calculate the rotation needed
+                // Calculate the required angle and axis to rotate towards the target
                 float angle = glm::acos(glm::dot(currentForward, targetDirection));
                 glm::vec3 axis = glm::normalize(glm::cross(currentForward, targetDirection));
 
-                // Handle edge case where target is directly behind
+                // If the target is almost directly behind, adjust the axis to 'up'
                 if (glm::length(axis) < 0.001f)
                 {
-                    axis = up; // Use the up vector as the axis
+                    axis = glm::vec3(0.0f, 1.0f, 0.0f); // Up vector
                 }
 
+                // Handle movement and speed adjustments
                 if (aiInputComponent->isForward)
                 {
                     if (aiInputComponent->isBoosting)
-                        aiInputComponent->currentSpeed = glm::mix(aiInputComponent->currentSpeed, aiInputComponent->boostSpeed, std::min(1.0f, dt * 30.0f));
+                    {
+                        // Gradually boost speed
+                        aiInputComponent->currentSpeed = glm::mix(aiInputComponent->currentSpeed, aiInputComponent->boostSpeed, glm::min(1.0f, dt * 30.0f));
+                    }
                     else
                     {
+                        // Adjust speed based on distance to the target
                         if (distance > 100.0f)
                         {
-                            // Beyond max range? Cap at full speed
+                            // Cap speed at max when too far
                             aiInputComponent->currentSpeed = glm::min(aiInputComponent->currentSpeed + dt, 1.0f);
-
                         }
                         else if (distance > 40.0f && distance <= 100.0f)
                         {
-                            // Map distance 20 -> 9 to speed 1.0 -> 0.2
+                            // Smoothly reduce speed based on the distance
                             float t = glm::clamp((distance - 40.0f) / (100.0f - 40.0f), 0.0f, 1.0f);
-                            float targetSpeed = glm::mix(0.2f, 1.0f, t); // Closer to 9 = slower
-                            aiInputComponent->currentSpeed = glm::mix(aiInputComponent->currentSpeed, targetSpeed, dt * 2.0f); // Smoothly interpolate
+                            float targetSpeed = glm::mix(0.2f, 1.0f, t);
+                            aiInputComponent->currentSpeed = glm::mix(aiInputComponent->currentSpeed, targetSpeed, dt * 2.0f);
                         }
                     }
                 }
                 else
                 {
+                    // Stop moving if not moving forward
                     aiInputComponent->currentSpeed = 0.0f;
                 }
 
-              
-                // Create the target rotation quaternion
+                // Create the target rotation quaternion based on the angle and axis
                 targetRotation = glm::angleAxis(angle, axis);
 
-                // Interpolate between current and target rotation
-                float rotationSpeed = 3.0f * dt; // Adjust for smoothness
+                // Interpolate between current and target rotation to smoothly turn
+                float rotationSpeed = 3.0f * dt;
                 glm::quat newOrientation = glm::slerp(glm::quat(transformComponent->orientation), targetRotation, rotationSpeed);
 
-                // Update the ship's forward direction
+                // Update the ship's forward direction based on the new orientation
                 glm::vec3 newForward = newOrientation * currentForward;
-
-                // Set the AI input based on the new forward direction
                 aiInputComponent->rotationInputX = newForward.x;
                 aiInputComponent->rotationInputY = newForward.y;
                 aiInputComponent->rotationInputZ = newForward.z;
-
-                aiInputComponent->isForward = true;
+                aiInputComponent->isForward = true; // Ensure the ship is moving forward
 
                 // Update the ship's orientation
                 transformComponent->orientation = newOrientation;
             }
         }
+
         // If the ship is following the path
-        else if (!entity->path.empty() && entity->pathIndex < entity->path.size() && entity->hasReachedTheStartNode)
+        if (!entity->path.empty() && entity->pathIndex < entity->path.size() && entity->hasReachedTheStartNode)
         {
             Entity* nextNode = entity->path[entity->pathIndex];
             auto nextTransform = nextNode->GetComponent<Components::TransformComponent>();
             glm::vec3 targetPos = glm::vec3(nextTransform->transform[3]);
-
             glm::vec3 fromCurrent2Target = targetPos - currentPos;
-            float distance = glm::dot(fromCurrent2Target, fromCurrent2Target); // Distance to the target node
-
+            float distance = glm::dot(fromCurrent2Target, fromCurrent2Target);
             Debug::DrawLine(transformComponent->transform[3], nextTransform->transform[3], 1.0f, glm::vec4(1, 1, 0, 1), glm::vec4(1, 1, 0, 1), Debug::RenderMode::AlwaysOnTop);
 
-            if (distance <= 40.0f) // If close enough to the target node
+            // If close enough to the target node
+            if (distance <= 40.0f)
             {
 
-
-                entity->nodeArrivalTimer += dt; // Timer for arrival
-                if (entity->nodeArrivalTimer >= 0.05f) // Delay before moving to the next node
+                //adjust updates
+                entity->nodeArrivalTimer += dt;
+                if (entity->nodeArrivalTimer >= 0.05f)
                 {
-                    entity->pathIndex++; // Move to the next node
-                    entity->nodeArrivalTimer = 0.0f; // Reset timer
+                    entity->pathIndex++;
+                    entity->nodeArrivalTimer = 0.0f;
                 }
             }
-            
-            
+
+
             else
             {
-                // Smoothly rotate towards the target
+                // Normalize the direction to the target
                 targetDirection = glm::normalize(fromCurrent2Target);
-                glm::vec3 currentForward = glm::vec3(0, 0, 1); // Assuming z-axis is forward
+                glm::vec3 currentForward = glm::vec3(0, 0, 1);
 
-                // Calculate the rotation needed
+                // Calculate the required angle and axis to rotate towards the target
                 float angle = glm::acos(glm::dot(currentForward, targetDirection));
                 glm::vec3 axis = glm::normalize(glm::cross(currentForward, targetDirection));
 
-                // Handle edge case where target is directly behind
+                // If the target is almost directly behind, adjust the axis to 'up'
                 if (glm::length(axis) < 0.001f)
                 {
-                    axis = up; // Use the up vector as the axis
+                    axis = glm::vec3(0.0f, 1.0f, 0.0f); // Up vector
                 }
 
-                // Create the target rotation quaternion
-                targetRotation = glm::angleAxis(angle, axis);
-
-                
+                // Handle movement and speed adjustments
                 if (aiInputComponent->isForward)
                 {
                     if (aiInputComponent->isBoosting)
-                        aiInputComponent->currentSpeed = glm::mix(aiInputComponent->currentSpeed, aiInputComponent->boostSpeed, std::min(1.0f, dt * 30.0f));
+                    {
+                        // Gradually boost speed
+                        aiInputComponent->currentSpeed = glm::mix(aiInputComponent->currentSpeed, aiInputComponent->boostSpeed, glm::min(1.0f, dt * 30.0f));
+                    }
                     else
                     {
+                        // Adjust speed based on distance to the target
                         if (distance > 100.0f)
                         {
-                            // Beyond max range? Cap at full speed
+                            // Cap speed at max when too far
                             aiInputComponent->currentSpeed = glm::min(aiInputComponent->currentSpeed + dt, 1.0f);
-
                         }
                         else if (distance > 40.0f && distance <= 100.0f)
                         {
-                            // Map distance 20 -> 9 to speed 1.0 -> 0.2
+                            // Smoothly reduce speed based on the distance
                             float t = glm::clamp((distance - 40.0f) / (100.0f - 40.0f), 0.0f, 1.0f);
-                            float targetSpeed = glm::mix(0.2f, 1.0f, t); // Closer to 9 = slower
-                            aiInputComponent->currentSpeed = glm::mix(aiInputComponent->currentSpeed, targetSpeed, dt * 2.0f); // Smoothly interpolate
+                            float targetSpeed = glm::mix(0.2f, 1.0f, t);
+                            aiInputComponent->currentSpeed = glm::mix(aiInputComponent->currentSpeed, targetSpeed, dt * 2.0f);
                         }
                     }
                 }
                 else
                 {
+                    // Stop moving if not moving forward
                     aiInputComponent->currentSpeed = 0.0f;
                 }
 
-                // Interpolate between current and target rotation
-                float rotationSpeed = 3.0f * dt; // Adjust for smoothness
-                glm::quat newOrientation = glm::slerp(glm::quat(transformComponent->orientation), targetRotation , rotationSpeed);
+                // Create the target rotation quaternion based on the angle and axis
+                targetRotation = glm::angleAxis(angle, axis);
 
-                // Update the ship's forward direction
+                // Interpolate between current and target rotation to smoothly turn
+                float rotationSpeed = 3.0f * dt;
+                glm::quat newOrientation = glm::slerp(glm::quat(transformComponent->orientation), targetRotation, rotationSpeed);
+
+                // Update the ship's forward direction based on the new orientation
                 glm::vec3 newForward = newOrientation * currentForward;
-
-                // Set the AI input based on the new forward direction
                 aiInputComponent->rotationInputX = newForward.x;
                 aiInputComponent->rotationInputY = newForward.y;
                 aiInputComponent->rotationInputZ = newForward.z;
-
-                // Set the speed and forward movement
-                
-                aiInputComponent->isForward = true;
+                aiInputComponent->isForward = true; // Ensure the ship is moving forward
 
                 // Update the ship's orientation
                 transformComponent->orientation = newOrientation;
             }
+
         }
         // If the ship has completed the path
-        else if (entity->pathIndex >= entity->path.size() && entity->hasReachedTheStartNode)
+        if (entity->pathIndex >= entity->path.size() && entity->hasReachedTheStartNode)
         {
             entity->closestNodeCalled = false;
             entity->hasReachedTheStartNode = false;
@@ -1216,11 +1240,11 @@ inline void World::UpdateAiShip(Entity* entity, float dt)
         }
 
         // Draw the path
-        auto aiComp = entity->GetComponent<Components::AINavNodeComponent>();
-        int menuIsUsingDrawPath(Core::CVarReadInt(aiComp->r_draw_path));
-        if (menuIsUsingDrawPath)
+        for (auto node : entity->path)
         {
-            for (auto node : entity->path)
+            auto aiComp = node->GetComponent<Components::AINavNodeComponent>();
+            int menuIsUsingDrawPath(Core::CVarReadInt(aiComp->r_draw_path));
+            if (menuIsUsingDrawPath)
             {
                 auto nextNode = node->parentNode;
                 auto currentNode = node;
@@ -1232,13 +1256,17 @@ inline void World::UpdateAiShip(Entity* entity, float dt)
                     Debug::DrawLine(transformComponentprevNode->transform[3], transformComponentdestNode->transform[3], 1.0f, glm::vec4(0, 1, 1, 1), glm::vec4(0, 1, 1, 1), Debug::RenderMode::AlwaysOnTop);
                 }
             }
+            else
+            {
+                break;
+            }
+
         }
-      
 
         // Update ship movement and orientation
         if (aiInputComponent && transformComponent && cameraComponent)
         {
-           
+
 
             glm::vec3 desiredVelocity = glm::vec3(0, 0, aiInputComponent->currentSpeed);
             desiredVelocity = transformComponent->transform * glm::vec4(desiredVelocity, 0.0f);
@@ -1271,7 +1299,7 @@ inline void World::UpdateAiShip(Entity* entity, float dt)
                 cameraComponent->theCam->view = glm::lookAt(cameraComponent->camPos, cameraComponent->camPos + glm::vec3(transformComponent->transform[2]), glm::vec3(transformComponent->transform[1]));
 
             }
-           
+
             // Particles for thruster of the ship
             const float thrusterPosOffset = 0.365f;
             particleComponent->particleEmitterLeft->data.origin = glm::vec4(glm::vec3(transformComponent->transform[3] + transformComponent->transform[0] * -thrusterPosOffset + transformComponent->transform[2] * particleComponent->emitterOffset), 1);
@@ -1316,7 +1344,7 @@ inline void World::UpdateAiShip(Entity* entity, float dt)
             }
 
 
-            
+
             bool hit = false;
             for (int i = 0; i < sizeof(colliderComponent->colliderEndPoints) / sizeof(glm::vec3); i++)
             {
@@ -1348,6 +1376,103 @@ inline void World::UpdateAiShip(Entity* entity, float dt)
 
                 }
 
+            }
+
+
+            glm::mat4 transform = transformComponent->transform;
+
+            // Left Wing Raycast
+            glm::vec3 leftWingStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[0], 1.0f));
+            glm::vec3 leftWingEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[1], 1.0f));
+            float leftLength = glm::length(leftWingEnd - leftWingStart);
+
+            Debug::DrawLine(leftWingStart, leftWingEnd, 1.0f, glm::vec4(0, 1, 1, 1), glm::vec4(0, 1, 1, 1), Debug::RenderMode::AlwaysOnTop);
+            Physics::RaycastPayload payloadLeft = Physics::Raycast(leftWingStart, leftWingEnd, leftLength);
+            payloadLeft.hitPoint = leftWingEnd;
+
+            // Right Wing Raycast
+            glm::vec3 rightWingStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[2], 1.0f));
+            glm::vec3 rightWingEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[3], 1.0f));
+            float rightLength = glm::length(rightWingEnd - rightWingStart);
+
+            Debug::DrawLine(rightWingStart, rightWingEnd, 1.0f, glm::vec4(0, 1, 1, 1), glm::vec4(0, 1, 1, 1), Debug::RenderMode::AlwaysOnTop);
+            Physics::RaycastPayload payloadRight = Physics::Raycast(rightWingStart, rightWingEnd, rightLength);
+            payloadRight.hitPoint = rightWingEnd;
+
+            // Top Raycast
+            glm::vec3 topStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[4], 1.0f));
+            glm::vec3 topEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[5], 1.0f));
+            float topLength = glm::length(topEnd - topStart);
+
+            Debug::DrawLine(topStart, topEnd, 1.0f, glm::vec4(0, 1, 1, 1), glm::vec4(0, 1, 1, 1), Debug::RenderMode::AlwaysOnTop);
+            Physics::RaycastPayload payloadTop = Physics::Raycast(topStart, topEnd, topLength);
+            payloadTop.hitPoint = topEnd;
+
+            // Bottom Raycast
+            glm::vec3 botStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[6], 1.0f));
+            glm::vec3 botEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[7], 1.0f));
+            float botLength = glm::length(botEnd - botStart);
+
+            Debug::DrawLine(botStart, botEnd, 1.0f, glm::vec4(0, 1, 1, 1), glm::vec4(0, 1, 1, 1), Debug::RenderMode::AlwaysOnTop);
+            Physics::RaycastPayload payloadBot = Physics::Raycast(botStart, botEnd, botLength);
+            payloadBot.hitPoint = botEnd;
+
+
+            // Steering response to obstacle avoidance
+            glm::vec3 avoidanceOffset(0.0f);
+
+            if (payloadLeft.hit)
+            {
+                Debug::DrawDebugText("HIT", payloadLeft.hitPoint, glm::vec4(1, 1, 1, 1));
+                avoidanceOffset += glm::vec3(1.0f, 0.0f, 0.0f);  // Push right
+                entity->isAvoidingAsteroids = true;
+            }
+            if (payloadRight.hit)
+            {
+                Debug::DrawDebugText("HIT", payloadRight.hitPoint, glm::vec4(1, 1, 1, 1));
+                avoidanceOffset += glm::vec3(-1.0f, 0.0f, 0.0f); // Push left
+                entity->isAvoidingAsteroids = true;
+            }
+            if (payloadTop.hit)
+            {
+                Debug::DrawDebugText("HIT", payloadTop.hitPoint, glm::vec4(1, 1, 1, 1));
+                avoidanceOffset += glm::vec3(0.0f, -1.0f, 0.0f); // Push down
+                entity->isAvoidingAsteroids = true;
+            }
+            if (payloadBot.hit)
+            {
+                Debug::DrawDebugText("HIT", payloadBot.hitPoint, glm::vec4(1, 1, 1, 1));
+                avoidanceOffset += glm::vec3(0.0f, 1.0f, 0.0f);  // Push up
+                entity->isAvoidingAsteroids = true;
+            }
+            if (entity->isAvoidingAsteroids)
+            {
+                if (glm::length(avoidanceOffset) > 0.01f)
+                {
+                    glm::vec3 avoidanceDirection = glm::normalize(avoidanceOffset);
+
+                    glm::vec3 currentForward = glm::normalize(glm::vec3(transform[2]) * -1.0f); // assuming -Z is forward
+                    glm::quat targetRotation = glm::rotation(currentForward, avoidanceDirection);
+
+                    float rotationSpeed = 3.0f * dt;
+                    glm::quat newOrientation = glm::slerp(glm::quat(transformComponent->orientation), targetRotation, rotationSpeed);
+
+                    // Apply to ship input
+                    glm::vec3 newForward = newOrientation * glm::vec3(0, 0, 1);
+                    aiInputComponent->rotationInputX = newForward.x;
+                    aiInputComponent->rotationInputY = newForward.y;
+                    aiInputComponent->rotationInputZ = newForward.z;
+
+                    aiInputComponent->isForward = true;
+                    transformComponent->orientation = newOrientation;
+
+                    // Optional: slow down or stop while avoiding
+                    aiInputComponent->currentSpeed = glm::mix(aiInputComponent->currentSpeed, 0.0f, dt * 5.0f);
+                }
+            }
+            else
+            {
+                entity->isAvoidingAsteroids = false;
             }
         }
     }
@@ -1468,38 +1593,38 @@ inline void World::draw(Entity* entity) // literally draw everything that render
 }
 inline void World::updateCamera(Entity* entity, float dt)
 {
-    if (entity->eType == EntityType::EnemyShip || entity->eType == EntityType::SpaceShip) // PlayerShip
+    if (entity->eType == EntityType::SpaceShip || entity->eType == EntityType::EnemyShip)
     {
         // First pass: Check if the selected entity already has a camera
-
-        Components::CameraComponent* savedCamera;
-
-        //Render::CameraManager::GetCamera(CAMERA_MAIN);
         auto camComp = entity->GetComponent<Components::CameraComponent>();
+
         if (camComp)
         {
             int selectedID(Core::CVarReadInt(camComp->r_camera_id));
+            int isPlayerOrEnemy(Core::CVarReadInt(camComp->r_camera));
 
-            // If entity has a camera component and it matches the current selected ID
-            if (entity->id == selectedID)
+            // Check if the entity is selected and has a camera
+            if ((isPlayerOrEnemy == 1 && entity->eType == EntityType::SpaceShip) ||
+                (isPlayerOrEnemy == 0 && entity->eType == EntityType::EnemyShip))
             {
-                // Assign main camera only to the selected entity
-                if (camComp->theCam == nullptr)
+                if (entity->id == selectedID)
                 {
-                    camComp->theCam = Render::CameraManager::GetCamera(CAMERA_MAIN);
+                    // Assign the main camera to the selected entity
+                    if (camComp->theCam == nullptr) {
+                        camComp->theCam = Render::CameraManager::GetCamera(CAMERA_MAIN);
+                    }
+                }
+                else
+                {
+                    // If the entity is not selected, clear the camera
+                    camComp->theCam = nullptr;
                 }
             }
             else
             {
                 // Null out the camera for all others
-                if (camComp->theCam != nullptr)
-                {
-                    camComp->theCam = nullptr;
-                }
+                camComp->theCam = nullptr;
             }
         }
-        return;
-       
     }
-   
 }
