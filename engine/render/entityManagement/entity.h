@@ -40,6 +40,8 @@ public:
 	bool hasReachedTheStartNode = false;
 	bool closestNodeCalled = false;
 	bool isAvoidingAsteroids = false;
+
+	float avoidanceCooldownTimer = 0.0f;
 	
 };
 //--------------------------------------------------------------------------------------------

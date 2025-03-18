@@ -549,20 +549,31 @@ inline void World::CreateEnemyShip(bool isRespawning)
         glm::vec3(0.0, 0.739624, 0.102582),  // top fin
         glm::vec3(0.0, -0.244758, 0.284825),  // bottom
     };
-    const glm::vec3 rayCastEndPoints[8] =
+    const glm::vec3 rayCastEndPoints[16] =
     {
-        glm::vec3(1.33578, 0.0, 0.088893),// left wing front
-        glm::vec3(1.33578, 0, 30.0),// dest left wing front
+        glm::vec3(0.0, 0.0, 0.3), // forward
+        glm::vec3(0.0, 0.0, 10.0), // dest forward
 
-        glm::vec3(-1.33578, 0.0, 0.088893), // right wing front
-        glm::vec3(-1.33578, 0, 30.0),// dest left wing front
+        glm::vec3(0.0, 0.0, 0.3), // forward-right
+        glm::vec3(3.0, 0.0, 10.0), // dest forward-right
 
+        glm::vec3(0.0, 0.0, 0.3), // forward-left
+        glm::vec3(-3.0, 0.0, 10.0), // dest forward-left
 
-        glm::vec3(0.0, 0.525049, 0.0), // top
-        glm::vec3(0.0, 10, 30.0), // dest top
+        glm::vec3(0.0, 0.0, 0.3), // forward-up
+        glm::vec3(0.0, 3.0, 10.0), // dest forward-up
 
-        glm::vec3(0.0, -0.525049, 0.0),// bot 
-        glm::vec3(0.0, -10, 30.0), // dest bot
+        glm::vec3(0.0, 0.0, 0.3), // forward-down
+        glm::vec3(0.0, -3.0, 10.0), // dest forward-down
+
+        glm::vec3(0.0, 0.0, 0.3), // forward-up-right
+        glm::vec3(3.0, 3.0, 10.0), // dest forward-up-right
+
+        glm::vec3(0.0, 0.0, 0.3), // forward-up-left
+        glm::vec3(-3.0, 3.0, 10.0), // dest forward-up-left
+
+        glm::vec3(0.0, 0.0, 0.3), // centerline long
+        glm::vec3(0.0, 0.0, 10.0), // dest centerline long
     };
 
 
@@ -1057,18 +1068,18 @@ inline void World::UpdateAiShip(Entity* entity, float dt)
             return;
         }
         // If the ship hasn't reached the start node, go to start node
-        if (!entity->hasReachedTheStartNode)
+        if (!entity->hasReachedTheStartNode && !entity->isAvoidingAsteroids)
         {
+            entity->avoidanceCooldownTimer = 5.0f;
             glm::vec3 targetPos = glm::vec3(closeNodeTranscomp->transform[3]);
             glm::vec3 fromCurrent2Target = targetPos - currentPos;
             float distance = glm::dot(fromCurrent2Target, fromCurrent2Target);
 
             Debug::DrawLine(transformComponent->transform[3], closeNodeTranscomp->transform[3], 1.0f, glm::vec4(1, 1, 0, 1), glm::vec4(1, 1, 0, 1), Debug::RenderMode::AlwaysOnTop);
 
-            if (distance <= 40.0f && entity->path.empty()) // automatic waypoint system
+            if (distance <= 40.0f && entity->path.empty() && !entity->isAvoidingAsteroids) // automatic waypoint system
             {
                 entity->hasReachedTheStartNode = true;
-
                 // Request the actual path
                 auto randomDestination = randomGetNode();
                 entity->path = astar->findPath(closestNodeFromShip, randomDestination);
@@ -1111,7 +1122,7 @@ inline void World::UpdateAiShip(Entity* entity, float dt)
                             // Smoothly reduce speed based on the distance
                             float t = glm::clamp((distance - 40.0f) / (100.0f - 40.0f), 0.0f, 1.0f);
                             float targetSpeed = glm::mix(0.2f, 1.0f, t);
-                            aiInputComponent->currentSpeed = glm::mix(aiInputComponent->currentSpeed, targetSpeed, dt * 2.0f);
+                            aiInputComponent->currentSpeed = glm::mix(aiInputComponent->currentSpeed, targetSpeed, dt * 1.0f);
                         }
                     }
                 }
@@ -1141,7 +1152,7 @@ inline void World::UpdateAiShip(Entity* entity, float dt)
         }
 
         // If the ship is following the path
-        if (!entity->path.empty() && entity->pathIndex < entity->path.size() && entity->hasReachedTheStartNode)
+        if (!entity->path.empty() && entity->pathIndex < entity->path.size() && entity->hasReachedTheStartNode && !entity->isAvoidingAsteroids)
         {
             Entity* nextNode = entity->path[entity->pathIndex];
             auto nextTransform = nextNode->GetComponent<Components::TransformComponent>();
@@ -1201,7 +1212,7 @@ inline void World::UpdateAiShip(Entity* entity, float dt)
                             // Smoothly reduce speed based on the distance
                             float t = glm::clamp((distance - 40.0f) / (100.0f - 40.0f), 0.0f, 1.0f);
                             float targetSpeed = glm::mix(0.2f, 1.0f, t);
-                            aiInputComponent->currentSpeed = glm::mix(aiInputComponent->currentSpeed, targetSpeed, dt * 2.0f);
+                            aiInputComponent->currentSpeed = glm::mix(aiInputComponent->currentSpeed, targetSpeed, dt * 1.0f);
                         }
                     }
                 }
@@ -1215,7 +1226,7 @@ inline void World::UpdateAiShip(Entity* entity, float dt)
                 targetRotation = glm::angleAxis(angle, axis);
 
                 // Interpolate between current and target rotation to smoothly turn
-                float rotationSpeed = 3.0f * dt;
+                float rotationSpeed = 2.0 * dt;
                 glm::quat newOrientation = glm::slerp(glm::quat(transformComponent->orientation), targetRotation, rotationSpeed);
 
                 // Update the ship's forward direction based on the new orientation
@@ -1381,98 +1392,159 @@ inline void World::UpdateAiShip(Entity* entity, float dt)
 
             glm::mat4 transform = transformComponent->transform;
 
-            // Left Wing Raycast
-            glm::vec3 leftWingStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[0], 1.0f));
-            glm::vec3 leftWingEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[1], 1.0f));
-            float leftLength = glm::length(leftWingEnd - leftWingStart);
+            // Forward
+            glm::vec3 fStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[0], 1.0f));
+            glm::vec3 fEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[1], 1.0f));
+            float fLength = glm::length(fEnd - fStart);
+            Debug::DrawLine(fStart, fEnd, 1.0f, glm::vec4(0, 1, 1, 1), glm::vec4(0, 1, 1, 1), Debug::RenderMode::AlwaysOnTop);
+            Physics::RaycastPayload pf = Physics::Raycast(fStart, fEnd, fLength);
 
-            Debug::DrawLine(leftWingStart, leftWingEnd, 1.0f, glm::vec4(0, 1, 1, 1), glm::vec4(0, 1, 1, 1), Debug::RenderMode::AlwaysOnTop);
-            Physics::RaycastPayload payloadLeft = Physics::Raycast(leftWingStart, leftWingEnd, leftLength);
-            payloadLeft.hitPoint = leftWingEnd;
+            // Forward-Right
+            glm::vec3 frStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[2], 1.0f));
+            glm::vec3 frEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[3], 1.0f));
+            float frLength = glm::length(frEnd - frStart);
+            Debug::DrawLine(frStart, frEnd, 1.0f, glm::vec4(0, 1, 1, 1), glm::vec4(0, 1, 1, 1), Debug::RenderMode::AlwaysOnTop);
+            Physics::RaycastPayload pfr = Physics::Raycast(frStart, frEnd, frLength);
 
-            // Right Wing Raycast
-            glm::vec3 rightWingStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[2], 1.0f));
-            glm::vec3 rightWingEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[3], 1.0f));
-            float rightLength = glm::length(rightWingEnd - rightWingStart);
+            // Forward-Left
+            glm::vec3 flStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[4], 1.0f));
+            glm::vec3 flEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[5], 1.0f));
+            float flLength = glm::length(flEnd - flStart);
+            Debug::DrawLine(flStart, flEnd, 1.0f, glm::vec4(0, 1, 1, 1), glm::vec4(0, 1, 1, 1), Debug::RenderMode::AlwaysOnTop);
+            Physics::RaycastPayload pfl = Physics::Raycast(flStart, flEnd, flLength);
 
-            Debug::DrawLine(rightWingStart, rightWingEnd, 1.0f, glm::vec4(0, 1, 1, 1), glm::vec4(0, 1, 1, 1), Debug::RenderMode::AlwaysOnTop);
-            Physics::RaycastPayload payloadRight = Physics::Raycast(rightWingStart, rightWingEnd, rightLength);
-            payloadRight.hitPoint = rightWingEnd;
+            // Forward-Up
+            glm::vec3 fuStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[6], 1.0f));
+            glm::vec3 fuEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[7], 1.0f));
+            float fuLength = glm::length(fuEnd - fuStart);
+            Debug::DrawLine(fuStart, fuEnd, 1.0f, glm::vec4(0, 1, 1, 1), glm::vec4(0, 1, 1, 1), Debug::RenderMode::AlwaysOnTop);
+            Physics::RaycastPayload pfu = Physics::Raycast(fuStart, fuEnd, fuLength);
 
-            // Top Raycast
-            glm::vec3 topStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[4], 1.0f));
-            glm::vec3 topEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[5], 1.0f));
-            float topLength = glm::length(topEnd - topStart);
+            // Forward-Down
+            glm::vec3 fdStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[8], 1.0f));
+            glm::vec3 fdEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[9], 1.0f));
+            float fdLength = glm::length(fdEnd - fdStart);
+            Debug::DrawLine(fdStart, fdEnd, 1.0f, glm::vec4(0, 1, 1, 1), glm::vec4(0, 1, 1, 1), Debug::RenderMode::AlwaysOnTop);
+            Physics::RaycastPayload pfd = Physics::Raycast(fdStart, fdEnd, fdLength);
 
-            Debug::DrawLine(topStart, topEnd, 1.0f, glm::vec4(0, 1, 1, 1), glm::vec4(0, 1, 1, 1), Debug::RenderMode::AlwaysOnTop);
-            Physics::RaycastPayload payloadTop = Physics::Raycast(topStart, topEnd, topLength);
-            payloadTop.hitPoint = topEnd;
+            // Forward-Up-Left
+            glm::vec3 fulStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[10], 1.0f));
+            glm::vec3 fulEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[11], 1.0f));
+            float fulLength = glm::length(fulEnd - fulStart);
+            Debug::DrawLine(fulStart, fulEnd, 1.0f, glm::vec4(0, 1, 1, 1), glm::vec4(0, 1, 1, 1), Debug::RenderMode::AlwaysOnTop);
+            Physics::RaycastPayload pful = Physics::Raycast(fulStart, fulEnd, fulLength);
 
-            // Bottom Raycast
-            glm::vec3 botStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[6], 1.0f));
-            glm::vec3 botEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[7], 1.0f));
-            float botLength = glm::length(botEnd - botStart);
+            // Forward-Up-Right
+            glm::vec3 furStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[12], 1.0f));
+            glm::vec3 furEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[13], 1.0f));
+            float furLength = glm::length(furEnd - furStart);
+            Debug::DrawLine(furStart, furEnd, 1.0f, glm::vec4(0, 1, 1, 1), glm::vec4(0, 1, 1, 1), Debug::RenderMode::AlwaysOnTop);
+            Physics::RaycastPayload pfur = Physics::Raycast(furStart, furEnd, furLength);
 
-            Debug::DrawLine(botStart, botEnd, 1.0f, glm::vec4(0, 1, 1, 1), glm::vec4(0, 1, 1, 1), Debug::RenderMode::AlwaysOnTop);
-            Physics::RaycastPayload payloadBot = Physics::Raycast(botStart, botEnd, botLength);
-            payloadBot.hitPoint = botEnd;
+            // Forward-Down-Left
+            glm::vec3 fdlStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[14], 1.0f));
+            glm::vec3 fdlEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[15], 1.0f));
+            float fdlLength = glm::length(fdlEnd - fdlStart);
+            Debug::DrawLine(fdlStart, fdlEnd, 1.0f, glm::vec4(0, 1, 1, 1), glm::vec4(0, 1, 1, 1), Debug::RenderMode::AlwaysOnTop);
+            Physics::RaycastPayload pfdl = Physics::Raycast(fdlStart, fdlEnd, fdlLength);
+
+            // Forward-Down-Right
+            glm::vec3 fdrStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[16], 1.0f));
+            glm::vec3 fdrEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[17], 1.0f));
+            float fdrLength = glm::length(fdrEnd - fdrStart);
+            Debug::DrawLine(fdrStart, fdrEnd, 1.0f, glm::vec4(0, 1, 1, 1), glm::vec4(0, 1, 1, 1), Debug::RenderMode::AlwaysOnTop);
+            Physics::RaycastPayload pfdr = Physics::Raycast(fdrStart, fdrEnd, fdrLength);
 
 
-            // Steering response to obstacle avoidance
+            // Obstacle avoidance steering logic
             glm::vec3 avoidanceOffset(0.0f);
+            entity->isAvoidingAsteroids = false;
 
-            if (payloadLeft.hit)
+            if (pf.hit)
             {
-                Debug::DrawDebugText("HIT", payloadLeft.hitPoint, glm::vec4(1, 1, 1, 1));
-                avoidanceOffset += glm::vec3(1.0f, 0.0f, 0.0f);  // Push right
+                Debug::DrawDebugText("HIT forward", pf.hitPoint, glm::vec4(1, 1, 1, 1));
+                avoidanceOffset += glm::vec3(0.0f, 0.0f, -1.0f); // Push back
                 entity->isAvoidingAsteroids = true;
             }
-            if (payloadRight.hit)
+            else if (pfr.hit)
             {
-                Debug::DrawDebugText("HIT", payloadRight.hitPoint, glm::vec4(1, 1, 1, 1));
-                avoidanceOffset += glm::vec3(-1.0f, 0.0f, 0.0f); // Push left
+                Debug::DrawDebugText("HIT forward-right", pfr.hitPoint, glm::vec4(1, 1, 1, 1));
+                avoidanceOffset += glm::vec3(-1.0f, 0.0f, -0.5f); // Push left and back
                 entity->isAvoidingAsteroids = true;
             }
-            if (payloadTop.hit)
+            else if (pfl.hit)
             {
-                Debug::DrawDebugText("HIT", payloadTop.hitPoint, glm::vec4(1, 1, 1, 1));
+                Debug::DrawDebugText("HIT forward-left", pfl.hitPoint, glm::vec4(1, 1, 1, 1));
+                avoidanceOffset += glm::vec3(1.0f, 0.0f, -0.5f); // Push right and back
+                entity->isAvoidingAsteroids = true;
+            }
+            else if (pfu.hit)
+            {
+                Debug::DrawDebugText("HIT forward-up", pfu.hitPoint, glm::vec4(1, 1, 1, 1));
                 avoidanceOffset += glm::vec3(0.0f, -1.0f, 0.0f); // Push down
                 entity->isAvoidingAsteroids = true;
             }
-            if (payloadBot.hit)
+            else if (pfd.hit)
             {
-                Debug::DrawDebugText("HIT", payloadBot.hitPoint, glm::vec4(1, 1, 1, 1));
-                avoidanceOffset += glm::vec3(0.0f, 1.0f, 0.0f);  // Push up
+                Debug::DrawDebugText("HIT forward-down", pfd.hitPoint, glm::vec4(1, 1, 1, 1));
+                avoidanceOffset += glm::vec3(0.0f, -1.0f, 0.0f); // Push up
                 entity->isAvoidingAsteroids = true;
             }
+            else if (pful.hit)
+            {
+                Debug::DrawDebugText("HIT forward-up-left", pful.hitPoint, glm::vec4(1, 1, 1, 1));
+                avoidanceOffset += glm::vec3(1.0f, -1.0f, -0.5f); // Push right, down, back
+                entity->isAvoidingAsteroids = true;
+            }
+            else if (pfur.hit)
+            {
+                Debug::DrawDebugText("HIT forward-up-right", pfur.hitPoint, glm::vec4(1, 1, 1, 1));
+                avoidanceOffset += glm::vec3(-1.0f, -1.0f, -0.5f); // Push left, down, back
+                entity->isAvoidingAsteroids = true;
+            }
+            else if (pfdl.hit)
+            {
+                Debug::DrawDebugText("HIT forward-down-left", pfdl.hitPoint, glm::vec4(1, 1, 1, 1));
+                avoidanceOffset += glm::vec3(1.0f, 1.0f, -0.5f); // Push right, up, back
+                entity->isAvoidingAsteroids = true;
+            }
+            else if (pfdr.hit)
+            {
+                Debug::DrawDebugText("HIT forward-down-right", pfdr.hitPoint, glm::vec4(1, 1, 1, 1));
+                avoidanceOffset += glm::vec3(-1.0f, 1.0f, -0.5f); // Push left, up, back
+                entity->isAvoidingAsteroids = true;
+            }
+
             if (entity->isAvoidingAsteroids)
             {
-                if (glm::length(avoidanceOffset) > 0.01f)
+                aiInputComponent->currentSpeed = glm::mix(aiInputComponent->currentSpeed, 0.2f, dt * 3.0f); // Slow down during avoidance
+
+                // Apply the avoidance direction (steering away from the asteroid)
+                if (glm::length(avoidanceOffset) > 1.0f)
                 {
                     glm::vec3 avoidanceDirection = glm::normalize(avoidanceOffset);
 
                     glm::vec3 currentForward = glm::normalize(glm::vec3(transform[2]) * -1.0f); // assuming -Z is forward
                     glm::quat targetRotation = glm::rotation(currentForward, avoidanceDirection);
 
-                    float rotationSpeed = 3.0f * dt;
+                    float rotationSpeed = 3.0 * dt;
                     glm::quat newOrientation = glm::slerp(glm::quat(transformComponent->orientation), targetRotation, rotationSpeed);
 
                     // Apply to ship input
-                    glm::vec3 newForward = newOrientation * glm::vec3(0, 0, 1);
+                    glm::vec3 newForward = newOrientation * currentForward;
                     aiInputComponent->rotationInputX = newForward.x;
                     aiInputComponent->rotationInputY = newForward.y;
                     aiInputComponent->rotationInputZ = newForward.z;
 
                     aiInputComponent->isForward = true;
                     transformComponent->orientation = newOrientation;
-
-                    // Optional: slow down or stop while avoiding
-                    aiInputComponent->currentSpeed = glm::mix(aiInputComponent->currentSpeed, 0.0f, dt * 5.0f);
                 }
-            }
-            else
-            {
-                entity->isAvoidingAsteroids = false;
+                else
+                {
+                    // Cooldown is over, stop avoiding and resume pathfinding
+                    entity->isAvoidingAsteroids = false;
+
+                }
             }
         }
     }

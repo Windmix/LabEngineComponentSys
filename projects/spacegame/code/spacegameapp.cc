@@ -98,12 +98,12 @@ SpaceGameApp::Run()
     // Setup asteroids far
     for (int i = 0; i < 150; i++)
     {
-        world->CreateAsteroid(200.0f);
+        world->CreateAsteroid(50.0f);
     }
     // Setup asteroids near
     for (int i = 0; i < 130; i++)
     {
-        world->CreateAsteroid(40.0f);
+        world->CreateAsteroid(70.0f);
     }
 
     //gridbased nodes
