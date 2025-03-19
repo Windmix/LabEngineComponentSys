@@ -83,6 +83,8 @@ inline std::vector<Entity*> PureEntityData::getNeighbors(Entity* entity)
                 if (neighborIt == gridNodes.end())
                     continue;
 
+
+
                 // Check if diagonal
                 bool isDiagonal = (abs(dx) + abs(dy) + abs(dz)) > 1;
 

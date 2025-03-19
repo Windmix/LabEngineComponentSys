@@ -48,8 +48,9 @@ namespace Components
 		static constexpr ComponentType TYPE = ComponentType::COLLIDER;
 		Physics::ColliderMeshId collidermeshId;
 		Physics::ColliderId colliderID;
+		glm::vec3 EndPointsNodes[6];
 		glm::vec3 colliderEndPoints[17];
-		glm::vec3 rayCastPoints[16];
+		glm::vec3 rayCastPoints[50];
 
 		ColliderComponent() {}
 		ColliderComponent(Physics::ColliderMeshId colliderId) : collidermeshId(colliderId) {}
@@ -167,6 +168,7 @@ namespace Components
 		Core::CVar* r_draw_Node_Axis_id = Core::CVarCreate(Core::CVarType::CVar_Int, "r_draw_Node_Axis_id", " - 1");
 
 		glm::vec3 EndPoints[6];
+		bool isCollidedAsteroids = false;
 		
 
 	};

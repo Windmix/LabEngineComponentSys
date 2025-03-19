@@ -96,12 +96,12 @@ SpaceGameApp::Run()
    
 
     // Setup asteroids far
-    for (int i = 0; i < 150; i++)
+    for (int i = 0; i < 100; i++)
     {
         world->CreateAsteroid(50.0f);
     }
     // Setup asteroids near
-    for (int i = 0; i < 130; i++)
+    for (int i = 0; i < 50; i++)
     {
         world->CreateAsteroid(70.0f);
     }
