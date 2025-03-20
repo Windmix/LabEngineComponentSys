@@ -52,6 +52,7 @@ namespace Components
 		glm::vec3 colliderEndPoints[17];
 		glm::vec3 rayCastPoints[50];
 
+		Core::CVar* r_Raycasts = Core::CVarCreate(Core::CVarType::CVar_Int, "r_Raycasts", "0");
 		ColliderComponent() {}
 		ColliderComponent(Physics::ColliderMeshId colliderId) : collidermeshId(colliderId) {}
 	

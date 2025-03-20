@@ -367,68 +367,68 @@ inline void World::CreatePlayerShip(bool isRespawning)
         glm::vec3(0.0, 0.0, 50.0),
 
         glm::vec3(0.0, 0.0, 0.3),
-        glm::vec3(0.0, 7.0, 54.0),
+        glm::vec3(0.0, 3.0, 20.0),
 
         glm::vec3(0.0, 0.0, 0.3),
-        glm::vec3(0.0, -7.0,54.0),
+        glm::vec3(0.0, -3.0,20.0),
 
        // up rays
        glm::vec3(0.0, 0.0, 0.3), 
-       glm::vec3(0.0, 15.0, 54.0),
+       glm::vec3(0.0, 7.0, 20.0),
 
        // down rays
        glm::vec3(0.0, 0.0, 0.3), 
-       glm::vec3(0.0, -15.0, 54.0), 
+       glm::vec3(0.0, -7.0, 20.0), 
 
        // Forward rays L
        glm::vec3(1.33578, 0.0, 0.3),
-       glm::vec3(1.33578, 0.0, 50.0),
+       glm::vec3(1.33578, 0.0, 21.0),
 
        glm::vec3(1.33578, 0.0, 0.3),
-       glm::vec3(1.33578, 7.0, 54.0),
+       glm::vec3(1.33578, 3.0, 20.0),
 
        glm::vec3(1.33578, 0.0, 0.3),
-       glm::vec3(1.33578, -7.0,54.0),
+       glm::vec3(1.33578, -3.0,20.0),
 
        // up rays L
        glm::vec3(1.33578, 0.0, 0.3),
-       glm::vec3(1.33578, 15.0, 54.0),
+       glm::vec3(1.33578, 7.0, 20.0),
 
        // down rays L
        glm::vec3(1.33578, 0.0, 0.3),
-       glm::vec3(1.33578, -15.0, 54.0),
+       glm::vec3(1.33578, -7.0, 20.0),
 
        // Forward rays R
        glm::vec3(-1.33578, 0.0, 0.3),
-       glm::vec3(-1.33578, 0.0, 50.0),
+       glm::vec3(-1.33578, 0.0, 21.0),
 
        glm::vec3(-1.33578, 0.0, 0.3),
-       glm::vec3(-1.33578, 7.0, 54.0),
+       glm::vec3(-1.33578, 3.0, 20.0),
 
        glm::vec3(-1.33578, 0.0, 0.3),
-       glm::vec3(-1.33578,-7.0,54.0),
+       glm::vec3(-1.33578,-3.0,20.0),
 
        // up rays R
        glm::vec3(-1.33578, 0.0, 0.3),
-       glm::vec3(-1.33578, 15.0, 54.0),
+       glm::vec3(-1.33578, 7.0, 20.0),
 
        // down rays R
        glm::vec3(-1.33578, 0.0, 0.3),
-       glm::vec3(-1.33578, -15.0, 54.0),
+       glm::vec3(-1.33578, -7.0, 20.0),
 
        //left rays
        glm::vec3(1.33578, 0.0, 0.088893),
-       glm::vec3(1.33578, 0.0, 50.0),
+       glm::vec3(1.33578, 0.0, 21.0),
 
         glm::vec3(1.33578, 0.0, 0.088893),
-       glm::vec3(10.0, 0.0, 50.0),
+       glm::vec3(10.0, 0.0, 21.0),
 
        //right rays
        glm::vec3(-1.33578, 0.0, 0.088893),
-       glm::vec3(-1.33578, 0.0, 50.0),
+       glm::vec3(-1.33578, 0.0, 21.0),
 
         glm::vec3(-1.33578, 0.0, 0.088893),
-       glm::vec3(-10.0, 0.0, 50.0),
+       glm::vec3(-10.0, 0.0, 21.0),
 
     };
    
@@ -634,71 +634,71 @@ inline void World::CreateEnemyShip(bool isRespawning)
     {
         // Forward rays
         glm::vec3(0.0, 0.0, 0.3),
-        glm::vec3(0.0, 0.0, 50.0),
+        glm::vec3(0.0, 0.0, 21.0),
 
         glm::vec3(0.0, 0.0, 0.3),
-        glm::vec3(0.0, 7.0, 54.0),
+        glm::vec3(0.0, 6.0, 20.0),
 
         glm::vec3(0.0, 0.0, 0.3),
-        glm::vec3(0.0, -7.0,54.0),
+        glm::vec3(0.0, -6.0,20.0),
 
         // up rays
         glm::vec3(0.0, 0.0, 0.3),
-        glm::vec3(0.0, 15.0, 54.0),
+        glm::vec3(0.0, 10.0, 20.0),
 
         // down rays
         glm::vec3(0.0, 0.0, 0.3),
-        glm::vec3(0.0, -15.0, 54.0),
+        glm::vec3(0.0, -10.0, 20.0),
 
         // Forward rays L
         glm::vec3(1.33578, 0.0, 0.3),
-        glm::vec3(1.33578, 0.0, 50.0),
+        glm::vec3(1.33578, 0.0, 21.0),
 
         glm::vec3(1.33578, 0.0, 0.3),
-        glm::vec3(1.33578, 7.0, 54.0),
+        glm::vec3(1.33578, 6.0, 20.0),
 
         glm::vec3(1.33578, 0.0, 0.3),
-        glm::vec3(1.33578, -7.0,54.0),
+        glm::vec3(1.33578, -6.0,20.0),
 
         // up rays L
         glm::vec3(1.33578, 0.0, 0.3),
-        glm::vec3(1.33578, 15.0, 54.0),
+        glm::vec3(1.33578, 10.0, 20.0),
 
         // down rays L
         glm::vec3(1.33578, 0.0, 0.3),
-        glm::vec3(1.33578, -15.0, 54.0),
+        glm::vec3(1.33578, -10.0, 20.0),
 
         // Forward rays R
         glm::vec3(-1.33578, 0.0, 0.3),
-        glm::vec3(-1.33578, 0.0, 50.0),
+        glm::vec3(-1.33578, 0.0, 21.0),
 
         glm::vec3(-1.33578, 0.0, 0.3),
-        glm::vec3(-1.33578, 7.0, 54.0),
+        glm::vec3(-1.33578, 6.0, 20.0),
 
         glm::vec3(-1.33578, 0.0, 0.3),
-        glm::vec3(-1.33578,-7.0,54.0),
+        glm::vec3(-1.33578,-6.0,20.0),
 
         // up rays R
         glm::vec3(-1.33578, 0.0, 0.3),
-        glm::vec3(-1.33578, 15.0, 54.0),
+        glm::vec3(-1.33578, 10.0, 20.0),
 
         // down rays R
         glm::vec3(-1.33578, 0.0, 0.3),
-        glm::vec3(-1.33578, -15.0, 54.0),
+        glm::vec3(-1.33578, -10.0, 20.0),
 
         //left rays
         glm::vec3(1.33578, 0.0, 0.088893),
-        glm::vec3(1.33578, 0.0, 50.0),
+        glm::vec3(1.33578, 0.0, 21.0),
 
          glm::vec3(1.33578, 0.0, 0.088893),
-        glm::vec3(10.0, 0.0, 50.0),
+        glm::vec3(10.0, 0.0, 21.0),
 
         //right rays
         glm::vec3(-1.33578, 0.0, 0.088893),
-        glm::vec3(-1.33578, 0.0, 50.0),
+        glm::vec3(-1.33578, 0.0, 21.0),
 
          glm::vec3(-1.33578, 0.0, 0.088893),
-        glm::vec3(-10.0, 0.0, 50.0),
+        glm::vec3(-10.0, 0.0, 21.0),
 
     };
 
@@ -937,7 +937,7 @@ inline void World::CreateAsteroid(float spread)
 
         newTransform->linearVelocity = glm::normalize(velocity);  // Normalize to get a consistent direction
         //GIVE THE TRANSFORM ROTATIONSPEED
-        float rotationSpeed = Core::RandomFloat() * 90.0f + 10.0f;  // Random speed between 10 and 100
+        float rotationSpeed = Core::RandomFloat() * 1.0f + 9.0f;  // Random speed between 1 and 9
         newTransform->rotationSpeed = rotationSpeed;
         collider->colliderID = Physics::CreateCollider(colliderMeshes[resourceIndex], newTransform->transform);
 
@@ -1163,7 +1163,12 @@ inline void World::UpdateShip(Entity* entity, float dt)
                 Physics::RaycastPayload payload = Physics::Raycast(glm::vec3(transformComponent->transform[3]), dir, len);
 
                 // debug draw collision rays
-                Debug::DrawLine(pos, pos + dir * len, 1.0f, glm::vec4(0, 1, 0, 1), glm::vec4(0, 1, 0, 1), Debug::RenderMode::AlwaysOnTop);
+                int menuIsUsingRayCasts(Core::CVarReadInt(colliderComponent->r_Raycasts));
+                if (menuIsUsingRayCasts == 1.0f)
+                {
+                    Debug::DrawLine(pos, pos + dir * len, 1.0f, glm::vec4(0, 1, 0, 1), glm::vec4(0, 1, 0, 1), Debug::RenderMode::AlwaysOnTop);
+                }
+               
 
                 if (payload.hit)
                 {
@@ -1203,126 +1208,147 @@ inline void World::UpdateShip(Entity* entity, float dt)
             glm::vec3 fStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[0], 1.0f));
             glm::vec3 fEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[1], 1.0f));
             float fLength = glm::length(fEnd - fStart);
-            Debug::DrawLine(fStart, fEnd, 1.0f, glm::vec4(1), glm::vec4(1), Debug::RenderMode::AlwaysOnTop);
             pf = Physics::Raycast(fStart, fEnd, fLength);
 
             glm::vec3 f1Start = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[2], 1.0f));
             glm::vec3 f1End = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[3], 1.0f));
             float f1Length = glm::length(f1End - f1Start);
-            Debug::DrawLine(f1Start, f1End, 1.0f, glm::vec4(1), glm::vec4(1), Debug::RenderMode::AlwaysOnTop);
+
             pf1 = Physics::Raycast(f1Start, f1End, f1Length);
 
             glm::vec3 f2Start = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[4], 1.0f));
             glm::vec3 f2End = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[5], 1.0f));
             float f2Length = glm::length(f2End - f2Start);
-            Debug::DrawLine(f2Start, f2End, 1.0f, glm::vec4(1), glm::vec4(1), Debug::RenderMode::AlwaysOnTop);
             pf2 = Physics::Raycast(f2Start, f2End, f2Length);
 
             // === Up ray (center) ===
             glm::vec3 uStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[6], 1.0f));
             glm::vec3 uEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[7], 1.0f));
             float uLength = glm::length(uEnd - uStart);
-            Debug::DrawLine(uStart, uEnd, 1.0f, glm::vec4(0, 1, 1, 1), glm::vec4(0, 1, 1, 1), Debug::RenderMode::AlwaysOnTop);
             pu = Physics::Raycast(uStart, uEnd, uLength);
 
             // === Down ray (center) ===
             glm::vec3 dStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[8], 1.0f));
             glm::vec3 dEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[9], 1.0f));
             float dLength = glm::length(dEnd - dStart);
-            Debug::DrawLine(dStart, dEnd, 1.0f, glm::vec4(0, 1, 1, 1), glm::vec4(0, 1, 1, 1), Debug::RenderMode::AlwaysOnTop);
+
             pd = Physics::Raycast(dStart, dEnd, dLength);
 
             // === Forward rays (Left) ===
             glm::vec3 flStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[10], 1.0f));
             glm::vec3 flEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[11], 1.0f));
             float flLength = glm::length(flEnd - flStart);
-            Debug::DrawLine(flStart, flEnd, 1.0f, glm::vec4(0, 0, 1, 1), glm::vec4(0, 0, 1, 1), Debug::RenderMode::AlwaysOnTop);
+
             pfl = Physics::Raycast(flStart, flEnd, flLength);
 
             glm::vec3 fl1Start = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[12], 1.0f));
             glm::vec3 fl1End = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[13], 1.0f));
             float fl1Length = glm::length(fl1End - fl1Start);
-            Debug::DrawLine(fl1Start, fl1End, 1.0f, glm::vec4(0, 0, 1, 1), glm::vec4(0, 0, 1, 1), Debug::RenderMode::AlwaysOnTop);
+
             pfl1 = Physics::Raycast(fl1Start, fl1End, fl1Length);
 
             glm::vec3 fl2Start = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[14], 1.0f));
             glm::vec3 fl2End = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[15], 1.0f));
             float fl2Length = glm::length(fl2End - fl2Start);
-            Debug::DrawLine(fl2Start, fl2End, 1.0f, glm::vec4(0, 0, 1, 1), glm::vec4(0, 0, 1, 1), Debug::RenderMode::AlwaysOnTop);
+
             pfl2 = Physics::Raycast(fl2Start, fl2End, fl2Length);
 
             // === Up ray (Left) ===
             glm::vec3 ulStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[16], 1.0f));
             glm::vec3 ulEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[17], 1.0f));
             float ulLength = glm::length(ulEnd - ulStart);
-            Debug::DrawLine(ulStart, ulEnd, 1.0f, glm::vec4(0, 1, 1, 1), glm::vec4(0, 1, 1, 1), Debug::RenderMode::AlwaysOnTop);
+
             pul = Physics::Raycast(ulStart, ulEnd, ulLength);
 
             // === Down ray (Left) ===
             glm::vec3 dlStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[18], 1.0f));
             glm::vec3 dlEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[19], 1.0f));
             float dlLength = glm::length(dlEnd - dlStart);
-            Debug::DrawLine(dlStart, dlEnd, 1.0f, glm::vec4(0, 1, 1, 1), glm::vec4(0, 1, 1, 1), Debug::RenderMode::AlwaysOnTop);
+
             pdl = Physics::Raycast(dlStart, dlEnd, dlLength);
 
             // === Forward rays (Right) ===
             glm::vec3 frStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[20], 1.0f));
             glm::vec3 frEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[21], 1.0f));
             float frLength = glm::length(frEnd - frStart);
-            Debug::DrawLine(frStart, frEnd, 1.0f, glm::vec4(1, 1, 0, 1), glm::vec4(1, 1, 0, 1), Debug::RenderMode::AlwaysOnTop);
+
             pfr = Physics::Raycast(frStart, frEnd, frLength);
 
             glm::vec3 fr1Start = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[22], 1.0f));
             glm::vec3 fr1End = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[23], 1.0f));
             float fr1Length = glm::length(fr1End - fr1Start);
-            Debug::DrawLine(fr1Start, fr1End, 1.0f, glm::vec4(1, 1, 0, 1), glm::vec4(1, 1, 0, 1), Debug::RenderMode::AlwaysOnTop);
+
             pfr1 = Physics::Raycast(fr1Start, fr1End, fr1Length);
 
             glm::vec3 fr2Start = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[24], 1.0f));
             glm::vec3 fr2End = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[25], 1.0f));
             float fr2Length = glm::length(fr2End - fr2Start);
-            Debug::DrawLine(fr2Start, fr2End, 1.0f, glm::vec4(1, 1, 0, 1), glm::vec4(1, 1, 0, 1), Debug::RenderMode::AlwaysOnTop);
+
             pfr2 = Physics::Raycast(fr2Start, fr2End, fr2Length);
 
             // === Up ray (Right) ===
             glm::vec3 urStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[26], 1.0f));
             glm::vec3 urEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[27], 1.0f));
             float urLength = glm::length(urEnd - urStart);
-            Debug::DrawLine(urStart, urEnd, 1.0f, glm::vec4(0, 1, 1, 1), glm::vec4(0, 1, 1, 1), Debug::RenderMode::AlwaysOnTop);
+
             pur = Physics::Raycast(urStart, urEnd, urLength);
 
             // === Down ray (Right) ===
             glm::vec3 drStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[28], 1.0f));
             glm::vec3 drEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[29], 1.0f));
             float drLength = glm::length(drEnd - drStart);
-            Debug::DrawLine(drStart, drEnd, 1.0f, glm::vec4(0, 1, 1, 1), glm::vec4(0, 1, 1, 1), Debug::RenderMode::AlwaysOnTop);
+
             pdr = Physics::Raycast(drStart, drEnd, drLength);
 
             // === Left rays ===
             glm::vec3 lStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[30], 1.0f));
             glm::vec3 lEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[31], 1.0f));
             float lLength = glm::length(lEnd - lStart);
-            Debug::DrawLine(lStart, lEnd, 1.0f, glm::vec4(1, 0, 0, 1), glm::vec4(1, 0, 0, 1), Debug::RenderMode::AlwaysOnTop);
+
             pl = Physics::Raycast(lStart, lEnd, lLength);
 
             glm::vec3 l1Start = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[32], 1.0f));
             glm::vec3 l1End = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[33], 1.0f));
             float l1Length = glm::length(l1End - l1Start);
-            Debug::DrawLine(l1Start, l1End, 1.0f, glm::vec4(1, 0, 0, 1), glm::vec4(1, 0, 0, 1), Debug::RenderMode::AlwaysOnTop);
+
             pl1 = Physics::Raycast(l1Start, l1End, l1Length);
 
             // === Right rays ===
             glm::vec3 rStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[34], 1.0f));
             glm::vec3 rEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[35], 1.0f));
             float rLength = glm::length(rEnd - rStart);
-            Debug::DrawLine(rStart, rEnd, 1.0f, glm::vec4(1, 0, 1, 1), glm::vec4(1, 0, 1, 1), Debug::RenderMode::AlwaysOnTop);
+
             pr = Physics::Raycast(rStart, rEnd, rLength);
 
             glm::vec3 r1Start = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[36], 1.0f));
             glm::vec3 r1End = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[37], 1.0f));
             float r1Length = glm::length(r1End - r1Start);
-            Debug::DrawLine(r1Start, r1End, 1.0f, glm::vec4(1, 0, 1, 1), glm::vec4(1, 0, 1, 1), Debug::RenderMode::AlwaysOnTop);
+
             pr1 = Physics::Raycast(r1Start, r1End, r1Length);
+
+            int menuIsUsingRayCasts(Core::CVarReadInt(colliderComponent->r_Raycasts));
+            if (menuIsUsingRayCasts == 1.0f)
+            {
+                Debug::DrawLine(fStart, fEnd, 1.0f, glm::vec4(1), glm::vec4(1), Debug::RenderMode::AlwaysOnTop);
+                Debug::DrawLine(f1Start, f1End, 1.0f, glm::vec4(1), glm::vec4(1), Debug::RenderMode::AlwaysOnTop);
+                Debug::DrawLine(f2Start, f2End, 1.0f, glm::vec4(1), glm::vec4(1), Debug::RenderMode::AlwaysOnTop);
+                Debug::DrawLine(uStart, uEnd, 1.0f, glm::vec4(0, 1, 1, 1), glm::vec4(0, 1, 1, 1), Debug::RenderMode::AlwaysOnTop);
+                Debug::DrawLine(dStart, dEnd, 1.0f, glm::vec4(0, 1, 1, 1), glm::vec4(0, 1, 1, 1), Debug::RenderMode::AlwaysOnTop);
+                Debug::DrawLine(flStart, flEnd, 1.0f, glm::vec4(0, 0, 1, 1), glm::vec4(0, 0, 1, 1), Debug::RenderMode::AlwaysOnTop);
+                Debug::DrawLine(fl1Start, fl1End, 1.0f, glm::vec4(0, 0, 1, 1), glm::vec4(0, 0, 1, 1), Debug::RenderMode::AlwaysOnTop);
+                Debug::DrawLine(fl2Start, fl2End, 1.0f, glm::vec4(0, 0, 1, 1), glm::vec4(0, 0, 1, 1), Debug::RenderMode::AlwaysOnTop);
+                Debug::DrawLine(ulStart, ulEnd, 1.0f, glm::vec4(0, 1, 1, 1), glm::vec4(0, 1, 1, 1), Debug::RenderMode::AlwaysOnTop);
+                Debug::DrawLine(dlStart, dlEnd, 1.0f, glm::vec4(0, 1, 1, 1), glm::vec4(0, 1, 1, 1), Debug::RenderMode::AlwaysOnTop);
+                Debug::DrawLine(frStart, frEnd, 1.0f, glm::vec4(1, 1, 0, 1), glm::vec4(1, 1, 0, 1), Debug::RenderMode::AlwaysOnTop);
+                Debug::DrawLine(fr1Start, fr1End, 1.0f, glm::vec4(1, 1, 0, 1), glm::vec4(1, 1, 0, 1), Debug::RenderMode::AlwaysOnTop);
+                Debug::DrawLine(fr2Start, fr2End, 1.0f, glm::vec4(1, 1, 0, 1), glm::vec4(1, 1, 0, 1), Debug::RenderMode::AlwaysOnTop);
+                Debug::DrawLine(urStart, urEnd, 1.0f, glm::vec4(0, 1, 1, 1), glm::vec4(0, 1, 1, 1), Debug::RenderMode::AlwaysOnTop);
+                Debug::DrawLine(drStart, drEnd, 1.0f, glm::vec4(0, 1, 1, 1), glm::vec4(0, 1, 1, 1), Debug::RenderMode::AlwaysOnTop);
+                Debug::DrawLine(lStart, lEnd, 1.0f, glm::vec4(1, 0, 0, 1), glm::vec4(1, 0, 0, 1), Debug::RenderMode::AlwaysOnTop);
+                Debug::DrawLine(l1Start, l1End, 1.0f, glm::vec4(1, 0, 0, 1), glm::vec4(1, 0, 0, 1), Debug::RenderMode::AlwaysOnTop);
+                Debug::DrawLine(rStart, rEnd, 1.0f, glm::vec4(1, 0, 1, 1), glm::vec4(1, 0, 1, 1), Debug::RenderMode::AlwaysOnTop);
+                Debug::DrawLine(r1Start, r1End, 1.0f, glm::vec4(1, 0, 1, 1), glm::vec4(1, 0, 1, 1), Debug::RenderMode::AlwaysOnTop);
+            }
 
 
 
@@ -1348,8 +1374,7 @@ inline void World::UpdateShip(Entity* entity, float dt)
                 pfl.hit || pfl1.hit || pfl2.hit ||
                 pfr.hit || pfr1.hit || pfr2.hit ||
                 pu.hit || pd.hit || pul.hit || pdl.hit || pur.hit || pdr.hit ||
-                pl.hit || pl1.hit || pr.hit || pr1.hit
-                )
+                pl.hit || pl1.hit || pr.hit || pr1.hit)
             {
                 entity->isAvoidingAsteroids = true;
                 entity->avoidanceTime = 0.0f;
@@ -1371,7 +1396,7 @@ inline void World::UpdateShip(Entity* entity, float dt)
                     )
                 )
             {
-                float rotationSpeed2 = 6.0 * dt; // Adjust this value to control the speed of rotation
+                float rotationSpeed2 = 20.0 * dt; // Adjust this value to control the speed of rotation
 
                 // Handle avoidance logic based on hit rays
                 if (pf.hit || pf1.hit || pf2.hit || pfl.hit || pfl1.hit || pfl2.hit || pfr.hit || pfr1.hit || pfr2.hit)
@@ -1458,7 +1483,11 @@ inline void World::UpdateAiShip(Entity* entity, float dt)
             glm::vec3 fromCurrent2Target = targetPos - currentPos;
             float distance = glm::dot(fromCurrent2Target, fromCurrent2Target);
 
-            Debug::DrawLine(transformComponent->transform[3], closeNodeTranscomp->transform[3], 1.0f, glm::vec4(1, 1, 0, 1), glm::vec4(1, 1, 0, 1), Debug::RenderMode::AlwaysOnTop);
+            int menuIsUsingRayCasts(Core::CVarReadInt(colliderComponent->r_Raycasts));
+            if (menuIsUsingRayCasts == 1.0f)
+            {
+                Debug::DrawLine(transformComponent->transform[3], closeNodeTranscomp->transform[3], 1.0f, glm::vec4(1, 1, 0, 1), glm::vec4(1, 1, 0, 1), Debug::RenderMode::AlwaysOnTop);
+            }
 
             if (distance <= 40.0f && entity->path.empty() && !entity->isAvoidingAsteroids) // automatic waypoint system
             {
@@ -1484,7 +1513,7 @@ inline void World::UpdateAiShip(Entity* entity, float dt)
                 targetRotation = glm::angleAxis(angle, axis);
 
                 // Interpolate between current and target rotation to smoothly turn
-                float rotationSpeed = 2.0f * dt;
+                float rotationSpeed = 1.0f * dt;
                 glm::quat newOrientation = glm::slerp(glm::quat(transformComponent->orientation), targetRotation, rotationSpeed);
 
                 // Update the ship's forward direction based on the new orientation
@@ -1507,8 +1536,11 @@ inline void World::UpdateAiShip(Entity* entity, float dt)
             glm::vec3 targetPos = glm::vec3(nextTransform->transform[3]);
             glm::vec3 fromCurrent2Target = targetPos - currentPos;
             float distance = glm::dot(fromCurrent2Target, fromCurrent2Target);
-            Debug::DrawLine(transformComponent->transform[3], nextTransform->transform[3], 1.0f, glm::vec4(1, 1, 0, 1), glm::vec4(1, 1, 0, 1), Debug::RenderMode::AlwaysOnTop);
-
+            int menuIsUsingRayCasts(Core::CVarReadInt(colliderComponent->r_Raycasts));
+            if (menuIsUsingRayCasts == 1.0f)
+            {
+                Debug::DrawLine(transformComponent->transform[3], nextTransform->transform[3], 1.0f, glm::vec4(1, 1, 0, 1), glm::vec4(1, 1, 0, 1), Debug::RenderMode::AlwaysOnTop);
+            }
             // If close enough to the target node
             if (distance <= 40.0f)
             {
@@ -1691,7 +1723,11 @@ inline void World::UpdateAiShip(Entity* entity, float dt)
                 Physics::RaycastPayload payload = Physics::Raycast(glm::vec3(transformComponent->transform[3]), dir, len);
 
                 // debug draw collision rays
-                Debug::DrawLine(pos, pos + dir * len, 1.0f, glm::vec4(0, 1, 0, 1), glm::vec4(0, 1, 0, 1), Debug::RenderMode::AlwaysOnTop);
+                int menuIsUsingRayCasts(Core::CVarReadInt(colliderComponent->r_Raycasts));
+                if (menuIsUsingRayCasts == 1.0f)
+                {
+                    Debug::DrawLine(pos, pos + dir * len, 1.0f, glm::vec4(0, 1, 0, 1), glm::vec4(0, 1, 0, 1), Debug::RenderMode::AlwaysOnTop);
+                }
 
                 if (payload.hit)
                 {
@@ -1734,131 +1770,152 @@ inline void World::UpdateAiShip(Entity* entity, float dt)
             Physics::RaycastPayload pl, pl1;
             Physics::RaycastPayload pr, pr1;
 
+          
             // === Forward rays (center) ===
             glm::vec3 fStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[0], 1.0f));
             glm::vec3 fEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[1], 1.0f));
             float fLength = glm::length(fEnd - fStart);
-            Debug::DrawLine(fStart, fEnd, 1.0f, glm::vec4(1), glm::vec4(1), Debug::RenderMode::AlwaysOnTop);
             pf = Physics::Raycast(fStart, fEnd, fLength);
 
             glm::vec3 f1Start = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[2], 1.0f));
             glm::vec3 f1End = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[3], 1.0f));
             float f1Length = glm::length(f1End - f1Start);
-            Debug::DrawLine(f1Start, f1End, 1.0f, glm::vec4(1), glm::vec4(1), Debug::RenderMode::AlwaysOnTop);
+
             pf1 = Physics::Raycast(f1Start, f1End, f1Length);
 
             glm::vec3 f2Start = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[4], 1.0f));
             glm::vec3 f2End = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[5], 1.0f));
             float f2Length = glm::length(f2End - f2Start);
-            Debug::DrawLine(f2Start, f2End, 1.0f, glm::vec4(1), glm::vec4(1), Debug::RenderMode::AlwaysOnTop);
             pf2 = Physics::Raycast(f2Start, f2End, f2Length);
 
             // === Up ray (center) ===
             glm::vec3 uStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[6], 1.0f));
             glm::vec3 uEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[7], 1.0f));
             float uLength = glm::length(uEnd - uStart);
-            Debug::DrawLine(uStart, uEnd, 1.0f, glm::vec4(0, 1, 1, 1), glm::vec4(0, 1, 1, 1), Debug::RenderMode::AlwaysOnTop);
             pu = Physics::Raycast(uStart, uEnd, uLength);
 
             // === Down ray (center) ===
             glm::vec3 dStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[8], 1.0f));
             glm::vec3 dEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[9], 1.0f));
             float dLength = glm::length(dEnd - dStart);
-            Debug::DrawLine(dStart, dEnd, 1.0f, glm::vec4(0, 1, 1, 1), glm::vec4(0, 1, 1, 1), Debug::RenderMode::AlwaysOnTop);
+            
             pd = Physics::Raycast(dStart, dEnd, dLength);
 
             // === Forward rays (Left) ===
             glm::vec3 flStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[10], 1.0f));
             glm::vec3 flEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[11], 1.0f));
             float flLength = glm::length(flEnd - flStart);
-            Debug::DrawLine(flStart, flEnd, 1.0f, glm::vec4(0, 0, 1, 1), glm::vec4(0, 0, 1, 1), Debug::RenderMode::AlwaysOnTop);
+            
             pfl = Physics::Raycast(flStart, flEnd, flLength);
 
             glm::vec3 fl1Start = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[12], 1.0f));
             glm::vec3 fl1End = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[13], 1.0f));
             float fl1Length = glm::length(fl1End - fl1Start);
-            Debug::DrawLine(fl1Start, fl1End, 1.0f, glm::vec4(0, 0, 1, 1), glm::vec4(0, 0, 1, 1), Debug::RenderMode::AlwaysOnTop);
+            
             pfl1 = Physics::Raycast(fl1Start, fl1End, fl1Length);
 
             glm::vec3 fl2Start = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[14], 1.0f));
             glm::vec3 fl2End = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[15], 1.0f));
             float fl2Length = glm::length(fl2End - fl2Start);
-            Debug::DrawLine(fl2Start, fl2End, 1.0f, glm::vec4(0, 0, 1, 1), glm::vec4(0, 0, 1, 1), Debug::RenderMode::AlwaysOnTop);
+            
             pfl2 = Physics::Raycast(fl2Start, fl2End, fl2Length);
 
             // === Up ray (Left) ===
             glm::vec3 ulStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[16], 1.0f));
             glm::vec3 ulEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[17], 1.0f));
             float ulLength = glm::length(ulEnd - ulStart);
-            Debug::DrawLine(ulStart, ulEnd, 1.0f, glm::vec4(0, 1, 1, 1), glm::vec4(0, 1, 1, 1), Debug::RenderMode::AlwaysOnTop);
+            
             pul = Physics::Raycast(ulStart, ulEnd, ulLength);
 
             // === Down ray (Left) ===
             glm::vec3 dlStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[18], 1.0f));
             glm::vec3 dlEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[19], 1.0f));
             float dlLength = glm::length(dlEnd - dlStart);
-            Debug::DrawLine(dlStart, dlEnd, 1.0f, glm::vec4(0, 1, 1, 1), glm::vec4(0, 1, 1, 1), Debug::RenderMode::AlwaysOnTop);
+           
             pdl = Physics::Raycast(dlStart, dlEnd, dlLength);
 
             // === Forward rays (Right) ===
             glm::vec3 frStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[20], 1.0f));
             glm::vec3 frEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[21], 1.0f));
             float frLength = glm::length(frEnd - frStart);
-            Debug::DrawLine(frStart, frEnd, 1.0f, glm::vec4(1, 1, 0, 1), glm::vec4(1, 1, 0, 1), Debug::RenderMode::AlwaysOnTop);
+        
             pfr = Physics::Raycast(frStart, frEnd, frLength);
 
             glm::vec3 fr1Start = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[22], 1.0f));
             glm::vec3 fr1End = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[23], 1.0f));
             float fr1Length = glm::length(fr1End - fr1Start);
-            Debug::DrawLine(fr1Start, fr1End, 1.0f, glm::vec4(1, 1, 0, 1), glm::vec4(1, 1, 0, 1), Debug::RenderMode::AlwaysOnTop);
+           
             pfr1 = Physics::Raycast(fr1Start, fr1End, fr1Length);
 
             glm::vec3 fr2Start = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[24], 1.0f));
             glm::vec3 fr2End = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[25], 1.0f));
             float fr2Length = glm::length(fr2End - fr2Start);
-            Debug::DrawLine(fr2Start, fr2End, 1.0f, glm::vec4(1, 1, 0, 1), glm::vec4(1, 1, 0, 1), Debug::RenderMode::AlwaysOnTop);
+            
             pfr2 = Physics::Raycast(fr2Start, fr2End, fr2Length);
 
             // === Up ray (Right) ===
             glm::vec3 urStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[26], 1.0f));
             glm::vec3 urEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[27], 1.0f));
             float urLength = glm::length(urEnd - urStart);
-            Debug::DrawLine(urStart, urEnd, 1.0f, glm::vec4(0, 1, 1, 1), glm::vec4(0, 1, 1, 1), Debug::RenderMode::AlwaysOnTop);
+           
             pur = Physics::Raycast(urStart, urEnd, urLength);
 
             // === Down ray (Right) ===
             glm::vec3 drStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[28], 1.0f));
             glm::vec3 drEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[29], 1.0f));
             float drLength = glm::length(drEnd - drStart);
-            Debug::DrawLine(drStart, drEnd, 1.0f, glm::vec4(0, 1, 1, 1), glm::vec4(0, 1, 1, 1), Debug::RenderMode::AlwaysOnTop);
+            
             pdr = Physics::Raycast(drStart, drEnd, drLength);
 
             // === Left rays ===
             glm::vec3 lStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[30], 1.0f));
             glm::vec3 lEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[31], 1.0f));
             float lLength = glm::length(lEnd - lStart);
-            Debug::DrawLine(lStart, lEnd, 1.0f, glm::vec4(1, 0, 0, 1), glm::vec4(1, 0, 0, 1), Debug::RenderMode::AlwaysOnTop);
+           
             pl = Physics::Raycast(lStart, lEnd, lLength);
 
             glm::vec3 l1Start = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[32], 1.0f));
             glm::vec3 l1End = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[33], 1.0f));
             float l1Length = glm::length(l1End - l1Start);
-            Debug::DrawLine(l1Start, l1End, 1.0f, glm::vec4(1, 0, 0, 1), glm::vec4(1, 0, 0, 1), Debug::RenderMode::AlwaysOnTop);
+            
             pl1 = Physics::Raycast(l1Start, l1End, l1Length);
 
             // === Right rays ===
             glm::vec3 rStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[34], 1.0f));
             glm::vec3 rEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[35], 1.0f));
             float rLength = glm::length(rEnd - rStart);
-            Debug::DrawLine(rStart, rEnd, 1.0f, glm::vec4(1, 0, 1, 1), glm::vec4(1, 0, 1, 1), Debug::RenderMode::AlwaysOnTop);
+            
             pr = Physics::Raycast(rStart, rEnd, rLength);
 
             glm::vec3 r1Start = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[36], 1.0f));
             glm::vec3 r1End = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[37], 1.0f));
             float r1Length = glm::length(r1End - r1Start);
-            Debug::DrawLine(r1Start, r1End, 1.0f, glm::vec4(1, 0, 1, 1), glm::vec4(1, 0, 1, 1), Debug::RenderMode::AlwaysOnTop);
+           
             pr1 = Physics::Raycast(r1Start, r1End, r1Length);
 
+            int menuIsUsingRayCasts(Core::CVarReadInt(colliderComponent->r_Raycasts));
+            if (menuIsUsingRayCasts == 1.0f)
+            {
+                Debug::DrawLine(fStart, fEnd, 1.0f, glm::vec4(1), glm::vec4(1), Debug::RenderMode::AlwaysOnTop);
+                Debug::DrawLine(f1Start, f1End, 1.0f, glm::vec4(1), glm::vec4(1), Debug::RenderMode::AlwaysOnTop);
+                Debug::DrawLine(f2Start, f2End, 1.0f, glm::vec4(1), glm::vec4(1), Debug::RenderMode::AlwaysOnTop);
+                Debug::DrawLine(uStart, uEnd, 1.0f, glm::vec4(0, 1, 1, 1), glm::vec4(0, 1, 1, 1), Debug::RenderMode::AlwaysOnTop);
+                Debug::DrawLine(dStart, dEnd, 1.0f, glm::vec4(0, 1, 1, 1), glm::vec4(0, 1, 1, 1), Debug::RenderMode::AlwaysOnTop);
+                Debug::DrawLine(flStart, flEnd, 1.0f, glm::vec4(0, 0, 1, 1), glm::vec4(0, 0, 1, 1), Debug::RenderMode::AlwaysOnTop);
+                Debug::DrawLine(fl1Start, fl1End, 1.0f, glm::vec4(0, 0, 1, 1), glm::vec4(0, 0, 1, 1), Debug::RenderMode::AlwaysOnTop);
+                Debug::DrawLine(fl2Start, fl2End, 1.0f, glm::vec4(0, 0, 1, 1), glm::vec4(0, 0, 1, 1), Debug::RenderMode::AlwaysOnTop);
+                Debug::DrawLine(ulStart, ulEnd, 1.0f, glm::vec4(0, 1, 1, 1), glm::vec4(0, 1, 1, 1), Debug::RenderMode::AlwaysOnTop);
+                Debug::DrawLine(dlStart, dlEnd, 1.0f, glm::vec4(0, 1, 1, 1), glm::vec4(0, 1, 1, 1), Debug::RenderMode::AlwaysOnTop);
+                Debug::DrawLine(frStart, frEnd, 1.0f, glm::vec4(1, 1, 0, 1), glm::vec4(1, 1, 0, 1), Debug::RenderMode::AlwaysOnTop);
+                Debug::DrawLine(fr1Start, fr1End, 1.0f, glm::vec4(1, 1, 0, 1), glm::vec4(1, 1, 0, 1), Debug::RenderMode::AlwaysOnTop);
+                Debug::DrawLine(fr2Start, fr2End, 1.0f, glm::vec4(1, 1, 0, 1), glm::vec4(1, 1, 0, 1), Debug::RenderMode::AlwaysOnTop);
+                Debug::DrawLine(urStart, urEnd, 1.0f, glm::vec4(0, 1, 1, 1), glm::vec4(0, 1, 1, 1), Debug::RenderMode::AlwaysOnTop);
+                Debug::DrawLine(drStart, drEnd, 1.0f, glm::vec4(0, 1, 1, 1), glm::vec4(0, 1, 1, 1), Debug::RenderMode::AlwaysOnTop);
+                Debug::DrawLine(lStart, lEnd, 1.0f, glm::vec4(1, 0, 0, 1), glm::vec4(1, 0, 0, 1), Debug::RenderMode::AlwaysOnTop);
+                Debug::DrawLine(l1Start, l1End, 1.0f, glm::vec4(1, 0, 0, 1), glm::vec4(1, 0, 0, 1), Debug::RenderMode::AlwaysOnTop);
+                Debug::DrawLine(rStart, rEnd, 1.0f, glm::vec4(1, 0, 1, 1), glm::vec4(1, 0, 1, 1), Debug::RenderMode::AlwaysOnTop);
+                Debug::DrawLine(r1Start, r1End, 1.0f, glm::vec4(1, 0, 1, 1), glm::vec4(1, 0, 1, 1), Debug::RenderMode::AlwaysOnTop);
+            }
 
 
             // Logic to determine avoidance actions
@@ -1866,6 +1923,7 @@ inline void World::UpdateAiShip(Entity* entity, float dt)
             {
                 entity->isAvoidingAsteroids = true;
 
+               
                
                 entity->avoidanceTime = 0.0f;
             }
@@ -1887,8 +1945,14 @@ inline void World::UpdateAiShip(Entity* entity, float dt)
                     )
                 )
             {
+                // Handle movement and speed adjustments
+                if (aiInputComponent->isForward)
+                {
+                    // Decrease speed when avoiding obstacles
+                    aiInputComponent->currentSpeed = glm::max(aiInputComponent->currentSpeed - dt * 2.0f, 0.0f);
 
-                float rotationSpeed2 = 3.0 * dt; // Adjust this value to control the speed of rotation
+                }
+                float rotationSpeed2 = 20.0 * dt; //rotationSpeed
 
 
 
@@ -1930,8 +1994,24 @@ inline void World::UpdateAsteroid(Entity* entity, float dt)
 {
     if (entity->eType == EntityType::Asteroid) // asteroids
     {
-        auto transformComponent = entity->GetComponent<Components::TransformComponent>();
+         auto transformComponent = entity->GetComponent<Components::TransformComponent>();
+        auto colliderComponent = entity->GetComponent<Components::ColliderComponent>();
+        auto renderComponent = entity->GetComponent<Components::RenderableComponent>();
+
+        // Apply rotation to the asteroid's transform matrix
         transformComponent->transform = glm::rotate(transformComponent->transform, dt * glm::radians(transformComponent->rotationSpeed), transformComponent->rotationAxis);
+
+        // Ensure that the rotation is preserved correctly and the matrix remains valid
+        // This part normalizes the basis vectors (rows of the transform matrix)
+        transformComponent->transform = glm::mat4(glm::normalize(transformComponent->transform[0]), 
+                                                   glm::normalize(transformComponent->transform[1]), 
+                                                   glm::normalize(transformComponent->transform[2]), 
+                                                   transformComponent->transform[3]);
+
+        // Update the collider's transform with the updated mesh transform
+        Physics::SetTransform(colliderComponent->colliderID, transformComponent->transform);
+
+
     }
 }
 inline void World::drawNode(Entity* entity)
