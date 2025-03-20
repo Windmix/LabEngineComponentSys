@@ -98,12 +98,12 @@ SpaceGameApp::Run()
     // Setup asteroids far
     for (int i = 0; i < 100; i++)
     {
-        world->CreateAsteroid(50.0f);
+        world->CreateAsteroid(200.0f);
     }
     // Setup asteroids near
-    for (int i = 0; i < 50; i++)
+    for (int i = 0; i < 100; i++)
     {
-        world->CreateAsteroid(70.0f);
+        world->CreateAsteroid(100.0f);
     }
 
     //gridbased nodes
@@ -156,7 +156,7 @@ SpaceGameApp::Run()
         lights[i] = Render::LightServer::CreatePointLight(translation, color, Core::RandomFloat() * 4.0f, 1.0f + (15 + Core::RandomFloat() * 10.0f));
     }
 
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < 1; i++)
     {
         world->CreateEnemyShip(false);
     }

@@ -30,7 +30,7 @@ public:
 	//ai stuff
 	Entity* parentNode = nullptr;
 	std::vector<Entity*> path;
-
+	Entity* closestNodeFromShip;
 	int gCost = 0;  // Cost from start to current node
 	int hCost = 0;  // Heuristic cost from current node to end
 	int FCost() const { return gCost + hCost;}

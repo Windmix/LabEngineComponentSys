@@ -7,6 +7,8 @@
 #include <render/model.h>
 #include "pureEntityData.h"
 #include <gtx/quaternion.hpp>
+#include <queue>
+#include <cstdint>
 
 
 
@@ -32,7 +34,7 @@ public:
 
     //saving for destroyed ships
     uint32_t savedID = 0;
-    uint32_t savedEnemyID = 0;
+    std::queue<uint32_t> savedEnemyIDs;
 
     int randomIndex;
 
@@ -144,7 +146,8 @@ inline Entity* World::createEntity(EntityType etype, bool isRespawning)
     }
     else if (entity->eType == EntityType::EnemyShip && isRespawning)
     {
-        entity->id = savedEnemyID;
+        entity->id =  savedEnemyIDs.front();
+        savedEnemyIDs.pop();
     }
     pureEntityData->entities.push_back(entity);
   
@@ -1417,7 +1420,6 @@ inline void World::UpdateAiShip(Entity* entity, float dt)
 
         AstarAlgorithm* astar = AstarAlgorithm::Instance();
 
-        Entity* closestNodeFromShip;
         Components::TransformComponent* closeNodeTranscomp;
         glm::vec3 targetDirection;
         glm::quat targetRotation;
@@ -1434,11 +1436,12 @@ inline void World::UpdateAiShip(Entity* entity, float dt)
         // Find the closest node
         if (!entity->closestNodeCalled)
         {
-            closestNodeFromShip = getclosestNodeFromAIship(entity);
+            entity->closestNodeFromShip = getclosestNodeFromAIship(entity);
+            entity->closestNodeCalled = true;
             
         }
 
-        closeNodeTranscomp = closestNodeFromShip->GetComponent<Components::TransformComponent>();
+        closeNodeTranscomp = entity->closestNodeFromShip->GetComponent<Components::TransformComponent>();
      
         glm::vec3 currentPos = glm::vec3(transformComponent->transform[3]);
 
@@ -1463,7 +1466,7 @@ inline void World::UpdateAiShip(Entity* entity, float dt)
 
                 // Request the actual path
                 auto randomDestination = randomGetNode();
-                entity->path = astar->findPath(closestNodeFromShip, randomDestination);
+                entity->path = astar->findPath(entity->closestNodeFromShip, randomDestination);
             }
 
             else
@@ -1481,14 +1484,14 @@ inline void World::UpdateAiShip(Entity* entity, float dt)
                 targetRotation = glm::angleAxis(angle, axis);
 
                 // Interpolate between current and target rotation to smoothly turn
-                float rotationSpeed = 3.0f * dt;
+                float rotationSpeed = 2.0f * dt;
                 glm::quat newOrientation = glm::slerp(glm::quat(transformComponent->orientation), targetRotation, rotationSpeed);
 
                 // Update the ship's forward direction based on the new orientation
                 glm::vec3 newForward = newOrientation * currentForward;
-                aiInputComponent->rotXSmooth = newForward.x;
-                aiInputComponent->rotYSmooth = newForward.y;
-                aiInputComponent->rotZSmooth = newForward.z;
+                aiInputComponent->rotationInputX = newForward.x;
+                aiInputComponent->rotationInputY = newForward.y;
+                aiInputComponent->rotationInputZ = newForward.z;
                 aiInputComponent->isForward = true; // Ensure the ship is moving forward
 
                 // Update the ship's orientation
@@ -1553,9 +1556,9 @@ inline void World::UpdateAiShip(Entity* entity, float dt)
 
                 // Update the ship's forward direction based on the new orientation
                 glm::vec3 newForward = newOrientation * currentForward;
-                aiInputComponent->rotXSmooth = newForward.x;
-                aiInputComponent->rotYSmooth = newForward.y;
-                aiInputComponent->rotZSmooth = newForward.z;
+                aiInputComponent->rotationInputX = newForward.x;
+                aiInputComponent->rotationInputY = newForward.y;
+                aiInputComponent->rotationInputZ = newForward.z;
                 aiInputComponent->isForward = true; // Ensure the ship is moving forward
 
                 // Update the ship's orientation
@@ -1569,6 +1572,7 @@ inline void World::UpdateAiShip(Entity* entity, float dt)
             entity->closestNodeCalled = false;
             entity->hasReachedTheStartNode = false;
             entity->path.clear();
+            entity->closestNodeFromShip = nullptr;
             entity->pathIndex = 0;
         }
 
@@ -1701,8 +1705,9 @@ inline void World::UpdateAiShip(Entity* entity, float dt)
                     particleComponent->particleCanonLeft->data.looping = 0;
 
                     particleComponent->particleCanonRight->data.looping = 0;
-                    //entity->path.clear();
-                    savedEnemyID = entity->id;
+                    entity->path.clear();
+                    savedEnemyIDs.push(entity->id);
+                    entity->closestNodeFromShip = nullptr;
                     CreateEnemyShip(true);
                     DestroyEntity(entity->id, entity->eType);
                     hit = false;
@@ -1716,7 +1721,7 @@ inline void World::UpdateAiShip(Entity* entity, float dt)
             
         }
 
-             glm::mat4 transform = transformComponent->transform;
+            glm::mat4 transform = transformComponent->transform;
             entity->isAvoidingAsteroids = false;
 
             //Define raycast result holders
@@ -1870,25 +1875,6 @@ inline void World::UpdateAiShip(Entity* entity, float dt)
                 // Cooldown is over, stop avoiding and resume pathfinding
                 entity->isAvoidingAsteroids = false;
             }
-          
-
-            // Logic to determine avoidance actions
-            if (
-                pf.hit || pf1.hit || pf2.hit ||
-                pfl.hit || pfl1.hit || pfl2.hit ||
-                pfr.hit || pfr1.hit || pfr2.hit ||
-                pu.hit || pd.hit || pul.hit || pdl.hit || pur.hit || pdr.hit ||
-                pl.hit || pl1.hit || pr.hit || pr1.hit
-                )
-            {
-                entity->isAvoidingAsteroids = true;
-                entity->avoidanceTime = 0.0f;
-            }
-            else
-            {
-                // Cooldown is over, stop avoiding and resume pathfinding
-                entity->isAvoidingAsteroids = false;
-            }
 
             if (
                 entity->isAvoidingAsteroids &&
@@ -1904,11 +1890,13 @@ inline void World::UpdateAiShip(Entity* entity, float dt)
 
                 float rotationSpeed2 = 3.0 * dt; // Adjust this value to control the speed of rotation
 
+
+
                 // Handle avoidance logic based on hit rays
                 if (pf.hit || pf1.hit || pf2.hit || pfl.hit || pfl1.hit || pfl2.hit || pfr.hit || pfr1.hit || pfr2.hit)
                 {
                     // Up if forward rays hit
-                   aiInputComponent->rotYSmooth = glm::mix(0.0f, rotationSpeed2, dt * cameraComponent->cameraSmoothFactor);
+                    aiInputComponent->rotYSmooth = glm::mix(0.0f, rotationSpeed2, dt * cameraComponent->cameraSmoothFactor);
                 }
 
                 if (pu.hit || pul.hit || pur.hit)
@@ -1934,6 +1922,7 @@ inline void World::UpdateAiShip(Entity* entity, float dt)
                     aiInputComponent->rotXSmooth = glm::mix(0.0f, rotationSpeed2, dt * cameraComponent->cameraSmoothFactor);
                 }
             }
+
 
     }
 }
