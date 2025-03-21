@@ -156,7 +156,7 @@ SpaceGameApp::Run()
         lights[i] = Render::LightServer::CreatePointLight(translation, color, Core::RandomFloat() * 4.0f, 1.0f + (15 + Core::RandomFloat() * 10.0f));
     }
 
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < 8; i++)
     {
         world->CreateEnemyShip(false);
     }

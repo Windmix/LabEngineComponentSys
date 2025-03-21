@@ -8,6 +8,7 @@
 #include "pureEntityData.h"
 #include <gtx/quaternion.hpp>
 #include <queue>
+#include <map>
 #include <cstdint>
 
 
@@ -34,10 +35,10 @@ public:
 
     //saving for destroyed ships
     uint32_t savedID = 0;
-    std::queue<uint32_t> savedEnemyIDs;
+    std::queue<std::map<uint32_t, bool>> savedEnemyIDsNrespawning;
 
     int randomIndex;
-
+    float respawnTimer;
     World();
     ~World();
 
@@ -93,6 +94,7 @@ inline World::World()
 {
 
    pureEntityData = PureEntityData::instance();
+   respawnTimer = 3.0f;
 
 }
 
@@ -177,8 +179,7 @@ inline Entity* World::GetEntity(uint32_t entityId)
 
 inline void World::Update(float dt)
 {
-    //RNG
-
+    
     //updates everything
     for (Entity* entity : pureEntityData->entities)
     {
@@ -259,6 +260,8 @@ inline void World::DestroyEntity(uint32_t entityId, EntityType eType)
 
         // Remove the entity from the entity vector
         pureEntityData->entities.erase(it);
+
+       
     }
 
 }
@@ -743,21 +746,21 @@ inline void World::CreateEnemyShip(bool isRespawning)
         particleEmitter->particleCanonRight = ChunkOfPartcles.Allocate(particleEmitter->numParticles);
 
         particleEmitter->particleEmitterLeft->data = {
-            .origin = glm::vec4(glm::vec3(newTransform->transform[3]) + (glm::vec3(newTransform->transform[2]) * particleEmitter->emitterOffset), 1.0f),
-            .dir = glm::vec4(glm::vec3(newTransform->transform[2]), 0),
-            .startColor = glm::vec4(0.38f, 0.76f, 0.95f, 1.0f) * 2.0f,
-            .endColor = glm::vec4(0,0,0,1.0f),
-            .numParticles = particleEmitter->numParticles,
-            .theta = glm::radians(0.0f),
-            .startSpeed = 1.2f,
-            .endSpeed = 0.0f,
-            .startScale = 0.01f,
-            .endScale = 0.0f,
-            .decayTime = 2.58f,
-            .randomTimeOffsetDist = 2.58f,
-            .looping = 1,
-            .emitterType = 1,
-            .discRadius = 0.080f
+           .origin = glm::vec4(glm::vec3(newTransform->transform[3]) + (glm::vec3(newTransform->transform[2]) * particleEmitter->emitterOffset), 1.0f),
+           .dir = glm::vec4(glm::vec3(newTransform->transform[2]), 0),
+           .startColor = glm::vec4(0.38f, 0.76f, 0.95f, 1.0f) * 2.0f,
+           .endColor = glm::vec4(0,0,0,1.0f),
+           .numParticles = particleEmitter->numParticles,
+           .theta = glm::radians(0.0f),
+           .startSpeed = 1.2f,
+           .endSpeed = 0.0f,
+           .startScale = 0.01f,
+           .endScale = 0.0f,
+           .decayTime = 2.58f,
+           .randomTimeOffsetDist = 2.58f,
+           .looping = 1,
+           .emitterType = 1,
+           .discRadius = 0.1f
         };
 
 
@@ -828,22 +831,24 @@ inline void World::CreateEnemyShip(bool isRespawning)
         particleEmitter->particleCanonLeft = ChunkOfPartcles.Allocate(particleEmitter->numParticles);
         particleEmitter->particleCanonRight = ChunkOfPartcles.Allocate(particleEmitter->numParticles);
 
+
+
         particleEmitter->particleEmitterLeft->data = {
-            .origin = glm::vec4(glm::vec3(newTransform->transform[3]) + (glm::vec3(newTransform->transform[2]) * particleEmitter->emitterOffset), 1.0f),
-            .dir = glm::vec4(glm::vec3(newTransform->transform[2]), 0),
-            .startColor = glm::vec4(0.38f, 0.76f, 0.95f, 1.0f) * 2.0f,
-            .endColor = glm::vec4(0,0,0,1.0f),
-            .numParticles = particleEmitter->numParticles,
-            .theta = glm::radians(0.0f),
-            .startSpeed = 1.2f,
-            .endSpeed = 0.0f,
-            .startScale = 0.025f,
-            .endScale = 0.0f,
-            .decayTime = 2.58f,
-            .randomTimeOffsetDist = 2.58f,
-            .looping = 1,
-            .emitterType = 1,
-            .discRadius = 0.020f
+             .origin = glm::vec4(glm::vec3(newTransform->transform[3]) + (glm::vec3(newTransform->transform[2]) * particleEmitter->emitterOffset), 1.0f),
+             .dir = glm::vec4(glm::vec3(newTransform->transform[2]), 0),
+             .startColor = glm::vec4(0.38f, 0.76f, 0.95f, 1.0f) * 2.0f,
+             .endColor = glm::vec4(0,0,0,1.0f),
+             .numParticles = particleEmitter->numParticles,
+             .theta = glm::radians(0.0f),
+             .startSpeed = 1.2f,
+             .endSpeed = 0.0f,
+             .startScale = 0.01f,
+             .endScale = 0.0f,
+             .decayTime = 2.58f,
+             .randomTimeOffsetDist = 2.58f,
+             .looping = 1,
+             .emitterType = 1,
+             .discRadius = 0.1f
         };
 
 
@@ -1185,6 +1190,7 @@ inline void World::UpdateShip(Entity* entity, float dt)
                     CreatePlayerShip(true);
                     DestroyEntity(entity->id, entity->eType);
                     hit = false;
+                    return;
 
                 }
 
@@ -1450,7 +1456,7 @@ inline void World::UpdateAiShip(Entity* entity, float dt)
         glm::quat targetRotation;
         glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
 
-        Debug::DrawDebugText(std::to_string(aiInputComponent->currentSpeed).c_str(), transformComponent->transform[3], { 0.9f,0.9f,1,1 });
+        Debug::DrawDebugText(std::to_string(entity->id).c_str(), transformComponent->transform[3], { 0.9f,0.9f,1,1 });
 
         if (aiInputComponent->isForward)
         {
@@ -1732,25 +1738,21 @@ inline void World::UpdateAiShip(Entity* entity, float dt)
                 if (payload.hit)
                 {
                     Debug::DrawDebugText("HIT", payload.hitPoint, glm::vec4(1, 1, 1, 1));
-                    hit = true;
-                }
-                //if hit asteroid, one shot
-                if (hit)
-                {
 
                     particleComponent->particleCanonLeft->data.looping = 0;
-
                     particleComponent->particleCanonRight->data.looping = 0;
                     entity->path.clear();
-                    savedEnemyIDs.push(entity->id);
+                    savedEnemyIDsNrespawning.push();
                     entity->closestNodeFromShip = nullptr;
-                    CreateEnemyShip(true);
                     DestroyEntity(entity->id, entity->eType);
-                    hit = false;
+                    isRespawnings.push(true);
 
+                    hit = true;
                 }
 
+
             }
+          
 
 
          
