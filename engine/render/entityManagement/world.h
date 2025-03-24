@@ -85,6 +85,7 @@ private:
     void draw(Entity* entity);
     void updateCamera(Entity* entity, float dt);
 
+    void HandleAsteroidHit(Entity* entity, Components::ParticleEmitterComponent* particleEmit);
 };
 
 
@@ -147,15 +148,15 @@ inline Entity* World::createEntity(EntityType etype, bool isRespawning)
     {
         entity->id = savedIDs.front();
         savedIDs.pop();
+        pureEntityData->ships.push_back(entity);
     }
     else if (entity->eType == EntityType::EnemyShip && isRespawning)
     {
-        entity->id =  savedEnemyIDs.front();
+        entity->id = savedEnemyIDs.front();
         savedEnemyIDs.pop();
+        pureEntityData->ships.push_back(entity);
     }
     pureEntityData->entities.push_back(entity);
-
-  
 
     return entity;
 }
@@ -182,18 +183,30 @@ inline Entity* World::GetEntity(uint32_t entityId)
 
 inline void World::Update(float dt)
 {
-    
-    //updates everything
-    for (Entity* entity : pureEntityData->entities)
+    for (auto asteroid : pureEntityData->Asteroids)
     {
+        UpdateAsteroid(asteroid, dt);
+    }
+  
+    for (auto ship : pureEntityData->ships)
+    {
+        UpdateAiShip(ship, dt);
+        UpdateShip(ship, dt);
+        updateCamera(ship, dt);
         
-        UpdateAsteroid(entity, dt);
-        UpdateAiShip(entity, dt);
-        UpdateShip(entity, dt);
-        UpdateNode(entity, dt);
-        draw(entity);
-        updateCamera(entity, dt);
        
+    }
+  
+    for (auto node : pureEntityData->nodes)
+    {
+        UpdateNode(node, dt);
+    }
+   
+
+    //draw Everything
+    for (auto entity : pureEntityData->entities)
+    {
+        draw(entity);
     }
  
     
@@ -258,7 +271,8 @@ inline void World::DestroyShip(uint32_t shipId, EntityType eType)
                 Render::ParticleSystem::Instance()->RemoveEmitter(particleEmitterComp->particleEmitterLeft);
                 Render::ParticleSystem::Instance()->RemoveEmitter(particleEmitterComp->particleEmitterRight);
 
-
+                particleEmitterComp->particleCanonLeft->data = Render::ParticleEmitter::EmitterBlock();
+                particleEmitterComp->particleCanonRight->data = Render::ParticleEmitter::EmitterBlock();
                 ChunkOfPartcles.Deallocate(particleEmitterComp->particleCanonLeft);
                 ChunkOfPartcles.Deallocate(particleEmitterComp->particleCanonRight);
 
@@ -336,13 +350,18 @@ inline void World::DestroyEntity(uint32_t entityId, EntityType eType)
             }
             else if (auto* particleEmitterComp = dynamic_cast<Components::ParticleEmitterComponent*>(component))
             {
+                particleEmitterComp->particleCanonLeft = nullptr;
+                particleEmitterComp->particleCanonRight = nullptr;
+                particleEmitterComp->particleEmitterLeft = nullptr;
+                particleEmitterComp->particleEmitterRight = nullptr;
+                particleEmitterComp->numParticles = 0;
                 Render::ParticleSystem::Instance()->RemoveEmitter(particleEmitterComp->particleCanonLeft);
                 Render::ParticleSystem::Instance()->RemoveEmitter(particleEmitterComp->particleCanonRight);
 
                 Render::ParticleSystem::Instance()->RemoveEmitter(particleEmitterComp->particleEmitterLeft);
                 Render::ParticleSystem::Instance()->RemoveEmitter(particleEmitterComp->particleEmitterRight);
 
-
+               
                 ChunkOfPartcles.Deallocate(particleEmitterComp->particleCanonLeft);
                 ChunkOfPartcles.Deallocate(particleEmitterComp->particleCanonRight);
 
@@ -361,7 +380,7 @@ inline void World::DestroyEntity(uint32_t entityId, EntityType eType)
         entityChunk.Deallocate(entityToDelete);
 
         // Remove the entities from the entity vector
-        pureEntityData->entities.erase(it);
+       pureEntityData->entities.erase(it);
       
        
 
@@ -417,7 +436,8 @@ inline void World::Cleanup()
                     Render::ParticleSystem::Instance()->RemoveEmitter(particleEmitterComp->particleEmitterLeft);
                     Render::ParticleSystem::Instance()->RemoveEmitter(particleEmitterComp->particleEmitterRight);
 
-
+                    particleEmitterComp->particleCanonLeft->data = Render::ParticleEmitter::EmitterBlock();
+                    particleEmitterComp->particleCanonRight->data = Render::ParticleEmitter::EmitterBlock();
                     ChunkOfPartcles.Deallocate(particleEmitterComp->particleCanonLeft);
                     ChunkOfPartcles.Deallocate(particleEmitterComp->particleCanonRight);
 
@@ -557,180 +577,99 @@ inline  Entity* World::CreatePlayerShip(bool isRespawning)
     {
         spaceship = createEntity(EntityType::SpaceShip, isRespawning);
 
-        Components::TransformComponent* newTransform = transformChunk.Allocate();
-        spaceship->AddComponent(newTransform, ComponentType::TRANSFORM, EntityType::SpaceShip);
-        newTransform->transform[3] = glm::vec4(0.0f, 0.0f + 10.0f, 0.0f, 0.0f);
-
-        Components::RenderableComponent* renderable = renderableChunk.Allocate(shipModel);
-        spaceship->AddComponent(renderable, ComponentType::RENDERABLE, EntityType::SpaceShip);
-
-        Components::ColliderComponent* collider = colliderChunk.Allocate();
-        spaceship->AddComponent(collider, ComponentType::COLLIDER, EntityType::SpaceShip);
-        for (int i = 0; i < sizeof(colliderEndPoints) / sizeof(glm::vec3); i++)
-        {
-            collider->colliderEndPoints[i] = colliderEndPoints[i];
-        }
-        for (int i = 0; i < sizeof(collider->rayCastPoints) / sizeof(glm::vec3); i++)
-        {
-            collider->rayCastPoints[i] = rayCastEndPoints[i];
-        }
-       
-        collider->colliderID = Physics::CreateCollider(ColliderMeshShip, newTransform->transform);
-        collider->UsingEntityType = EntityType::SpaceShip;
-
-        Components::CameraComponent* camera = cameraChunk.Allocate();
-        spaceship->AddComponent(camera, ComponentType::CAMERA, EntityType::SpaceShip);
-        camera->theCam = Render::CameraManager::GetCamera(CAMERA_MAIN);
-
-        Components::PlayerInputComponent* controllinput = controlInputChunk.Allocate();
-        spaceship->AddComponent(controllinput, ComponentType::INPUT, EntityType::SpaceShip);
-
-        Components::ParticleEmitterComponent* particleEmitter = particleEmitterChunk.Allocate();
-        spaceship->AddComponent(particleEmitter, ComponentType::PARTICLE_EMITTER, EntityType::SpaceShip);
-
-
-        particleEmitter->particleEmitterLeft = ChunkOfPartcles.Allocate(particleEmitter->numParticles);
-        particleEmitter->particleEmitterRight = ChunkOfPartcles.Allocate(particleEmitter->numParticles);
-
-        particleEmitter->particleCanonLeft = ChunkOfPartcles.Allocate(particleEmitter->numParticles);
-        particleEmitter->particleCanonRight = ChunkOfPartcles.Allocate(particleEmitter->numParticles);
-
-        particleEmitter->particleEmitterLeft->data = {
-            .origin = glm::vec4(glm::vec3(newTransform->transform[3]) + (glm::vec3(newTransform->transform[2]) * particleEmitter->emitterOffset), 1.0f),
-            .dir = glm::vec4(glm::vec3(newTransform->transform[2]), 0),
-            .startColor = glm::vec4(0.38f, 0.76f, 0.95f, 1.0f) * 2.0f,
-            .endColor = glm::vec4(0,0,0,1.0f),
-            .numParticles = particleEmitter->numParticles,
-            .theta = glm::radians(0.0f),
-            .startSpeed = 1.2f,
-            .endSpeed = 0.0f,
-            .startScale = 0.01f,
-            .endScale = 0.0f,
-            .decayTime = 2.58f,
-            .randomTimeOffsetDist = 2.58f,
-            .looping = 1,
-            .emitterType = 1,
-            .discRadius = 0.1f
-        };
-
-
-        particleEmitter->particleEmitterRight->data = particleEmitter->particleEmitterLeft->data;
-
-        Render::ParticleSystem::Instance()->AddEmitter(particleEmitter->particleEmitterLeft);
-        Render::ParticleSystem::Instance()->AddEmitter(particleEmitter->particleEmitterRight);
-
-
-        particleEmitter->particleCanonLeft->data = {
-           .origin = glm::vec4(glm::vec3(newTransform->transform[3]) + (glm::vec3(newTransform->transform[2]) * particleEmitter->canonEmitterOffset), 1.0f),
-           .dir = glm::vec4(glm::vec3(newTransform->transform[2]), 0),
-           .startColor = glm::vec4(0.0f, 1.0f, 0.0f, 1.0f) * 3.0f,
-           .endColor = glm::vec4(0,0,0,1.0f),
-           .numParticles = particleEmitter->numParticles,
-           .theta = glm::radians(0.0f),
-           .startSpeed = -0.0f,
-           .endSpeed = -0.0f,
-           .startScale = 0.02f,
-           .endScale = 0.015f,
-           .decayTime = 0.5f,
-           .randomTimeOffsetDist = 0.00001f,
-           .looping = 0,
-           .emitterType = 1,
-           .discRadius = 0.1f
-        };
-
-        particleEmitter->particleCanonRight->data = particleEmitter->particleCanonLeft->data;
-
-        Render::ParticleSystem::Instance()->AddEmitter(particleEmitter->particleCanonLeft);
-        Render::ParticleSystem::Instance()->AddEmitter(particleEmitter->particleCanonRight);
 
     }
     else
     {
         spaceship = createEntity(EntityType::SpaceShip, isRespawning);
-
-        Components::TransformComponent* newTransform = transformChunk.Allocate();
-        spaceship->AddComponent(newTransform, ComponentType::TRANSFORM, EntityType::SpaceShip);
-        /* newTransform->transform[3] = glm::vec4(0.0f + i*2, 0.0f + i*2, 0.0f + i*2, 0.0f);*/
-
-        Components::RenderableComponent* renderable = renderableChunk.Allocate(shipModel);
-        spaceship->AddComponent(renderable, ComponentType::RENDERABLE, EntityType::SpaceShip);
-
-        Components::ColliderComponent* collider = colliderChunk.Allocate();
-        spaceship->AddComponent(collider, ComponentType::COLLIDER, EntityType::SpaceShip);
-        for (int i = 0; i < sizeof(colliderEndPoints) / sizeof(glm::vec3); i++)
-        {
-            collider->colliderEndPoints[i] = colliderEndPoints[i];
-        }
-        for (int i = 0; i < sizeof(collider->rayCastPoints) / sizeof(glm::vec3); i++)
-        {
-            collider->rayCastPoints[i] = rayCastEndPoints[i];
-        }
-        collider->colliderID = Physics::CreateCollider(ColliderMeshShip, newTransform->transform);
-        collider->UsingEntityType = EntityType::SpaceShip;
-
-        Components::CameraComponent* camera = cameraChunk.Allocate();
-        spaceship->AddComponent(camera, ComponentType::CAMERA, EntityType::SpaceShip);
-        camera->theCam = Render::CameraManager::GetCamera(CAMERA_MAIN);
-
-        Components::PlayerInputComponent* controllinput = controlInputChunk.Allocate();
-        spaceship->AddComponent(controllinput, ComponentType::INPUT, EntityType::SpaceShip);
-
-        Components::ParticleEmitterComponent* particleEmitter = particleEmitterChunk.Allocate();
-        spaceship->AddComponent(particleEmitter, ComponentType::PARTICLE_EMITTER, EntityType::SpaceShip);
-
-        particleEmitter->particleEmitterLeft = ChunkOfPartcles.Allocate(particleEmitter->numParticles);
-        particleEmitter->particleEmitterRight = ChunkOfPartcles.Allocate(particleEmitter->numParticles);
-
-        particleEmitter->particleCanonLeft = ChunkOfPartcles.Allocate(particleEmitter->numParticles);
-        particleEmitter->particleCanonRight = ChunkOfPartcles.Allocate(particleEmitter->numParticles);
-
-        particleEmitter->particleEmitterLeft->data = {
-           .origin = glm::vec4(glm::vec3(newTransform->transform[3]) + (glm::vec3(newTransform->transform[2]) * particleEmitter->emitterOffset), 1.0f),
-            .dir = glm::vec4(glm::vec3(newTransform->transform[2]), 0),
-            .startColor = glm::vec4(0.38f, 0.76f, 0.95f, 1.0f) * 2.0f,
-            .endColor = glm::vec4(0,0,0,1.0f),
-            .numParticles = particleEmitter->numParticles,
-            .theta = glm::radians(0.0f),
-            .startSpeed = 1.2f,
-            .endSpeed = 0.0f,
-            .startScale = 0.01f,
-            .endScale = 0.0f,
-            .decayTime = 2.58f,
-            .randomTimeOffsetDist = 2.58f,
-            .looping = 1,
-            .emitterType = 1,
-            .discRadius = 0.1f
-        };
-
-
-        particleEmitter->particleEmitterRight->data = particleEmitter->particleEmitterLeft->data;
-
-        Render::ParticleSystem::Instance()->AddEmitter(particleEmitter->particleEmitterLeft);
-        Render::ParticleSystem::Instance()->AddEmitter(particleEmitter->particleEmitterRight);
-
-        particleEmitter->particleCanonLeft->data = {
-           .origin = glm::vec4(glm::vec3(newTransform->transform[3]) + (glm::vec3(newTransform->transform[2]) * particleEmitter->canonEmitterOffset), 1.0f),
-           .dir = glm::vec4(glm::vec3(newTransform->transform[2]), 0),
-           .startColor = glm::vec4(0.0f, 1.0f, 0.0f, 1.0f) * 3.0f,
-           .endColor = glm::vec4(0,0,0,1.0f),
-           .numParticles = particleEmitter->numParticles,
-           .theta = glm::radians(0.0f),
-           .startSpeed = -0.0f,
-           .endSpeed = -0.0f,
-           .startScale = 0.02f,
-           .endScale = 0.015f,
-           .decayTime = 0.5f,
-           .randomTimeOffsetDist = 0.00001f,
-           .looping = 0,
-           .emitterType = 1,
-           .discRadius = 0.1f
-        };
-
-        particleEmitter->particleCanonRight->data = particleEmitter->particleCanonLeft->data;
-
-        Render::ParticleSystem::Instance()->AddEmitter(particleEmitter->particleCanonLeft);
-        Render::ParticleSystem::Instance()->AddEmitter(particleEmitter->particleCanonRight);
     }
+
+    Components::TransformComponent* newTransform = transformChunk.Allocate();
+    spaceship->AddComponent(newTransform, ComponentType::TRANSFORM, EntityType::SpaceShip);
+    newTransform->transform[3] = glm::vec4(0.0f, 0.0f + 10.0f, 0.0f, 0.0f);
+
+    Components::RenderableComponent* renderable = renderableChunk.Allocate(shipModel);
+    spaceship->AddComponent(renderable, ComponentType::RENDERABLE, EntityType::SpaceShip);
+
+    Components::ColliderComponent* collider = colliderChunk.Allocate();
+    spaceship->AddComponent(collider, ComponentType::COLLIDER, EntityType::SpaceShip);
+    for (int i = 0; i < sizeof(colliderEndPoints) / sizeof(glm::vec3); i++)
+    {
+        collider->colliderEndPoints.push_back(colliderEndPoints[i]);
+    }
+    for (int i = 0; i < sizeof(collider->rayCastPoints) / sizeof(glm::vec3); i++)
+    {
+        collider->rayCastPoints.push_back(rayCastEndPoints[i]);
+    }
+
+    collider->colliderID = Physics::CreateCollider(ColliderMeshShip, newTransform->transform);
+    collider->UsingEntityType = EntityType::SpaceShip;
+
+    Components::CameraComponent* camera = cameraChunk.Allocate();
+    spaceship->AddComponent(camera, ComponentType::CAMERA, EntityType::SpaceShip);
+    camera->theCam = Render::CameraManager::GetCamera(CAMERA_MAIN);
+
+    Components::PlayerInputComponent* controllinput = controlInputChunk.Allocate();
+    spaceship->AddComponent(controllinput, ComponentType::INPUT, EntityType::SpaceShip);
+
+    Components::ParticleEmitterComponent* particleEmitter = particleEmitterChunk.Allocate();
+    spaceship->AddComponent(particleEmitter, ComponentType::PARTICLE_EMITTER, EntityType::SpaceShip);
+
+
+    particleEmitter->particleEmitterLeft = ChunkOfPartcles.Allocate(particleEmitter->numParticles);
+    particleEmitter->particleEmitterRight = ChunkOfPartcles.Allocate(particleEmitter->numParticles);
+
+    particleEmitter->particleCanonLeft = ChunkOfPartcles.Allocate(particleEmitter->numParticles);
+    particleEmitter->particleCanonRight = ChunkOfPartcles.Allocate(particleEmitter->numParticles);
+
+    particleEmitter->particleEmitterLeft->data = {
+        .origin = glm::vec4(glm::vec3(newTransform->transform[3]) + (glm::vec3(newTransform->transform[2]) * particleEmitter->emitterOffset), 1.0f),
+        .dir = glm::vec4(glm::vec3(newTransform->transform[2]), 0),
+        .startColor = glm::vec4(0.38f, 0.76f, 0.95f, 1.0f) * 2.0f,
+        .endColor = glm::vec4(0.38f, 0.76f, 0.95f, 1.0f),
+        .numParticles = particleEmitter->numParticles,
+        .theta = glm::radians(1.0f),
+        .startSpeed = 1.2f,
+        .endSpeed = 0.0f,
+        .startScale = 0.01f,
+        .endScale = 0.0f,
+        .decayTime = 2.58f,
+        .randomTimeOffsetDist = 2.58f,
+        .looping = 1,
+        .emitterType = 1,
+        .discRadius = 0.1f
+    };
+
+
+    particleEmitter->particleEmitterRight->data = particleEmitter->particleEmitterLeft->data;
+
+    Render::ParticleSystem::Instance()->AddEmitter(particleEmitter->particleEmitterLeft);
+    Render::ParticleSystem::Instance()->AddEmitter(particleEmitter->particleEmitterRight);
+
+
+    particleEmitter->particleCanonLeft->data = {
+       .origin = glm::vec4(glm::vec3(newTransform->transform[3]) + (glm::vec3(newTransform->transform[2]) * particleEmitter->canonEmitterOffset), 1.0f),
+       .dir = glm::vec4(glm::vec3(newTransform->transform[2]), 0),
+       .startColor = glm::vec4(0.0f, 1.0f, 0.0f, 1.0f) * 3.0f,
+       .endColor = glm::vec4(0,0,0,1.0f),
+       .numParticles = particleEmitter->numParticles,
+       .theta = glm::radians(0.0f),
+       .startSpeed = 10.0f,
+       .endSpeed = 10.0f,
+       .startScale = 0.1f,
+       .endScale = 0.015f,
+       .decayTime = 0.5f,
+       .randomTimeOffsetDist = 0.00001f,
+       .looping = 0,
+       .emitterType = 1,
+       .discRadius = 0.1f
+    };
+
+    particleEmitter->particleCanonRight->data = particleEmitter->particleCanonLeft->data;
+
+    Render::ParticleSystem::Instance()->AddEmitter(particleEmitter->particleCanonLeft);
+    Render::ParticleSystem::Instance()->AddEmitter(particleEmitter->particleCanonRight);
+
     return spaceship;
 }
 inline  Entity* World::CreateEnemyShip(bool isRespawning)
@@ -838,181 +777,96 @@ inline  Entity* World::CreateEnemyShip(bool isRespawning)
     if (!isRespawning)
     {
         AIspaceship = createEntity(EntityType::EnemyShip, isRespawning);
-
-        Components::TransformComponent* newTransform = transformChunk.Allocate();
-        AIspaceship->AddComponent(newTransform, ComponentType::TRANSFORM, EntityType::EnemyShip);
-       // newTransform->transform[3] = glm::vec4(0.0f, 1.0f, 0.0f, 0.0f);
-
-        Components::RenderableComponent* renderable = renderableChunk.Allocate(shipModel);
-        AIspaceship->AddComponent(renderable, ComponentType::RENDERABLE, EntityType::EnemyShip);
-
-        Components::ColliderComponent* collider = colliderChunk.Allocate();
-        AIspaceship->AddComponent(collider, ComponentType::COLLIDER, EntityType::EnemyShip);
-        for (int i = 0; i < sizeof(colliderEndPoints) / sizeof(glm::vec3); i++)
-        {
-            collider->colliderEndPoints[i] = colliderEndPoints[i];
-        }
-        for (int i = 0; i < sizeof(collider->rayCastPoints) / sizeof(glm::vec3); i++)
-        {
-            collider->rayCastPoints[i] = rayCastEndPoints[i];
-        }
-        collider->colliderID = Physics::CreateCollider(ColliderMeshShip, newTransform->transform);
-        collider->UsingEntityType = EntityType::EnemyShip;
-
-
-        Components::AIinputController* controllinput = AiControllerChunk.Allocate();
-        AIspaceship->AddComponent(controllinput, ComponentType::AI_CONTROLLER, EntityType::EnemyShip);
-
-        Components::CameraComponent* camera = cameraChunk.Allocate();
-        AIspaceship->AddComponent(camera, ComponentType::CAMERA, EntityType::EnemyShip);
-
-        Components::ParticleEmitterComponent* particleEmitter = particleEmitterChunk.Allocate();
-        AIspaceship->AddComponent(particleEmitter, ComponentType::PARTICLE_EMITTER, EntityType::EnemyShip);
-
-
-        particleEmitter->particleEmitterLeft = ChunkOfPartcles.Allocate(particleEmitter->numParticles);
-        particleEmitter->particleEmitterRight = ChunkOfPartcles.Allocate(particleEmitter->numParticles);
-
-        particleEmitter->particleCanonLeft = ChunkOfPartcles.Allocate(particleEmitter->numParticles);
-        particleEmitter->particleCanonRight = ChunkOfPartcles.Allocate(particleEmitter->numParticles);
-
-        particleEmitter->particleEmitterLeft->data = {
-           .origin = glm::vec4(glm::vec3(newTransform->transform[3]) + (glm::vec3(newTransform->transform[2]) * particleEmitter->emitterOffset), 1.0f),
-           .dir = glm::vec4(glm::vec3(newTransform->transform[2]), 0),
-           .startColor = glm::vec4(0.38f, 0.76f, 0.95f, 1.0f) * 2.0f,
-           .endColor = glm::vec4(0,0,0,1.0f),
-           .numParticles = particleEmitter->numParticles,
-           .theta = glm::radians(0.0f),
-           .startSpeed = 1.2f,
-           .endSpeed = 0.0f,
-           .startScale = 0.01f,
-           .endScale = 0.0f,
-           .decayTime = 2.58f,
-           .randomTimeOffsetDist = 2.58f,
-           .looping = 1,
-           .emitterType = 1,
-           .discRadius = 0.1f
-        };
-
-
-        particleEmitter->particleEmitterRight->data = particleEmitter->particleEmitterLeft->data;
-
-        Render::ParticleSystem::Instance()->AddEmitter(particleEmitter->particleEmitterLeft);
-        Render::ParticleSystem::Instance()->AddEmitter(particleEmitter->particleEmitterRight);
-
-
-        particleEmitter->particleCanonLeft->data = {
-           .origin = glm::vec4(glm::vec3(newTransform->transform[3]) + (glm::vec3(newTransform->transform[2]) * particleEmitter->canonEmitterOffset), 1.0f),
-           .dir = glm::vec4(glm::vec3(newTransform->transform[2]), 0),
-           .startColor = glm::vec4(0.0f, 1.0f, 0.0f, 1.0f) * 3.0f,
-           .endColor = glm::vec4(0,0,0,1.0f),
-           .numParticles = particleEmitter->numParticles,
-           .theta = glm::radians(0.0f),
-           .startSpeed = -0.0f,
-           .endSpeed = -0.0f,
-           .startScale = 0.02f,
-           .endScale = 0.015f,
-           .decayTime = 0.5f,
-           .randomTimeOffsetDist = 0.00001f,
-           .looping = 0,
-           .emitterType = 1,
-           .discRadius = 0.1f
-        };
-
-        particleEmitter->particleCanonRight->data = particleEmitter->particleCanonLeft->data;
-
-        Render::ParticleSystem::Instance()->AddEmitter(particleEmitter->particleCanonLeft);
-        Render::ParticleSystem::Instance()->AddEmitter(particleEmitter->particleCanonRight);
     }
     else
     {
         AIspaceship = createEntity(EntityType::EnemyShip, isRespawning);
-
-        Components::TransformComponent* newTransform = transformChunk.Allocate();
-        AIspaceship->AddComponent(newTransform, ComponentType::TRANSFORM, EntityType::EnemyShip);
-        /* newTransform->transform[3] = glm::vec4(0.0f + i*2, 0.0f + i*2, 0.0f + i*2, 0.0f);*/
-
-        Components::RenderableComponent* renderable = renderableChunk.Allocate(shipModel);
-        AIspaceship->AddComponent(renderable, ComponentType::RENDERABLE, EntityType::EnemyShip);
-
-        Components::ColliderComponent* collider = colliderChunk.Allocate();
-        AIspaceship->AddComponent(collider, ComponentType::COLLIDER, EntityType::EnemyShip);
-        for (int i = 0; i < sizeof(colliderEndPoints) / sizeof(glm::vec3); i++)
-        {
-            collider->colliderEndPoints[i] = colliderEndPoints[i];
-        }
-        for (int i = 0; i < sizeof(collider->rayCastPoints) / sizeof(glm::vec3); i++)
-        {
-            collider->rayCastPoints[i] = rayCastEndPoints[i];
-        }
-        collider->colliderID = Physics::CreateCollider(ColliderMeshShip, newTransform->transform);
-        collider->UsingEntityType = EntityType::EnemyShip;
-
-        Components::AIinputController* controllinput = AiControllerChunk.Allocate();
-        AIspaceship->AddComponent(controllinput, ComponentType::AI_CONTROLLER, EntityType::EnemyShip);
-
-        Components::CameraComponent* camera = cameraChunk.Allocate();
-        AIspaceship->AddComponent(camera, ComponentType::CAMERA, EntityType::EnemyShip);
-
-        Components::ParticleEmitterComponent* particleEmitter = particleEmitterChunk.Allocate();
-        AIspaceship->AddComponent(particleEmitter, ComponentType::PARTICLE_EMITTER, EntityType::EnemyShip);
-
-
-        particleEmitter->particleEmitterLeft = ChunkOfPartcles.Allocate(particleEmitter->numParticles);
-        particleEmitter->particleEmitterRight = ChunkOfPartcles.Allocate(particleEmitter->numParticles);
-
-        particleEmitter->particleCanonLeft = ChunkOfPartcles.Allocate(particleEmitter->numParticles);
-        particleEmitter->particleCanonRight = ChunkOfPartcles.Allocate(particleEmitter->numParticles);
-
-
-
-        particleEmitter->particleEmitterLeft->data = {
-             .origin = glm::vec4(glm::vec3(newTransform->transform[3]) + (glm::vec3(newTransform->transform[2]) * particleEmitter->emitterOffset), 1.0f),
-             .dir = glm::vec4(glm::vec3(newTransform->transform[2]), 0),
-             .startColor = glm::vec4(0.38f, 0.76f, 0.95f, 1.0f) * 2.0f,
-             .endColor = glm::vec4(0,0,0,1.0f),
-             .numParticles = particleEmitter->numParticles,
-             .theta = glm::radians(0.0f),
-             .startSpeed = 1.2f,
-             .endSpeed = 0.0f,
-             .startScale = 0.01f,
-             .endScale = 0.0f,
-             .decayTime = 2.58f,
-             .randomTimeOffsetDist = 2.58f,
-             .looping = 1,
-             .emitterType = 1,
-             .discRadius = 0.1f
-        };
-
-
-        particleEmitter->particleEmitterRight->data = particleEmitter->particleEmitterLeft->data;
-
-        Render::ParticleSystem::Instance()->AddEmitter(particleEmitter->particleEmitterLeft);
-        Render::ParticleSystem::Instance()->AddEmitter(particleEmitter->particleEmitterRight);
-
-        particleEmitter->particleCanonLeft->data = {
-           .origin = glm::vec4(glm::vec3(newTransform->transform[3]) + (glm::vec3(newTransform->transform[2]) * particleEmitter->canonEmitterOffset), 1.0f),
-           .dir = glm::vec4(glm::vec3(newTransform->transform[2]), 0),
-           .startColor = glm::vec4(0.0f, 1.0f, 0.0f, 1.0f) * 3.0f,
-           .endColor = glm::vec4(0,0,0,1.0f),
-           .numParticles = particleEmitter->numParticles,
-           .theta = glm::radians(0.0f),
-           .startSpeed = -0.0f,
-           .endSpeed = -0.0f,
-           .startScale = 0.02f,
-           .endScale = 0.015f,
-           .decayTime = 0.5f,
-           .randomTimeOffsetDist = 0.00001f,
-           .looping = 0,
-           .emitterType = 1,
-           .discRadius = 0.1f
-        };
-
-        particleEmitter->particleCanonRight->data = particleEmitter->particleCanonLeft->data;
-
-        Render::ParticleSystem::Instance()->AddEmitter(particleEmitter->particleCanonLeft);
-        Render::ParticleSystem::Instance()->AddEmitter(particleEmitter->particleCanonRight);
     }
+
+    Components::TransformComponent* newTransform = transformChunk.Allocate();
+    AIspaceship->AddComponent(newTransform, ComponentType::TRANSFORM, EntityType::EnemyShip);
+    /* newTransform->transform[3] = glm::vec4(0.0f + i*2, 0.0f + i*2, 0.0f + i*2, 0.0f);*/
+
+    Components::RenderableComponent* renderable = renderableChunk.Allocate(shipModel);
+    AIspaceship->AddComponent(renderable, ComponentType::RENDERABLE, EntityType::EnemyShip);
+
+    Components::ColliderComponent* collider = colliderChunk.Allocate();
+    AIspaceship->AddComponent(collider, ComponentType::COLLIDER, EntityType::EnemyShip);
+    for (int i = 0; i < sizeof(colliderEndPoints) / sizeof(glm::vec3); i++)
+    {
+        collider->colliderEndPoints.push_back(colliderEndPoints[i]);
+    }
+    for (int i = 0; i < sizeof(collider->rayCastPoints) / sizeof(glm::vec3); i++)
+    {
+        collider->rayCastPoints.push_back(rayCastEndPoints[i]);
+    }
+    collider->colliderID = Physics::CreateCollider(ColliderMeshShip, newTransform->transform);
+    collider->UsingEntityType = EntityType::EnemyShip;
+
+    Components::AIinputController* controllinput = AiControllerChunk.Allocate();
+    AIspaceship->AddComponent(controllinput, ComponentType::AI_CONTROLLER, EntityType::EnemyShip);
+
+    Components::CameraComponent* camera = cameraChunk.Allocate();
+    AIspaceship->AddComponent(camera, ComponentType::CAMERA, EntityType::EnemyShip);
+
+    Components::ParticleEmitterComponent* particleEmitter = particleEmitterChunk.Allocate();
+    AIspaceship->AddComponent(particleEmitter, ComponentType::PARTICLE_EMITTER, EntityType::EnemyShip);
+
+
+    particleEmitter->particleEmitterLeft = ChunkOfPartcles.Allocate(particleEmitter->numParticles);
+    particleEmitter->particleEmitterRight = ChunkOfPartcles.Allocate(particleEmitter->numParticles);
+
+    particleEmitter->particleCanonLeft = ChunkOfPartcles.Allocate(particleEmitter->numParticles);
+    particleEmitter->particleCanonRight = ChunkOfPartcles.Allocate(particleEmitter->numParticles);
+
+
+
+    particleEmitter->particleEmitterLeft->data = {
+    .origin = glm::vec4(glm::vec3(newTransform->transform[3]) + (glm::vec3(newTransform->transform[2]) * particleEmitter->emitterOffset), 1.0f),
+    .dir = glm::vec4(glm::vec3(newTransform->transform[2]), 0),
+    .startColor = glm::vec4(0.38f, 0.76f, 0.95f, 1.0f) * 2.0f,
+    .endColor = glm::vec4(0.38f, 0.76f, 0.95f, 1.0f),
+    .numParticles = particleEmitter->numParticles,
+    .theta = glm::radians(1.0f),
+    .startSpeed = 1.2f,
+    .endSpeed = 0.0f,
+    .startScale = 0.01f,
+    .endScale = 0.0f,
+    .decayTime = 2.58f,
+    .randomTimeOffsetDist = 2.58f,
+    .looping = 1,
+    .emitterType = 1,
+    .discRadius = 0.1f
+    };
+
+
+    particleEmitter->particleEmitterRight->data = particleEmitter->particleEmitterLeft->data;
+
+    Render::ParticleSystem::Instance()->AddEmitter(particleEmitter->particleEmitterLeft);
+    Render::ParticleSystem::Instance()->AddEmitter(particleEmitter->particleEmitterRight);
+
+    particleEmitter->particleCanonLeft->data = {
+       .origin = glm::vec4(glm::vec3(newTransform->transform[3]) + (glm::vec3(newTransform->transform[2]) * particleEmitter->canonEmitterOffset), 1.0f),
+       .dir = glm::vec4(glm::vec3(newTransform->transform[2]), 0),
+       .startColor = glm::vec4(0.0f, 1.0f, 0.0f, 1.0f) * 3.0f,
+       .endColor = glm::vec4(0,0,0,1.0f),
+       .numParticles = particleEmitter->numParticles,
+       .theta = glm::radians(0.0f),
+       .startSpeed = 10.0f,
+       .endSpeed = 10.0f,
+       .startScale = 0.1f,
+       .endScale = 0.015f,
+       .decayTime = 0.5f,
+       .randomTimeOffsetDist = 0.00001f,
+       .looping = 0,
+       .emitterType = 1,
+       .discRadius = 0.1f
+    };
+
+    particleEmitter->particleCanonRight->data = particleEmitter->particleCanonLeft->data;
+
+    Render::ParticleSystem::Instance()->AddEmitter(particleEmitter->particleCanonLeft);
+    Render::ParticleSystem::Instance()->AddEmitter(particleEmitter->particleCanonRight);
     return AIspaceship;
 
 }
@@ -1297,7 +1151,8 @@ inline void World::UpdateShip(Entity* entity, float dt)
             //check collisions
             glm::mat4 rotation = glm::mat4(transformComponent->orientation);
             bool hit = false;
-            for (int i = 0; i < sizeof(colliderComponent->colliderEndPoints) / sizeof(glm::vec3); i++)
+
+            for (int i = 0; i < colliderComponent->colliderEndPoints.size(); i++)
             {
                 glm::vec3 pos = glm::vec3(transformComponent->transform[3]);
                 glm::vec3 dir = transformComponent->transform * glm::vec4(glm::normalize(colliderComponent->colliderEndPoints[i]), 0.0f);
@@ -1310,7 +1165,7 @@ inline void World::UpdateShip(Entity* entity, float dt)
                 {
                     Debug::DrawLine(pos, pos + dir * len, 1.0f, glm::vec4(0, 1, 0, 1), glm::vec4(0, 1, 0, 1), Debug::RenderMode::AlwaysOnTop);
                 }
-               
+
 
                 if (payload.hit)
                 {
@@ -1326,17 +1181,19 @@ inline void World::UpdateShip(Entity* entity, float dt)
 
                             savedIDs.push(entity->id);
 
-                            CreatePlayerShip(true);
+
                             DestroyShip(entity->id, entity->eType);
                             DestroyEntity(entity->id, entity->eType);
-                            
+                            CreatePlayerShip(true);
+
                             return;
                         }
                     }
-                   
+
                 }
 
             }
+      
 
             //glm::mat4 transform = transformComponent->transform;
             //glm::vec3 avoidanceOffset(0.0f);
@@ -1618,11 +1475,7 @@ inline void World::UpdateAiShip(Entity* entity, float dt)
      
         glm::vec3 currentPos = glm::vec3(transformComponent->transform[3]);
 
-        //make sure it is not nullptr, then try next update
-        if (closeNodeTranscomp == nullptr)
-        {
-            return;
-        }
+     
 
         // If the ship hasn't reached the start node, go to start node
         if (!entity->hasReachedTheStartNode && !entity->isAvoidingAsteroids)
@@ -1677,7 +1530,7 @@ inline void World::UpdateAiShip(Entity* entity, float dt)
         }
 
         // If the ship is following the path
-        if (!entity->path.empty() && entity->pathIndex < entity->path.size() && entity->hasReachedTheStartNode && !entity->isAvoidingAsteroids)
+        else if (!entity->path.empty() && entity->pathIndex < entity->path.size() && entity->hasReachedTheStartNode && !entity->isAvoidingAsteroids)
         {
             Entity* nextNode = entity->path[entity->pathIndex];
             auto nextTransform = nextNode->GetComponent<Components::TransformComponent>();
@@ -1862,284 +1715,293 @@ inline void World::UpdateAiShip(Entity* entity, float dt)
 
 
 
-            bool hit = false;
-            for (int i = 0; i < sizeof(colliderComponent->colliderEndPoints) / sizeof(glm::vec3); i++)
-            {
-                glm::vec3 pos = glm::vec3(transformComponent->transform[3]);
-                glm::vec3 dir = transformComponent->transform * glm::vec4(glm::normalize(colliderComponent->colliderEndPoints[i]), 0.0f);
-                float len = glm::length(colliderComponent->colliderEndPoints[i]);
-                Physics::RaycastPayload payload = Physics::Raycast(glm::vec3(transformComponent->transform[3]), dir, len);
-
-                // debug draw collision rays
-                int menuIsUsingRayCasts(Core::CVarReadInt(colliderComponent->r_Raycasts));
-                if (menuIsUsingRayCasts == 1.0f)
-                {
-                    Debug::DrawLine(pos, pos + dir * len, 1.0f, glm::vec4(0, 1, 0, 1), glm::vec4(0, 1, 0, 1), Debug::RenderMode::AlwaysOnTop);
-                }
-
-                if (payload.hit)
-                {
-                    Debug::DrawDebugText("HIT", payload.hitPoint, glm::vec4(1, 1, 1, 1));
-
-                    for (auto entity1 : pureEntityData->Asteroids)
-                    {
-                        auto entComp = entity1->GetComponent<Components::ColliderComponent>();
-                        if (payload.collider == entComp->colliderID && entity1->eType == EntityType::Asteroid)
-                        {
-                            particleComponent->particleCanonLeft->data.looping = 0;
-                            particleComponent->particleCanonRight->data.looping = 0;
-
-
-                            savedEnemyIDs.push(entity->id);
-                          
-                            CreateEnemyShip(true);
-                            DestroyShip(entity->id, entity->eType);
-                            DestroyEntity(entity->id, entity->eType);
-                            return;
-                        }
-                    }
-                   
-                }
-
-            }
+           
           
 
 
          
             
         }
+        for (int i = 0; i < colliderComponent->colliderEndPoints.size(); i++)
+        {
+            glm::vec3 pos = glm::vec3(transformComponent->transform[3]);
+            glm::vec3 dir = transformComponent->transform * glm::vec4(glm::normalize(colliderComponent->colliderEndPoints[i]), 0.0f);
+            float len = glm::length(colliderComponent->colliderEndPoints[i]);
+            Physics::RaycastPayload payload = Physics::Raycast(glm::vec3(transformComponent->transform[3]), dir, len);
 
-            glm::mat4 transform = transformComponent->transform;
-            entity->isAvoidingAsteroids = false;
-
-            //Define raycast result holders
-            Physics::RaycastPayload pf, pf1, pf2;
-            Physics::RaycastPayload pu, pd;
-            Physics::RaycastPayload pfl, pfl1, pfl2;
-            Physics::RaycastPayload pul, pdl;
-            Physics::RaycastPayload pfr, pfr1, pfr2;
-            Physics::RaycastPayload pur, pdr;
-            Physics::RaycastPayload pl, pl1;
-            Physics::RaycastPayload pr, pr1;
-
-          
-            // === Forward rays (center) ===
-            glm::vec3 fStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[0], 1.0f));
-            glm::vec3 fEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[1], 1.0f));
-            float fLength = glm::length(fEnd - fStart);
-            pf = Physics::Raycast(fStart, fEnd, fLength);
-
-            glm::vec3 f1Start = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[2], 1.0f));
-            glm::vec3 f1End = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[3], 1.0f));
-            float f1Length = glm::length(f1End - f1Start);
-
-            pf1 = Physics::Raycast(f1Start, f1End, f1Length);
-
-            glm::vec3 f2Start = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[4], 1.0f));
-            glm::vec3 f2End = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[5], 1.0f));
-            float f2Length = glm::length(f2End - f2Start);
-            pf2 = Physics::Raycast(f2Start, f2End, f2Length);
-
-            // === Up ray (center) ===
-            glm::vec3 uStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[6], 1.0f));
-            glm::vec3 uEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[7], 1.0f));
-            float uLength = glm::length(uEnd - uStart);
-            pu = Physics::Raycast(uStart, uEnd, uLength);
-
-            // === Down ray (center) ===
-            glm::vec3 dStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[8], 1.0f));
-            glm::vec3 dEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[9], 1.0f));
-            float dLength = glm::length(dEnd - dStart);
-            
-            pd = Physics::Raycast(dStart, dEnd, dLength);
-
-            // === Forward rays (Left) ===
-            glm::vec3 flStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[10], 1.0f));
-            glm::vec3 flEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[11], 1.0f));
-            float flLength = glm::length(flEnd - flStart);
-            
-            pfl = Physics::Raycast(flStart, flEnd, flLength);
-
-            glm::vec3 fl1Start = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[12], 1.0f));
-            glm::vec3 fl1End = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[13], 1.0f));
-            float fl1Length = glm::length(fl1End - fl1Start);
-            
-            pfl1 = Physics::Raycast(fl1Start, fl1End, fl1Length);
-
-            glm::vec3 fl2Start = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[14], 1.0f));
-            glm::vec3 fl2End = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[15], 1.0f));
-            float fl2Length = glm::length(fl2End - fl2Start);
-            
-            pfl2 = Physics::Raycast(fl2Start, fl2End, fl2Length);
-
-            // === Up ray (Left) ===
-            glm::vec3 ulStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[16], 1.0f));
-            glm::vec3 ulEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[17], 1.0f));
-            float ulLength = glm::length(ulEnd - ulStart);
-            
-            pul = Physics::Raycast(ulStart, ulEnd, ulLength);
-
-            // === Down ray (Left) ===
-            glm::vec3 dlStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[18], 1.0f));
-            glm::vec3 dlEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[19], 1.0f));
-            float dlLength = glm::length(dlEnd - dlStart);
-           
-            pdl = Physics::Raycast(dlStart, dlEnd, dlLength);
-
-            // === Forward rays (Right) ===
-            glm::vec3 frStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[20], 1.0f));
-            glm::vec3 frEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[21], 1.0f));
-            float frLength = glm::length(frEnd - frStart);
-        
-            pfr = Physics::Raycast(frStart, frEnd, frLength);
-
-            glm::vec3 fr1Start = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[22], 1.0f));
-            glm::vec3 fr1End = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[23], 1.0f));
-            float fr1Length = glm::length(fr1End - fr1Start);
-           
-            pfr1 = Physics::Raycast(fr1Start, fr1End, fr1Length);
-
-            glm::vec3 fr2Start = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[24], 1.0f));
-            glm::vec3 fr2End = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[25], 1.0f));
-            float fr2Length = glm::length(fr2End - fr2Start);
-            
-            pfr2 = Physics::Raycast(fr2Start, fr2End, fr2Length);
-
-            // === Up ray (Right) ===
-            glm::vec3 urStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[26], 1.0f));
-            glm::vec3 urEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[27], 1.0f));
-            float urLength = glm::length(urEnd - urStart);
-           
-            pur = Physics::Raycast(urStart, urEnd, urLength);
-
-            // === Down ray (Right) ===
-            glm::vec3 drStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[28], 1.0f));
-            glm::vec3 drEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[29], 1.0f));
-            float drLength = glm::length(drEnd - drStart);
-            
-            pdr = Physics::Raycast(drStart, drEnd, drLength);
-
-            // === Left rays ===
-            glm::vec3 lStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[30], 1.0f));
-            glm::vec3 lEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[31], 1.0f));
-            float lLength = glm::length(lEnd - lStart);
-           
-            pl = Physics::Raycast(lStart, lEnd, lLength);
-
-            glm::vec3 l1Start = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[32], 1.0f));
-            glm::vec3 l1End = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[33], 1.0f));
-            float l1Length = glm::length(l1End - l1Start);
-            
-            pl1 = Physics::Raycast(l1Start, l1End, l1Length);
-
-            // === Right rays ===
-            glm::vec3 rStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[34], 1.0f));
-            glm::vec3 rEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[35], 1.0f));
-            float rLength = glm::length(rEnd - rStart);
-            
-            pr = Physics::Raycast(rStart, rEnd, rLength);
-
-            glm::vec3 r1Start = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[36], 1.0f));
-            glm::vec3 r1End = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[37], 1.0f));
-            float r1Length = glm::length(r1End - r1Start);
-           
-            pr1 = Physics::Raycast(r1Start, r1End, r1Length);
-
+            // debug draw collision rays
             int menuIsUsingRayCasts(Core::CVarReadInt(colliderComponent->r_Raycasts));
             if (menuIsUsingRayCasts == 1.0f)
             {
-                Debug::DrawLine(fStart, fEnd, 1.0f, glm::vec4(1), glm::vec4(1), Debug::RenderMode::AlwaysOnTop);
-                Debug::DrawLine(f1Start, f1End, 1.0f, glm::vec4(1), glm::vec4(1), Debug::RenderMode::AlwaysOnTop);
-                Debug::DrawLine(f2Start, f2End, 1.0f, glm::vec4(1), glm::vec4(1), Debug::RenderMode::AlwaysOnTop);
-                Debug::DrawLine(uStart, uEnd, 1.0f, glm::vec4(0, 1, 1, 1), glm::vec4(0, 1, 1, 1), Debug::RenderMode::AlwaysOnTop);
-                Debug::DrawLine(dStart, dEnd, 1.0f, glm::vec4(0, 1, 1, 1), glm::vec4(0, 1, 1, 1), Debug::RenderMode::AlwaysOnTop);
-                Debug::DrawLine(flStart, flEnd, 1.0f, glm::vec4(0, 0, 1, 1), glm::vec4(0, 0, 1, 1), Debug::RenderMode::AlwaysOnTop);
-                Debug::DrawLine(fl1Start, fl1End, 1.0f, glm::vec4(0, 0, 1, 1), glm::vec4(0, 0, 1, 1), Debug::RenderMode::AlwaysOnTop);
-                Debug::DrawLine(fl2Start, fl2End, 1.0f, glm::vec4(0, 0, 1, 1), glm::vec4(0, 0, 1, 1), Debug::RenderMode::AlwaysOnTop);
-                Debug::DrawLine(ulStart, ulEnd, 1.0f, glm::vec4(0, 1, 1, 1), glm::vec4(0, 1, 1, 1), Debug::RenderMode::AlwaysOnTop);
-                Debug::DrawLine(dlStart, dlEnd, 1.0f, glm::vec4(0, 1, 1, 1), glm::vec4(0, 1, 1, 1), Debug::RenderMode::AlwaysOnTop);
-                Debug::DrawLine(frStart, frEnd, 1.0f, glm::vec4(1, 1, 0, 1), glm::vec4(1, 1, 0, 1), Debug::RenderMode::AlwaysOnTop);
-                Debug::DrawLine(fr1Start, fr1End, 1.0f, glm::vec4(1, 1, 0, 1), glm::vec4(1, 1, 0, 1), Debug::RenderMode::AlwaysOnTop);
-                Debug::DrawLine(fr2Start, fr2End, 1.0f, glm::vec4(1, 1, 0, 1), glm::vec4(1, 1, 0, 1), Debug::RenderMode::AlwaysOnTop);
-                Debug::DrawLine(urStart, urEnd, 1.0f, glm::vec4(0, 1, 1, 1), glm::vec4(0, 1, 1, 1), Debug::RenderMode::AlwaysOnTop);
-                Debug::DrawLine(drStart, drEnd, 1.0f, glm::vec4(0, 1, 1, 1), glm::vec4(0, 1, 1, 1), Debug::RenderMode::AlwaysOnTop);
-                Debug::DrawLine(lStart, lEnd, 1.0f, glm::vec4(1, 0, 0, 1), glm::vec4(1, 0, 0, 1), Debug::RenderMode::AlwaysOnTop);
-                Debug::DrawLine(l1Start, l1End, 1.0f, glm::vec4(1, 0, 0, 1), glm::vec4(1, 0, 0, 1), Debug::RenderMode::AlwaysOnTop);
-                Debug::DrawLine(rStart, rEnd, 1.0f, glm::vec4(1, 0, 1, 1), glm::vec4(1, 0, 1, 1), Debug::RenderMode::AlwaysOnTop);
-                Debug::DrawLine(r1Start, r1End, 1.0f, glm::vec4(1, 0, 1, 1), glm::vec4(1, 0, 1, 1), Debug::RenderMode::AlwaysOnTop);
+                Debug::DrawLine(pos, pos + dir * len, 1.0f, glm::vec4(0, 1, 0, 1), glm::vec4(0, 1, 0, 1), Debug::RenderMode::AlwaysOnTop);
             }
 
 
-            // Logic to determine avoidance actions
-            if ((pf.hit || pf1.hit || pf2.hit || pu.hit || pd.hit || pl.hit || pl1.hit || pr.hit || pr1.hit))
+            if (payload.hit)
             {
-                entity->isAvoidingAsteroids = true;
+                Debug::DrawDebugText("HIT", payload.hitPoint, glm::vec4(1, 1, 1, 1));
 
-               
-               
-                entity->avoidanceTime = 0.0f;
+                for (auto entityIn : pureEntityData->Asteroids)
+                {
+                    auto entComp = entityIn->GetComponent<Components::ColliderComponent>();
+                    if (payload.collider == entComp->colliderID && entityIn->eType == EntityType::Asteroid)
+                    {
+                       // Stop particle emitters
+                       particleComponent->particleCanonLeft->data.looping = 0;
+                       particleComponent->particleCanonRight->data.looping = 0;
+
+                        // Save and flag for respawn
+                        savedEnemyIDs.push(entity->id);
+                        entity->isRespawning = true;
+
+                        DestroyShip(entity->id, entity->eType);
+                        DestroyEntity(entity->id, entity->eType);
+                        CreateEnemyShip(true);
+
+                        return;
+                    }
+                }
+
             }
 
-            else
-            {
-                // Cooldown is over, stop avoiding and resume pathfinding
-                entity->isAvoidingAsteroids = false;
-            }
+        }
+       
 
-            if (
-                entity->isAvoidingAsteroids &&
-                (
-                    pf.hit || pf1.hit || pf2.hit ||
-                    pfl.hit || pfl1.hit || pfl2.hit ||
-                    pfr.hit || pfr1.hit || pfr2.hit ||
-                    pu.hit || pd.hit || pul.hit || pdl.hit || pur.hit || pdr.hit ||
-                    pl.hit || pl1.hit || pr.hit || pr1.hit
-                    )
-                )
-            {
-                // Handle movement and speed adjustments
-                if (aiInputComponent->isForward)
-                {
-                    // Decrease speed when avoiding obstacles
-                    aiInputComponent->currentSpeed = glm::max(aiInputComponent->currentSpeed - dt * 2.0f, 0.0f);
+        //glm::mat4 transform = transformComponent->transform;
+        //entity->isAvoidingAsteroids = false;
 
-                }
-                float rotationSpeed2 = 20.0 * dt; //rotationSpeed
+        ////Define raycast result holders
+        //Physics::RaycastPayload pf, pf1, pf2;
+        //Physics::RaycastPayload pu, pd;
+        //Physics::RaycastPayload pfl, pfl1, pfl2;
+        //Physics::RaycastPayload pul, pdl;
+        //Physics::RaycastPayload pfr, pfr1, pfr2;
+        //Physics::RaycastPayload pur, pdr;
+        //Physics::RaycastPayload pl, pl1;
+        //Physics::RaycastPayload pr, pr1;
 
 
+        //// === Forward rays (center) ===
+        //glm::vec3 fStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[0], 1.0f));
+        //glm::vec3 fEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[1], 1.0f));
+        //float fLength = glm::length(fEnd - fStart);
+        //pf = Physics::Raycast(fStart, fEnd, fLength);
 
-                // Handle avoidance logic based on hit rays
-                if (pf.hit || pf1.hit || pf2.hit || pfl.hit || pfl1.hit || pfl2.hit || pfr.hit || pfr1.hit || pfr2.hit)
-                {
-                    // Up if forward rays hit
-                    aiInputComponent->rotYSmooth = glm::mix(0.0f, rotationSpeed2, dt * cameraComponent->cameraSmoothFactor);
-                }
+        //glm::vec3 f1Start = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[2], 1.0f));
+        //glm::vec3 f1End = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[3], 1.0f));
+        //float f1Length = glm::length(f1End - f1Start);
 
-                if (pu.hit || pul.hit || pur.hit)
-                {
-                    // Down if upward rays hit
-                    aiInputComponent->rotYSmooth = glm::mix(0.0f, -rotationSpeed2, dt * cameraComponent->cameraSmoothFactor);
-                }
+        //pf1 = Physics::Raycast(f1Start, f1End, f1Length);
 
-                if (pd.hit || pdl.hit || pdr.hit)
-                {
-                    // Up if downward rays hit
-                    aiInputComponent->rotYSmooth = glm::mix(0.0f, rotationSpeed2, dt * cameraComponent->cameraSmoothFactor);
-                }
+        //glm::vec3 f2Start = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[4], 1.0f));
+        //glm::vec3 f2End = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[5], 1.0f));
+        //float f2Length = glm::length(f2End - f2Start);
+        //pf2 = Physics::Raycast(f2Start, f2End, f2Length);
 
-                if (pl.hit || pl1.hit)
-                {
-                    // right if left rays hit
-                    aiInputComponent->rotXSmooth = glm::mix(0.0f, -rotationSpeed2, dt * cameraComponent->cameraSmoothFactor);
-                }
-                else if (pr.hit || pr1.hit)
-                {
-                    // left if right rays hit
-                    aiInputComponent->rotXSmooth = glm::mix(0.0f, rotationSpeed2, dt * cameraComponent->cameraSmoothFactor);
-                }
-            }
+        //// === Up ray (center) ===
+        //glm::vec3 uStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[6], 1.0f));
+        //glm::vec3 uEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[7], 1.0f));
+        //float uLength = glm::length(uEnd - uStart);
+        //pu = Physics::Raycast(uStart, uEnd, uLength);
+
+        //// === Down ray (center) ===
+        //glm::vec3 dStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[8], 1.0f));
+        //glm::vec3 dEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[9], 1.0f));
+        //float dLength = glm::length(dEnd - dStart);
+
+        //pd = Physics::Raycast(dStart, dEnd, dLength);
+
+        //// === Forward rays (Left) ===
+        //glm::vec3 flStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[10], 1.0f));
+        //glm::vec3 flEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[11], 1.0f));
+        //float flLength = glm::length(flEnd - flStart);
+
+        //pfl = Physics::Raycast(flStart, flEnd, flLength);
+
+        //glm::vec3 fl1Start = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[12], 1.0f));
+        //glm::vec3 fl1End = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[13], 1.0f));
+        //float fl1Length = glm::length(fl1End - fl1Start);
+
+        //pfl1 = Physics::Raycast(fl1Start, fl1End, fl1Length);
+
+        //glm::vec3 fl2Start = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[14], 1.0f));
+        //glm::vec3 fl2End = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[15], 1.0f));
+        //float fl2Length = glm::length(fl2End - fl2Start);
+
+        //pfl2 = Physics::Raycast(fl2Start, fl2End, fl2Length);
+
+        //// === Up ray (Left) ===
+        //glm::vec3 ulStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[16], 1.0f));
+        //glm::vec3 ulEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[17], 1.0f));
+        //float ulLength = glm::length(ulEnd - ulStart);
+
+        //pul = Physics::Raycast(ulStart, ulEnd, ulLength);
+
+        //// === Down ray (Left) ===
+        //glm::vec3 dlStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[18], 1.0f));
+        //glm::vec3 dlEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[19], 1.0f));
+        //float dlLength = glm::length(dlEnd - dlStart);
+
+        //pdl = Physics::Raycast(dlStart, dlEnd, dlLength);
+
+        //// === Forward rays (Right) ===
+        //glm::vec3 frStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[20], 1.0f));
+        //glm::vec3 frEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[21], 1.0f));
+        //float frLength = glm::length(frEnd - frStart);
+
+        //pfr = Physics::Raycast(frStart, frEnd, frLength);
+
+        //glm::vec3 fr1Start = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[22], 1.0f));
+        //glm::vec3 fr1End = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[23], 1.0f));
+        //float fr1Length = glm::length(fr1End - fr1Start);
+
+        //pfr1 = Physics::Raycast(fr1Start, fr1End, fr1Length);
+
+        //glm::vec3 fr2Start = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[24], 1.0f));
+        //glm::vec3 fr2End = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[25], 1.0f));
+        //float fr2Length = glm::length(fr2End - fr2Start);
+
+        //pfr2 = Physics::Raycast(fr2Start, fr2End, fr2Length);
+
+        //// === Up ray (Right) ===
+        //glm::vec3 urStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[26], 1.0f));
+        //glm::vec3 urEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[27], 1.0f));
+        //float urLength = glm::length(urEnd - urStart);
+
+        //pur = Physics::Raycast(urStart, urEnd, urLength);
+
+        //// === Down ray (Right) ===
+        //glm::vec3 drStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[28], 1.0f));
+        //glm::vec3 drEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[29], 1.0f));
+        //float drLength = glm::length(drEnd - drStart);
+
+        //pdr = Physics::Raycast(drStart, drEnd, drLength);
+
+        //// === Left rays ===
+        //glm::vec3 lStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[30], 1.0f));
+        //glm::vec3 lEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[31], 1.0f));
+        //float lLength = glm::length(lEnd - lStart);
+
+        //pl = Physics::Raycast(lStart, lEnd, lLength);
+
+        //glm::vec3 l1Start = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[32], 1.0f));
+        //glm::vec3 l1End = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[33], 1.0f));
+        //float l1Length = glm::length(l1End - l1Start);
+
+        //pl1 = Physics::Raycast(l1Start, l1End, l1Length);
+
+        //// === Right rays ===
+        //glm::vec3 rStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[34], 1.0f));
+        //glm::vec3 rEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[35], 1.0f));
+        //float rLength = glm::length(rEnd - rStart);
+
+        //pr = Physics::Raycast(rStart, rEnd, rLength);
+
+        //glm::vec3 r1Start = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[36], 1.0f));
+        //glm::vec3 r1End = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[37], 1.0f));
+        //float r1Length = glm::length(r1End - r1Start);
+
+        //pr1 = Physics::Raycast(r1Start, r1End, r1Length);
+
+        //int menuIsUsingRayCasts(Core::CVarReadInt(colliderComponent->r_Raycasts));
+        //if (menuIsUsingRayCasts == 1.0f)
+        //{
+        //    Debug::DrawLine(fStart, fEnd, 1.0f, glm::vec4(1), glm::vec4(1), Debug::RenderMode::AlwaysOnTop);
+        //    Debug::DrawLine(f1Start, f1End, 1.0f, glm::vec4(1), glm::vec4(1), Debug::RenderMode::AlwaysOnTop);
+        //    Debug::DrawLine(f2Start, f2End, 1.0f, glm::vec4(1), glm::vec4(1), Debug::RenderMode::AlwaysOnTop);
+        //    Debug::DrawLine(uStart, uEnd, 1.0f, glm::vec4(0, 1, 1, 1), glm::vec4(0, 1, 1, 1), Debug::RenderMode::AlwaysOnTop);
+        //    Debug::DrawLine(dStart, dEnd, 1.0f, glm::vec4(0, 1, 1, 1), glm::vec4(0, 1, 1, 1), Debug::RenderMode::AlwaysOnTop);
+        //    Debug::DrawLine(flStart, flEnd, 1.0f, glm::vec4(0, 0, 1, 1), glm::vec4(0, 0, 1, 1), Debug::RenderMode::AlwaysOnTop);
+        //    Debug::DrawLine(fl1Start, fl1End, 1.0f, glm::vec4(0, 0, 1, 1), glm::vec4(0, 0, 1, 1), Debug::RenderMode::AlwaysOnTop);
+        //    Debug::DrawLine(fl2Start, fl2End, 1.0f, glm::vec4(0, 0, 1, 1), glm::vec4(0, 0, 1, 1), Debug::RenderMode::AlwaysOnTop);
+        //    Debug::DrawLine(ulStart, ulEnd, 1.0f, glm::vec4(0, 1, 1, 1), glm::vec4(0, 1, 1, 1), Debug::RenderMode::AlwaysOnTop);
+        //    Debug::DrawLine(dlStart, dlEnd, 1.0f, glm::vec4(0, 1, 1, 1), glm::vec4(0, 1, 1, 1), Debug::RenderMode::AlwaysOnTop);
+        //    Debug::DrawLine(frStart, frEnd, 1.0f, glm::vec4(1, 1, 0, 1), glm::vec4(1, 1, 0, 1), Debug::RenderMode::AlwaysOnTop);
+        //    Debug::DrawLine(fr1Start, fr1End, 1.0f, glm::vec4(1, 1, 0, 1), glm::vec4(1, 1, 0, 1), Debug::RenderMode::AlwaysOnTop);
+        //    Debug::DrawLine(fr2Start, fr2End, 1.0f, glm::vec4(1, 1, 0, 1), glm::vec4(1, 1, 0, 1), Debug::RenderMode::AlwaysOnTop);
+        //    Debug::DrawLine(urStart, urEnd, 1.0f, glm::vec4(0, 1, 1, 1), glm::vec4(0, 1, 1, 1), Debug::RenderMode::AlwaysOnTop);
+        //    Debug::DrawLine(drStart, drEnd, 1.0f, glm::vec4(0, 1, 1, 1), glm::vec4(0, 1, 1, 1), Debug::RenderMode::AlwaysOnTop);
+        //    Debug::DrawLine(lStart, lEnd, 1.0f, glm::vec4(1, 0, 0, 1), glm::vec4(1, 0, 0, 1), Debug::RenderMode::AlwaysOnTop);
+        //    Debug::DrawLine(l1Start, l1End, 1.0f, glm::vec4(1, 0, 0, 1), glm::vec4(1, 0, 0, 1), Debug::RenderMode::AlwaysOnTop);
+        //    Debug::DrawLine(rStart, rEnd, 1.0f, glm::vec4(1, 0, 1, 1), glm::vec4(1, 0, 1, 1), Debug::RenderMode::AlwaysOnTop);
+        //    Debug::DrawLine(r1Start, r1End, 1.0f, glm::vec4(1, 0, 1, 1), glm::vec4(1, 0, 1, 1), Debug::RenderMode::AlwaysOnTop);
+        //}
 
 
+        //// Logic to determine avoidance actions
+        //if ((pf.hit || pf1.hit || pf2.hit || pu.hit || pd.hit || pl.hit || pl1.hit || pr.hit || pr1.hit))
+        //{
+        //    entity->isAvoidingAsteroids = true;
+
+
+
+        //    entity->avoidanceTime = 0.0f;
+        //}
+
+        //else
+        //{
+        //    // Cooldown is over, stop avoiding and resume pathfinding
+        //    entity->isAvoidingAsteroids = false;
+        //}
+
+        //if (
+        //    entity->isAvoidingAsteroids &&
+        //    (
+        //        pf.hit || pf1.hit || pf2.hit ||
+        //        pfl.hit || pfl1.hit || pfl2.hit ||
+        //        pfr.hit || pfr1.hit || pfr2.hit ||
+        //        pu.hit || pd.hit || pul.hit || pdl.hit || pur.hit || pdr.hit ||
+        //        pl.hit || pl1.hit || pr.hit || pr1.hit
+        //        )
+        //    )
+        //{
+        //    // Handle movement and speed adjustments
+        //    if (aiInputComponent->isForward)
+        //    {
+        //        // Decrease speed when avoiding obstacles
+        //        aiInputComponent->currentSpeed = glm::max(aiInputComponent->currentSpeed - dt * 2.0f, 0.0f);
+
+
+        //    }
+        //    float rotationSpeed2 = 20.0 * dt; //rotationSpeed
+
+
+
+        //    // Handle avoidance logic based on hit rays
+        //    if (pf.hit || pf1.hit || pf2.hit || pfl.hit || pfl1.hit || pfl2.hit || pfr.hit || pfr1.hit || pfr2.hit)
+        //    {
+        //        // Up if forward rays hit
+        //        aiInputComponent->rotYSmooth = glm::mix(0.0f, rotationSpeed2, dt * cameraComponent->cameraSmoothFactor);
+
+        //    }
+
+        //    if (pu.hit || pul.hit || pur.hit)
+        //    {
+        //        // Down if upward rays hit
+        //        aiInputComponent->rotYSmooth = glm::mix(0.0f, -rotationSpeed2, dt * cameraComponent->cameraSmoothFactor);
+
+        //    }
+
+        //    if (pd.hit || pdl.hit || pdr.hit)
+        //    {
+        //        // Up if downward rays hit
+        //        aiInputComponent->rotYSmooth = glm::mix(0.0f, rotationSpeed2, dt * cameraComponent->cameraSmoothFactor);
+
+        //    }
+
+        //    if (pl.hit || pl1.hit)
+        //    {
+        //        // right if left rays hit
+        //        aiInputComponent->rotXSmooth = glm::mix(0.0f, -rotationSpeed2, dt * cameraComponent->cameraSmoothFactor);
+
+        //    }
+        //    else if (pr.hit || pr1.hit)
+        //    {
+        //        // left if right rays hit
+        //        aiInputComponent->rotXSmooth = glm::mix(0.0f, rotationSpeed2, dt * cameraComponent->cameraSmoothFactor);
+
+        //    }
+        //}
     }
 }
 inline void World::UpdateAsteroid(Entity* entity, float dt) 
@@ -2259,21 +2121,18 @@ inline void World::drawNode(Entity* entity)
 inline void World::draw(Entity* entity) // literally draw everything that renders
 {
     auto renderableComponent = entity->GetComponent<Components::RenderableComponent>();
-   /* auto Aicomponent = entity->GetComponent<Components::AINavNodeComponent>();*/
+    /* auto Aicomponent = entity->GetComponent<Components::AINavNodeComponent>();*/
     auto trans = entity->GetComponent<Components::TransformComponent>();
     if (renderableComponent)
     {
         Render::RenderDevice::Draw(renderableComponent->modelId, entity->GetComponent<Components::TransformComponent>()->transform);
         //Debug::DrawDebugText(std::to_string(renderableComponent->ownerId).c_str(), entity->GetComponent<Components::TransformComponent>()->transform[3], { 0.9f,0.9f,1,1 });
     }
-   /* if (Aicomponent)
-    {
-        Debug::DrawDebugText(std::to_string(Aicomponent->ownerId).c_str(), entity->GetComponent<Components::TransformComponent>()->transform[3], { 0.9f,0.9f,1,1 });
-    }*/
-
 }
 inline void World::updateCamera(Entity* entity, float dt)
 {
+    
+
     if (entity->eType == EntityType::SpaceShip || entity->eType == EntityType::EnemyShip)
     {
         // First pass: Check if the selected entity already has a camera
@@ -2308,4 +2167,11 @@ inline void World::updateCamera(Entity* entity, float dt)
             }
         }
     }
+}
+
+inline void World::HandleAsteroidHit(Entity* entity, Components::ParticleEmitterComponent* particleEmit)
+{
+   
+
+   
 }

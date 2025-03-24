@@ -28,6 +28,7 @@ public:
 	T* GetComponent();
 
 	//ai stuff
+	bool isRespawning = false;
 	Entity* parentNode = nullptr;
 	std::vector<Entity*> path;
 	Entity* closestNodeFromShip;
