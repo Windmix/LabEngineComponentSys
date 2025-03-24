@@ -96,14 +96,16 @@ SpaceGameApp::Run()
    
 
     // Setup asteroids far
-    for (int i = 0; i < 200; i++)
+    for (int i = 0; i < 100; i++)
     {
-        world->CreateAsteroid(200.0f);
+       auto Asteroid = world->CreateAsteroid(200.0f);
+       world->pureEntityData->Asteroids.push_back(Asteroid);
     }
     // Setup asteroids near
-    for (int i = 0; i < 200; i++)
+    for (int i = 0; i < 100; i++)
     {
-        world->CreateAsteroid(70.0f);
+         auto Asteroid = world->CreateAsteroid(70.0f);
+         world->pureEntityData->Asteroids.push_back(Asteroid);
     }
 
     //gridbased nodes
@@ -117,7 +119,8 @@ SpaceGameApp::Run()
         {
             for (int k = 0; k < size3D; k++)
             {
-                world->CreatePathNode(k, j, i, distanceBetweenPoints);
+                auto node = world->CreatePathNode(k, j, i, distanceBetweenPoints);
+                world->pureEntityData->nodes.push_back(node);
             }
         }
       
@@ -156,11 +159,16 @@ SpaceGameApp::Run()
         lights[i] = Render::LightServer::CreatePointLight(translation, color, Core::RandomFloat() * 4.0f, 1.0f + (15 + Core::RandomFloat() * 10.0f));
     }
 
-    for (int i = 0; i < 8; i++)
+    //create aiships
+    for (int i = 0; i < 2; i++)
     {
-        world->CreateEnemyShip(false);
+        
+        auto aiShips = world->CreateEnemyShip(false);
+        world->pureEntityData->ships.push_back(aiShips);
     }
-    world->CreatePlayerShip(false);
+    //create ship
+    auto ship = world->CreatePlayerShip(false);
+    world->pureEntityData->ships.push_back(ship);
 
    
 

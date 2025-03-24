@@ -46,6 +46,8 @@ namespace Components
 
 	public:
 		static constexpr ComponentType TYPE = ComponentType::COLLIDER;
+		EntityType UsingEntityType = EntityType::Unknown;
+
 		Physics::ColliderMeshId collidermeshId;
 		Physics::ColliderId colliderID;
 		glm::vec3 EndPointsNodes[6];

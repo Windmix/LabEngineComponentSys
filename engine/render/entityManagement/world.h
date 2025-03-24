@@ -34,8 +34,8 @@ public:
    
 
     //saving for destroyed ships
-    uint32_t savedID = 0;
-    std::queue<std::map<uint32_t, bool>> savedEnemyIDsNrespawning;
+    std::queue<uint32_t> savedEnemyIDs;
+    std::queue<uint32_t> savedIDs;
 
     int randomIndex;
     float respawnTimer;
@@ -60,14 +60,15 @@ public:
    
     // Destroy an entity and deallocate all components
     void DestroyEntity(uint32_t entityId, EntityType eType);
+    void DestroyShip(uint32_t shipId, EntityType);
     void Cleanup();
     void DestroyWorld();
 
-    void CreatePlayerShip(bool isRespawning);
-    void CreateEnemyShip(bool isRespawning);
+    Entity* CreatePlayerShip(bool isRespawning);
+    Entity* CreateEnemyShip(bool isRespawning);
 
-    void CreateAsteroid(float spread);
-    void CreatePathNode(float xOffset, float yOffset, float zOffset, float deltaXYZ);
+    Entity* CreateAsteroid(float spread);
+    Entity* CreatePathNode(float xOffset, float yOffset, float zOffset, float deltaXYZ);
 
     Entity* randomGetNode();
     Entity* getclosestNodeFromAIship(Entity* ship);
@@ -144,7 +145,8 @@ inline Entity* World::createEntity(EntityType etype, bool isRespawning)
     }
     else if(entity->eType == EntityType::SpaceShip && isRespawning)
     {
-        entity->id = savedID;
+        entity->id = savedIDs.front();
+        savedIDs.pop();
     }
     else if (entity->eType == EntityType::EnemyShip && isRespawning)
     {
@@ -152,6 +154,7 @@ inline Entity* World::createEntity(EntityType etype, bool isRespawning)
         savedEnemyIDs.pop();
     }
     pureEntityData->entities.push_back(entity);
+
   
 
     return entity;
@@ -196,8 +199,87 @@ inline void World::Update(float dt)
     
 }
 
+inline void World::DestroyShip(uint32_t shipId, EntityType eType)
+{
+
+    auto it = std::find_if(pureEntityData->ships.begin(), pureEntityData->ships.end(), [shipId, eType](Entity* entity)
+        {
+            return entity->id == shipId && entity->eType == eType;
+        });
+
+    if (it != pureEntityData->ships.end())
+    {
+        Entity* entityToDelete = *it;
+
+        // Deallocate all components using the appropriate chunk allocators
+        for (auto* component : entityToDelete->components)
+        {
+            // Handle component deallocation for each type
+            if (auto* transformComp = dynamic_cast<Components::TransformComponent*>(component))
+            {
+                transformChunk.Deallocate(transformComp);
+
+            }
+            else if (auto* renderableComp = dynamic_cast<Components::RenderableComponent*>(component))
+            {
+                renderableChunk.Deallocate(renderableComp);
+
+            }
+            else if (auto* colliderComp = dynamic_cast<Components::ColliderComponent*>(component))
+            {
+                colliderChunk.Deallocate(colliderComp);
+
+            }
+            else if (auto* rigidBodyComp = dynamic_cast<Components::RigidBodyComponent*>(component))
+            {
+                rigidBodyChunk.Deallocate(rigidBodyComp);
+
+            }
+            else if (auto* cameraComp = dynamic_cast<Components::CameraComponent*>(component))
+            {
+                cameraChunk.Deallocate(cameraComp);
+
+            }
+            else if (auto* playerInputComp = dynamic_cast<Components::PlayerInputComponent*>(component))
+            {
+                controlInputChunk.Deallocate(playerInputComp);
+
+            }
+            else if (auto* aiInputControllerComp = dynamic_cast<Components::AIinputController*>(component))
+            {
+                AiControllerChunk.Deallocate(aiInputControllerComp);
+
+            }
+            else if (auto* particleEmitterComp = dynamic_cast<Components::ParticleEmitterComponent*>(component))
+            {
+                Render::ParticleSystem::Instance()->RemoveEmitter(particleEmitterComp->particleCanonLeft);
+                Render::ParticleSystem::Instance()->RemoveEmitter(particleEmitterComp->particleCanonRight);
+
+                Render::ParticleSystem::Instance()->RemoveEmitter(particleEmitterComp->particleEmitterLeft);
+                Render::ParticleSystem::Instance()->RemoveEmitter(particleEmitterComp->particleEmitterRight);
 
 
+                ChunkOfPartcles.Deallocate(particleEmitterComp->particleCanonLeft);
+                ChunkOfPartcles.Deallocate(particleEmitterComp->particleCanonRight);
+
+                ChunkOfPartcles.Deallocate(particleEmitterComp->particleEmitterLeft);
+                ChunkOfPartcles.Deallocate(particleEmitterComp->particleEmitterRight);
+
+                particleEmitterChunk.Deallocate(particleEmitterComp);
+            }
+
+
+
+        }
+
+
+        //// Deallocate the entity from the Chunk
+        entityChunk.Deallocate(entityToDelete);
+        // Remove the ship from the entity vector
+        pureEntityData->ships.erase(it);
+
+    }
+}
 
 inline void World::DestroyEntity(uint32_t entityId, EntityType eType)
 {
@@ -205,6 +287,9 @@ inline void World::DestroyEntity(uint32_t entityId, EntityType eType)
     {
             return entity->id == entityId && entity->eType == eType;
     });
+    
+    
+   
 
     if (it != pureEntityData->entities.end())
     {
@@ -217,36 +302,53 @@ inline void World::DestroyEntity(uint32_t entityId, EntityType eType)
             if (auto* transformComp = dynamic_cast<Components::TransformComponent*>(component))
             {
                 transformChunk.Deallocate(transformComp);
+
             }
             else if (auto* renderableComp = dynamic_cast<Components::RenderableComponent*>(component))
             {
                 renderableChunk.Deallocate(renderableComp);
+
             }
             else if (auto* colliderComp = dynamic_cast<Components::ColliderComponent*>(component))
             {
                 colliderChunk.Deallocate(colliderComp);
+
             }
             else if (auto* rigidBodyComp = dynamic_cast<Components::RigidBodyComponent*>(component))
             {
                 rigidBodyChunk.Deallocate(rigidBodyComp);
+
             }
             else if (auto* cameraComp = dynamic_cast<Components::CameraComponent*>(component))
             {
-                
                 cameraChunk.Deallocate(cameraComp);
+
             }
             else if (auto* playerInputComp = dynamic_cast<Components::PlayerInputComponent*>(component))
             {
                 controlInputChunk.Deallocate(playerInputComp);
+
             }
             else if (auto* aiInputControllerComp = dynamic_cast<Components::AIinputController*>(component))
             {
                 AiControllerChunk.Deallocate(aiInputControllerComp);
+
             }
             else if (auto* particleEmitterComp = dynamic_cast<Components::ParticleEmitterComponent*>(component))
             {
+                Render::ParticleSystem::Instance()->RemoveEmitter(particleEmitterComp->particleCanonLeft);
+                Render::ParticleSystem::Instance()->RemoveEmitter(particleEmitterComp->particleCanonRight);
+
+                Render::ParticleSystem::Instance()->RemoveEmitter(particleEmitterComp->particleEmitterLeft);
+                Render::ParticleSystem::Instance()->RemoveEmitter(particleEmitterComp->particleEmitterRight);
+
+
+                ChunkOfPartcles.Deallocate(particleEmitterComp->particleCanonLeft);
+                ChunkOfPartcles.Deallocate(particleEmitterComp->particleCanonRight);
+
                 ChunkOfPartcles.Deallocate(particleEmitterComp->particleEmitterLeft);
                 ChunkOfPartcles.Deallocate(particleEmitterComp->particleEmitterRight);
+
                 particleEmitterChunk.Deallocate(particleEmitterComp);
             }
             
@@ -258,8 +360,10 @@ inline void World::DestroyEntity(uint32_t entityId, EntityType eType)
         //// Deallocate the entity from the Chunk
         entityChunk.Deallocate(entityToDelete);
 
-        // Remove the entity from the entity vector
+        // Remove the entities from the entity vector
         pureEntityData->entities.erase(it);
+      
+       
 
        
     }
@@ -307,8 +411,19 @@ inline void World::Cleanup()
                 }
                 else if (auto* particleEmitterComp = dynamic_cast<Components::ParticleEmitterComponent*>(component))
                 {
+                    Render::ParticleSystem::Instance()->RemoveEmitter(particleEmitterComp->particleCanonLeft);
+                    Render::ParticleSystem::Instance()->RemoveEmitter(particleEmitterComp->particleCanonRight);
+
+                    Render::ParticleSystem::Instance()->RemoveEmitter(particleEmitterComp->particleEmitterLeft);
+                    Render::ParticleSystem::Instance()->RemoveEmitter(particleEmitterComp->particleEmitterRight);
+
+
+                    ChunkOfPartcles.Deallocate(particleEmitterComp->particleCanonLeft);
+                    ChunkOfPartcles.Deallocate(particleEmitterComp->particleCanonRight);
+
                     ChunkOfPartcles.Deallocate(particleEmitterComp->particleEmitterLeft);
                     ChunkOfPartcles.Deallocate(particleEmitterComp->particleEmitterRight);
+
                     particleEmitterChunk.Deallocate(particleEmitterComp);
                 }
                 else if (auto* aiNavNodeComp = dynamic_cast<Components::AINavNodeComponent*>(component))
@@ -336,10 +451,10 @@ inline void World::DestroyWorld()
         _instance = nullptr;
     }
 }
-inline void World::CreatePlayerShip(bool isRespawning)
+inline  Entity* World::CreatePlayerShip(bool isRespawning)
 {
-    auto shipModel = Render::LoadModel("assets/space/spaceship.glb");
-
+    Render::ModelId  shipModel = Render::LoadModel("assets/space/spaceship.glb");
+    Physics::ColliderMeshId  ColliderMeshShip = Physics::LoadColliderMesh("assets/space/spaceship_physics.glb");
     const glm::vec3 colliderEndPoints[17] =
     {
         glm::vec3(1.40173, 0.0, -0.225342),  // left wing back
@@ -434,12 +549,13 @@ inline void World::CreatePlayerShip(bool isRespawning)
        glm::vec3(-10.0, 0.0, 21.0),
 
     };
-   
+    
 
+    Entity* spaceship;
 
     if (!isRespawning)
     {
-        Entity* spaceship = createEntity(EntityType::SpaceShip, isRespawning);
+        spaceship = createEntity(EntityType::SpaceShip, isRespawning);
 
         Components::TransformComponent* newTransform = transformChunk.Allocate();
         spaceship->AddComponent(newTransform, ComponentType::TRANSFORM, EntityType::SpaceShip);
@@ -459,6 +575,9 @@ inline void World::CreatePlayerShip(bool isRespawning)
             collider->rayCastPoints[i] = rayCastEndPoints[i];
         }
        
+        collider->colliderID = Physics::CreateCollider(ColliderMeshShip, newTransform->transform);
+        collider->UsingEntityType = EntityType::SpaceShip;
+
         Components::CameraComponent* camera = cameraChunk.Allocate();
         spaceship->AddComponent(camera, ComponentType::CAMERA, EntityType::SpaceShip);
         camera->theCam = Render::CameraManager::GetCamera(CAMERA_MAIN);
@@ -527,7 +646,7 @@ inline void World::CreatePlayerShip(bool isRespawning)
     }
     else
     {
-        Entity* spaceship = createEntity(EntityType::SpaceShip, isRespawning);
+        spaceship = createEntity(EntityType::SpaceShip, isRespawning);
 
         Components::TransformComponent* newTransform = transformChunk.Allocate();
         spaceship->AddComponent(newTransform, ComponentType::TRANSFORM, EntityType::SpaceShip);
@@ -542,6 +661,13 @@ inline void World::CreatePlayerShip(bool isRespawning)
         {
             collider->colliderEndPoints[i] = colliderEndPoints[i];
         }
+        for (int i = 0; i < sizeof(collider->rayCastPoints) / sizeof(glm::vec3); i++)
+        {
+            collider->rayCastPoints[i] = rayCastEndPoints[i];
+        }
+        collider->colliderID = Physics::CreateCollider(ColliderMeshShip, newTransform->transform);
+        collider->UsingEntityType = EntityType::SpaceShip;
+
         Components::CameraComponent* camera = cameraChunk.Allocate();
         spaceship->AddComponent(camera, ComponentType::CAMERA, EntityType::SpaceShip);
         camera->theCam = Render::CameraManager::GetCamera(CAMERA_MAIN);
@@ -605,11 +731,12 @@ inline void World::CreatePlayerShip(bool isRespawning)
         Render::ParticleSystem::Instance()->AddEmitter(particleEmitter->particleCanonLeft);
         Render::ParticleSystem::Instance()->AddEmitter(particleEmitter->particleCanonRight);
     }
-
+    return spaceship;
 }
-inline void World::CreateEnemyShip(bool isRespawning)
+inline  Entity* World::CreateEnemyShip(bool isRespawning)
 {
     auto shipModel = Render::LoadModel("assets/space/spaceship.glb");
+    Physics::ColliderMeshId  ColliderMeshShip = Physics::LoadColliderMesh("assets/space/spaceship_physics.glb");
 
     const glm::vec3 colliderEndPoints[17] =
     {
@@ -707,10 +834,10 @@ inline void World::CreateEnemyShip(bool isRespawning)
 
 
 
-
+    Entity* AIspaceship;
     if (!isRespawning)
     {
-        Entity* AIspaceship = createEntity(EntityType::EnemyShip, isRespawning);
+        AIspaceship = createEntity(EntityType::EnemyShip, isRespawning);
 
         Components::TransformComponent* newTransform = transformChunk.Allocate();
         AIspaceship->AddComponent(newTransform, ComponentType::TRANSFORM, EntityType::EnemyShip);
@@ -729,6 +856,10 @@ inline void World::CreateEnemyShip(bool isRespawning)
         {
             collider->rayCastPoints[i] = rayCastEndPoints[i];
         }
+        collider->colliderID = Physics::CreateCollider(ColliderMeshShip, newTransform->transform);
+        collider->UsingEntityType = EntityType::EnemyShip;
+
+
         Components::AIinputController* controllinput = AiControllerChunk.Allocate();
         AIspaceship->AddComponent(controllinput, ComponentType::AI_CONTROLLER, EntityType::EnemyShip);
 
@@ -795,7 +926,7 @@ inline void World::CreateEnemyShip(bool isRespawning)
     }
     else
     {
-        Entity* AIspaceship = createEntity(EntityType::EnemyShip, isRespawning);
+        AIspaceship = createEntity(EntityType::EnemyShip, isRespawning);
 
         Components::TransformComponent* newTransform = transformChunk.Allocate();
         AIspaceship->AddComponent(newTransform, ComponentType::TRANSFORM, EntityType::EnemyShip);
@@ -814,6 +945,8 @@ inline void World::CreateEnemyShip(bool isRespawning)
         {
             collider->rayCastPoints[i] = rayCastEndPoints[i];
         }
+        collider->colliderID = Physics::CreateCollider(ColliderMeshShip, newTransform->transform);
+        collider->UsingEntityType = EntityType::EnemyShip;
 
         Components::AIinputController* controllinput = AiControllerChunk.Allocate();
         AIspaceship->AddComponent(controllinput, ComponentType::AI_CONTROLLER, EntityType::EnemyShip);
@@ -880,9 +1013,10 @@ inline void World::CreateEnemyShip(bool isRespawning)
         Render::ParticleSystem::Instance()->AddEmitter(particleEmitter->particleCanonLeft);
         Render::ParticleSystem::Instance()->AddEmitter(particleEmitter->particleCanonRight);
     }
+    return AIspaceship;
 
 }
-inline void World::CreateAsteroid(float spread)
+inline Entity* World::CreateAsteroid(float spread)
 {
     Render::ModelId models[6] = {
     Render::LoadModel("assets/space/Asteroid_1.glb"),
@@ -945,10 +1079,12 @@ inline void World::CreateAsteroid(float spread)
         float rotationSpeed = Core::RandomFloat() * 1.0f + 9.0f;  // Random speed between 1 and 9
         newTransform->rotationSpeed = rotationSpeed;
         collider->colliderID = Physics::CreateCollider(colliderMeshes[resourceIndex], newTransform->transform);
+        collider->UsingEntityType = EntityType::Asteroid;
 
     }
+    return asteroidEntity;
 }
-inline void World::CreatePathNode(float xOffset, float yOffset, float zOffset, float deltaXYZ)
+inline Entity* World::CreatePathNode(float xOffset, float yOffset, float zOffset, float deltaXYZ)
 {
     const glm::vec3 EndPoints[6] =
     {
@@ -1006,11 +1142,12 @@ inline void World::CreatePathNode(float xOffset, float yOffset, float zOffset, f
         }
 
     }
-    // pushback for use of the Debug menu
-    pureEntityData->nodes.push_back(node);
+
 
     //give it to the map too
     pureEntityData->gridNodes[node->id] = node;
+
+    return node;
 
    
 }
@@ -1178,262 +1315,267 @@ inline void World::UpdateShip(Entity* entity, float dt)
                 if (payload.hit)
                 {
                     Debug::DrawDebugText("HIT", payload.hitPoint, glm::vec4(1, 1, 1, 1));
-                    hit = true;            
+
+                    for (auto entityIn : pureEntityData->Asteroids)
+                    {
+                        auto entComp = entityIn->GetComponent<Components::ColliderComponent>();
+                        if (payload.collider == entComp->colliderID && entityIn->eType == EntityType::Asteroid)
+                        {
+                            particleComponent->particleCanonLeft->data.looping = 0;
+                            particleComponent->particleCanonRight->data.looping = 0;
+
+                            savedIDs.push(entity->id);
+
+                            CreatePlayerShip(true);
+                            DestroyShip(entity->id, entity->eType);
+                            DestroyEntity(entity->id, entity->eType);
+                            
+                            return;
+                        }
+                    }
+                   
                 }
-                //if hit asteroid, one shot
-                if (hit)
-                {
-
-                    particleComponent->particleCanonLeft->data.looping = 0;
-                    particleComponent->particleCanonRight->data.looping = 0;
-                    savedID = entity->id;
-                    CreatePlayerShip(true);
-                    DestroyEntity(entity->id, entity->eType);
-                    hit = false;
-                    return;
-
-                }
 
             }
 
-            glm::mat4 transform = transformComponent->transform;
-            glm::vec3 avoidanceOffset(0.0f);
-            entity->isAvoidingAsteroids = false;
+            //glm::mat4 transform = transformComponent->transform;
+            //glm::vec3 avoidanceOffset(0.0f);
+            //entity->isAvoidingAsteroids = false;
 
-            //Define raycast result holders
-            Physics::RaycastPayload pf, pf1, pf2;
-            Physics::RaycastPayload pu, pd;
-            Physics::RaycastPayload pfl, pfl1, pfl2;
-            Physics::RaycastPayload pul, pdl;
-            Physics::RaycastPayload pfr, pfr1, pfr2;
-            Physics::RaycastPayload pur, pdr;
-            Physics::RaycastPayload pl, pl1;
-            Physics::RaycastPayload pr, pr1;
+            ////Define raycast result holders
+            //Physics::RaycastPayload pf, pf1, pf2;
+            //Physics::RaycastPayload pu, pd;
+            //Physics::RaycastPayload pfl, pfl1, pfl2;
+            //Physics::RaycastPayload pul, pdl;
+            //Physics::RaycastPayload pfr, pfr1, pfr2;
+            //Physics::RaycastPayload pur, pdr;
+            //Physics::RaycastPayload pl, pl1;
+            //Physics::RaycastPayload pr, pr1;
 
-            // === Forward rays (center) ===
-            glm::vec3 fStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[0], 1.0f));
-            glm::vec3 fEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[1], 1.0f));
-            float fLength = glm::length(fEnd - fStart);
-            pf = Physics::Raycast(fStart, fEnd, fLength);
+            //// === Forward rays (center) ===
+            //glm::vec3 fStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[0], 1.0f));
+            //glm::vec3 fEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[1], 1.0f));
+            //float fLength = glm::length(fEnd - fStart);
+            //pf = Physics::Raycast(fStart, fEnd, fLength);
 
-            glm::vec3 f1Start = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[2], 1.0f));
-            glm::vec3 f1End = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[3], 1.0f));
-            float f1Length = glm::length(f1End - f1Start);
+            //glm::vec3 f1Start = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[2], 1.0f));
+            //glm::vec3 f1End = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[3], 1.0f));
+            //float f1Length = glm::length(f1End - f1Start);
 
-            pf1 = Physics::Raycast(f1Start, f1End, f1Length);
+            //pf1 = Physics::Raycast(f1Start, f1End, f1Length);
 
-            glm::vec3 f2Start = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[4], 1.0f));
-            glm::vec3 f2End = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[5], 1.0f));
-            float f2Length = glm::length(f2End - f2Start);
-            pf2 = Physics::Raycast(f2Start, f2End, f2Length);
+            //glm::vec3 f2Start = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[4], 1.0f));
+            //glm::vec3 f2End = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[5], 1.0f));
+            //float f2Length = glm::length(f2End - f2Start);
+            //pf2 = Physics::Raycast(f2Start, f2End, f2Length);
 
-            // === Up ray (center) ===
-            glm::vec3 uStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[6], 1.0f));
-            glm::vec3 uEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[7], 1.0f));
-            float uLength = glm::length(uEnd - uStart);
-            pu = Physics::Raycast(uStart, uEnd, uLength);
+            //// === Up ray (center) ===
+            //glm::vec3 uStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[6], 1.0f));
+            //glm::vec3 uEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[7], 1.0f));
+            //float uLength = glm::length(uEnd - uStart);
+            //pu = Physics::Raycast(uStart, uEnd, uLength);
 
-            // === Down ray (center) ===
-            glm::vec3 dStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[8], 1.0f));
-            glm::vec3 dEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[9], 1.0f));
-            float dLength = glm::length(dEnd - dStart);
+            //// === Down ray (center) ===
+            //glm::vec3 dStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[8], 1.0f));
+            //glm::vec3 dEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[9], 1.0f));
+            //float dLength = glm::length(dEnd - dStart);
 
-            pd = Physics::Raycast(dStart, dEnd, dLength);
+            //pd = Physics::Raycast(dStart, dEnd, dLength);
 
-            // === Forward rays (Left) ===
-            glm::vec3 flStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[10], 1.0f));
-            glm::vec3 flEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[11], 1.0f));
-            float flLength = glm::length(flEnd - flStart);
+            //// === Forward rays (Left) ===
+            //glm::vec3 flStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[10], 1.0f));
+            //glm::vec3 flEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[11], 1.0f));
+            //float flLength = glm::length(flEnd - flStart);
 
-            pfl = Physics::Raycast(flStart, flEnd, flLength);
+            //pfl = Physics::Raycast(flStart, flEnd, flLength);
 
-            glm::vec3 fl1Start = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[12], 1.0f));
-            glm::vec3 fl1End = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[13], 1.0f));
-            float fl1Length = glm::length(fl1End - fl1Start);
+            //glm::vec3 fl1Start = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[12], 1.0f));
+            //glm::vec3 fl1End = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[13], 1.0f));
+            //float fl1Length = glm::length(fl1End - fl1Start);
 
-            pfl1 = Physics::Raycast(fl1Start, fl1End, fl1Length);
+            //pfl1 = Physics::Raycast(fl1Start, fl1End, fl1Length);
 
-            glm::vec3 fl2Start = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[14], 1.0f));
-            glm::vec3 fl2End = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[15], 1.0f));
-            float fl2Length = glm::length(fl2End - fl2Start);
+            //glm::vec3 fl2Start = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[14], 1.0f));
+            //glm::vec3 fl2End = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[15], 1.0f));
+            //float fl2Length = glm::length(fl2End - fl2Start);
 
-            pfl2 = Physics::Raycast(fl2Start, fl2End, fl2Length);
+            //pfl2 = Physics::Raycast(fl2Start, fl2End, fl2Length);
 
-            // === Up ray (Left) ===
-            glm::vec3 ulStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[16], 1.0f));
-            glm::vec3 ulEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[17], 1.0f));
-            float ulLength = glm::length(ulEnd - ulStart);
+            //// === Up ray (Left) ===
+            //glm::vec3 ulStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[16], 1.0f));
+            //glm::vec3 ulEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[17], 1.0f));
+            //float ulLength = glm::length(ulEnd - ulStart);
 
-            pul = Physics::Raycast(ulStart, ulEnd, ulLength);
+            //pul = Physics::Raycast(ulStart, ulEnd, ulLength);
 
-            // === Down ray (Left) ===
-            glm::vec3 dlStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[18], 1.0f));
-            glm::vec3 dlEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[19], 1.0f));
-            float dlLength = glm::length(dlEnd - dlStart);
+            //// === Down ray (Left) ===
+            //glm::vec3 dlStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[18], 1.0f));
+            //glm::vec3 dlEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[19], 1.0f));
+            //float dlLength = glm::length(dlEnd - dlStart);
 
-            pdl = Physics::Raycast(dlStart, dlEnd, dlLength);
+            //pdl = Physics::Raycast(dlStart, dlEnd, dlLength);
 
-            // === Forward rays (Right) ===
-            glm::vec3 frStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[20], 1.0f));
-            glm::vec3 frEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[21], 1.0f));
-            float frLength = glm::length(frEnd - frStart);
+            //// === Forward rays (Right) ===
+            //glm::vec3 frStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[20], 1.0f));
+            //glm::vec3 frEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[21], 1.0f));
+            //float frLength = glm::length(frEnd - frStart);
 
-            pfr = Physics::Raycast(frStart, frEnd, frLength);
+            //pfr = Physics::Raycast(frStart, frEnd, frLength);
 
-            glm::vec3 fr1Start = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[22], 1.0f));
-            glm::vec3 fr1End = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[23], 1.0f));
-            float fr1Length = glm::length(fr1End - fr1Start);
+            //glm::vec3 fr1Start = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[22], 1.0f));
+            //glm::vec3 fr1End = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[23], 1.0f));
+            //float fr1Length = glm::length(fr1End - fr1Start);
 
-            pfr1 = Physics::Raycast(fr1Start, fr1End, fr1Length);
+            //pfr1 = Physics::Raycast(fr1Start, fr1End, fr1Length);
 
-            glm::vec3 fr2Start = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[24], 1.0f));
-            glm::vec3 fr2End = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[25], 1.0f));
-            float fr2Length = glm::length(fr2End - fr2Start);
+            //glm::vec3 fr2Start = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[24], 1.0f));
+            //glm::vec3 fr2End = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[25], 1.0f));
+            //float fr2Length = glm::length(fr2End - fr2Start);
 
-            pfr2 = Physics::Raycast(fr2Start, fr2End, fr2Length);
+            //pfr2 = Physics::Raycast(fr2Start, fr2End, fr2Length);
 
-            // === Up ray (Right) ===
-            glm::vec3 urStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[26], 1.0f));
-            glm::vec3 urEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[27], 1.0f));
-            float urLength = glm::length(urEnd - urStart);
+            //// === Up ray (Right) ===
+            //glm::vec3 urStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[26], 1.0f));
+            //glm::vec3 urEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[27], 1.0f));
+            //float urLength = glm::length(urEnd - urStart);
 
-            pur = Physics::Raycast(urStart, urEnd, urLength);
+            //pur = Physics::Raycast(urStart, urEnd, urLength);
 
-            // === Down ray (Right) ===
-            glm::vec3 drStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[28], 1.0f));
-            glm::vec3 drEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[29], 1.0f));
-            float drLength = glm::length(drEnd - drStart);
+            //// === Down ray (Right) ===
+            //glm::vec3 drStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[28], 1.0f));
+            //glm::vec3 drEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[29], 1.0f));
+            //float drLength = glm::length(drEnd - drStart);
 
-            pdr = Physics::Raycast(drStart, drEnd, drLength);
+            //pdr = Physics::Raycast(drStart, drEnd, drLength);
 
-            // === Left rays ===
-            glm::vec3 lStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[30], 1.0f));
-            glm::vec3 lEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[31], 1.0f));
-            float lLength = glm::length(lEnd - lStart);
+            //// === Left rays ===
+            //glm::vec3 lStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[30], 1.0f));
+            //glm::vec3 lEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[31], 1.0f));
+            //float lLength = glm::length(lEnd - lStart);
 
-            pl = Physics::Raycast(lStart, lEnd, lLength);
+            //pl = Physics::Raycast(lStart, lEnd, lLength);
 
-            glm::vec3 l1Start = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[32], 1.0f));
-            glm::vec3 l1End = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[33], 1.0f));
-            float l1Length = glm::length(l1End - l1Start);
+            //glm::vec3 l1Start = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[32], 1.0f));
+            //glm::vec3 l1End = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[33], 1.0f));
+            //float l1Length = glm::length(l1End - l1Start);
 
-            pl1 = Physics::Raycast(l1Start, l1End, l1Length);
+            //pl1 = Physics::Raycast(l1Start, l1End, l1Length);
 
-            // === Right rays ===
-            glm::vec3 rStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[34], 1.0f));
-            glm::vec3 rEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[35], 1.0f));
-            float rLength = glm::length(rEnd - rStart);
+            //// === Right rays ===
+            //glm::vec3 rStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[34], 1.0f));
+            //glm::vec3 rEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[35], 1.0f));
+            //float rLength = glm::length(rEnd - rStart);
 
-            pr = Physics::Raycast(rStart, rEnd, rLength);
+            //pr = Physics::Raycast(rStart, rEnd, rLength);
 
-            glm::vec3 r1Start = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[36], 1.0f));
-            glm::vec3 r1End = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[37], 1.0f));
-            float r1Length = glm::length(r1End - r1Start);
+            //glm::vec3 r1Start = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[36], 1.0f));
+            //glm::vec3 r1End = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[37], 1.0f));
+            //float r1Length = glm::length(r1End - r1Start);
 
-            pr1 = Physics::Raycast(r1Start, r1End, r1Length);
+            //pr1 = Physics::Raycast(r1Start, r1End, r1Length);
 
-            int menuIsUsingRayCasts(Core::CVarReadInt(colliderComponent->r_Raycasts));
-            if (menuIsUsingRayCasts == 1.0f)
-            {
-                Debug::DrawLine(fStart, fEnd, 1.0f, glm::vec4(1), glm::vec4(1), Debug::RenderMode::AlwaysOnTop);
-                Debug::DrawLine(f1Start, f1End, 1.0f, glm::vec4(1), glm::vec4(1), Debug::RenderMode::AlwaysOnTop);
-                Debug::DrawLine(f2Start, f2End, 1.0f, glm::vec4(1), glm::vec4(1), Debug::RenderMode::AlwaysOnTop);
-                Debug::DrawLine(uStart, uEnd, 1.0f, glm::vec4(0, 1, 1, 1), glm::vec4(0, 1, 1, 1), Debug::RenderMode::AlwaysOnTop);
-                Debug::DrawLine(dStart, dEnd, 1.0f, glm::vec4(0, 1, 1, 1), glm::vec4(0, 1, 1, 1), Debug::RenderMode::AlwaysOnTop);
-                Debug::DrawLine(flStart, flEnd, 1.0f, glm::vec4(0, 0, 1, 1), glm::vec4(0, 0, 1, 1), Debug::RenderMode::AlwaysOnTop);
-                Debug::DrawLine(fl1Start, fl1End, 1.0f, glm::vec4(0, 0, 1, 1), glm::vec4(0, 0, 1, 1), Debug::RenderMode::AlwaysOnTop);
-                Debug::DrawLine(fl2Start, fl2End, 1.0f, glm::vec4(0, 0, 1, 1), glm::vec4(0, 0, 1, 1), Debug::RenderMode::AlwaysOnTop);
-                Debug::DrawLine(ulStart, ulEnd, 1.0f, glm::vec4(0, 1, 1, 1), glm::vec4(0, 1, 1, 1), Debug::RenderMode::AlwaysOnTop);
-                Debug::DrawLine(dlStart, dlEnd, 1.0f, glm::vec4(0, 1, 1, 1), glm::vec4(0, 1, 1, 1), Debug::RenderMode::AlwaysOnTop);
-                Debug::DrawLine(frStart, frEnd, 1.0f, glm::vec4(1, 1, 0, 1), glm::vec4(1, 1, 0, 1), Debug::RenderMode::AlwaysOnTop);
-                Debug::DrawLine(fr1Start, fr1End, 1.0f, glm::vec4(1, 1, 0, 1), glm::vec4(1, 1, 0, 1), Debug::RenderMode::AlwaysOnTop);
-                Debug::DrawLine(fr2Start, fr2End, 1.0f, glm::vec4(1, 1, 0, 1), glm::vec4(1, 1, 0, 1), Debug::RenderMode::AlwaysOnTop);
-                Debug::DrawLine(urStart, urEnd, 1.0f, glm::vec4(0, 1, 1, 1), glm::vec4(0, 1, 1, 1), Debug::RenderMode::AlwaysOnTop);
-                Debug::DrawLine(drStart, drEnd, 1.0f, glm::vec4(0, 1, 1, 1), glm::vec4(0, 1, 1, 1), Debug::RenderMode::AlwaysOnTop);
-                Debug::DrawLine(lStart, lEnd, 1.0f, glm::vec4(1, 0, 0, 1), glm::vec4(1, 0, 0, 1), Debug::RenderMode::AlwaysOnTop);
-                Debug::DrawLine(l1Start, l1End, 1.0f, glm::vec4(1, 0, 0, 1), glm::vec4(1, 0, 0, 1), Debug::RenderMode::AlwaysOnTop);
-                Debug::DrawLine(rStart, rEnd, 1.0f, glm::vec4(1, 0, 1, 1), glm::vec4(1, 0, 1, 1), Debug::RenderMode::AlwaysOnTop);
-                Debug::DrawLine(r1Start, r1End, 1.0f, glm::vec4(1, 0, 1, 1), glm::vec4(1, 0, 1, 1), Debug::RenderMode::AlwaysOnTop);
-            }
+            //int menuIsUsingRayCasts(Core::CVarReadInt(colliderComponent->r_Raycasts));
+            //if (menuIsUsingRayCasts == 1.0f)
+            //{
+            //    Debug::DrawLine(fStart, fEnd, 1.0f, glm::vec4(1), glm::vec4(1), Debug::RenderMode::AlwaysOnTop);
+            //    Debug::DrawLine(f1Start, f1End, 1.0f, glm::vec4(1), glm::vec4(1), Debug::RenderMode::AlwaysOnTop);
+            //    Debug::DrawLine(f2Start, f2End, 1.0f, glm::vec4(1), glm::vec4(1), Debug::RenderMode::AlwaysOnTop);
+            //    Debug::DrawLine(uStart, uEnd, 1.0f, glm::vec4(0, 1, 1, 1), glm::vec4(0, 1, 1, 1), Debug::RenderMode::AlwaysOnTop);
+            //    Debug::DrawLine(dStart, dEnd, 1.0f, glm::vec4(0, 1, 1, 1), glm::vec4(0, 1, 1, 1), Debug::RenderMode::AlwaysOnTop);
+            //    Debug::DrawLine(flStart, flEnd, 1.0f, glm::vec4(0, 0, 1, 1), glm::vec4(0, 0, 1, 1), Debug::RenderMode::AlwaysOnTop);
+            //    Debug::DrawLine(fl1Start, fl1End, 1.0f, glm::vec4(0, 0, 1, 1), glm::vec4(0, 0, 1, 1), Debug::RenderMode::AlwaysOnTop);
+            //    Debug::DrawLine(fl2Start, fl2End, 1.0f, glm::vec4(0, 0, 1, 1), glm::vec4(0, 0, 1, 1), Debug::RenderMode::AlwaysOnTop);
+            //    Debug::DrawLine(ulStart, ulEnd, 1.0f, glm::vec4(0, 1, 1, 1), glm::vec4(0, 1, 1, 1), Debug::RenderMode::AlwaysOnTop);
+            //    Debug::DrawLine(dlStart, dlEnd, 1.0f, glm::vec4(0, 1, 1, 1), glm::vec4(0, 1, 1, 1), Debug::RenderMode::AlwaysOnTop);
+            //    Debug::DrawLine(frStart, frEnd, 1.0f, glm::vec4(1, 1, 0, 1), glm::vec4(1, 1, 0, 1), Debug::RenderMode::AlwaysOnTop);
+            //    Debug::DrawLine(fr1Start, fr1End, 1.0f, glm::vec4(1, 1, 0, 1), glm::vec4(1, 1, 0, 1), Debug::RenderMode::AlwaysOnTop);
+            //    Debug::DrawLine(fr2Start, fr2End, 1.0f, glm::vec4(1, 1, 0, 1), glm::vec4(1, 1, 0, 1), Debug::RenderMode::AlwaysOnTop);
+            //    Debug::DrawLine(urStart, urEnd, 1.0f, glm::vec4(0, 1, 1, 1), glm::vec4(0, 1, 1, 1), Debug::RenderMode::AlwaysOnTop);
+            //    Debug::DrawLine(drStart, drEnd, 1.0f, glm::vec4(0, 1, 1, 1), glm::vec4(0, 1, 1, 1), Debug::RenderMode::AlwaysOnTop);
+            //    Debug::DrawLine(lStart, lEnd, 1.0f, glm::vec4(1, 0, 0, 1), glm::vec4(1, 0, 0, 1), Debug::RenderMode::AlwaysOnTop);
+            //    Debug::DrawLine(l1Start, l1End, 1.0f, glm::vec4(1, 0, 0, 1), glm::vec4(1, 0, 0, 1), Debug::RenderMode::AlwaysOnTop);
+            //    Debug::DrawLine(rStart, rEnd, 1.0f, glm::vec4(1, 0, 1, 1), glm::vec4(1, 0, 1, 1), Debug::RenderMode::AlwaysOnTop);
+            //    Debug::DrawLine(r1Start, r1End, 1.0f, glm::vec4(1, 0, 1, 1), glm::vec4(1, 0, 1, 1), Debug::RenderMode::AlwaysOnTop);
+            //}
 
 
 
-            // Logic to determine avoidance actions
-            if ((pf.hit || pf1.hit || pf2.hit || pu.hit || pd.hit || pl.hit || pl1.hit || pr.hit || pr1.hit))
-            {
-                entity->isAvoidingAsteroids = true;
+            //// Logic to determine avoidance actions
+            //if ((pf.hit || pf1.hit || pf2.hit || pu.hit || pd.hit || pl.hit || pl1.hit || pr.hit || pr1.hit))
+            //{
+            //    entity->isAvoidingAsteroids = true;
 
-               
-                entity->avoidanceTime = 0.0f;
-            }
+            //   
+            //    entity->avoidanceTime = 0.0f;
+            //}
 
-            else
-            {
-                // Cooldown is over, stop avoiding and resume pathfinding
-                entity->isAvoidingAsteroids = false;
-            }
+            //else
+            //{
+            //    // Cooldown is over, stop avoiding and resume pathfinding
+            //    entity->isAvoidingAsteroids = false;
+            //}
           
 
-            // Logic to determine avoidance actions
-            if (
-                pf.hit || pf1.hit || pf2.hit ||
-                pfl.hit || pfl1.hit || pfl2.hit ||
-                pfr.hit || pfr1.hit || pfr2.hit ||
-                pu.hit || pd.hit || pul.hit || pdl.hit || pur.hit || pdr.hit ||
-                pl.hit || pl1.hit || pr.hit || pr1.hit)
-            {
-                entity->isAvoidingAsteroids = true;
-                entity->avoidanceTime = 0.0f;
-            }
-            else
-            {
-                // Cooldown is over, stop avoiding and resume pathfinding
-                entity->isAvoidingAsteroids = false;
-            }
+            //// Logic to determine avoidance actions
+            //if (
+            //    pf.hit || pf1.hit || pf2.hit ||
+            //    pfl.hit || pfl1.hit || pfl2.hit ||
+            //    pfr.hit || pfr1.hit || pfr2.hit ||
+            //    pu.hit || pd.hit || pul.hit || pdl.hit || pur.hit || pdr.hit ||
+            //    pl.hit || pl1.hit || pr.hit || pr1.hit)
+            //{
+            //    entity->isAvoidingAsteroids = true;
+            //    entity->avoidanceTime = 0.0f;
+            //}
+            //else
+            //{
+            //    // Cooldown is over, stop avoiding and resume pathfinding
+            //    entity->isAvoidingAsteroids = false;
+            //}
 
-            if (
-                entity->isAvoidingAsteroids &&
-                (
-                    pf.hit || pf1.hit || pf2.hit ||
-                    pfl.hit || pfl1.hit || pfl2.hit ||
-                    pfr.hit || pfr1.hit || pfr2.hit ||
-                    pu.hit || pd.hit || pul.hit || pdl.hit || pur.hit || pdr.hit ||
-                    pl.hit || pl1.hit || pr.hit || pr1.hit
-                    )
-                )
-            {
-                float rotationSpeed2 = 20.0 * dt; // Adjust this value to control the speed of rotation
+            //if (
+            //    entity->isAvoidingAsteroids &&
+            //    (
+            //        pf.hit || pf1.hit || pf2.hit ||
+            //        pfl.hit || pfl1.hit || pfl2.hit ||
+            //        pfr.hit || pfr1.hit || pfr2.hit ||
+            //        pu.hit || pd.hit || pul.hit || pdl.hit || pur.hit || pdr.hit ||
+            //        pl.hit || pl1.hit || pr.hit || pr1.hit
+            //        )
+            //    )
+            //{
+            //    float rotationSpeed2 = 20.0 * dt; // Adjust this value to control the speed of rotation
 
-                // Handle avoidance logic based on hit rays
-                if (pf.hit || pf1.hit || pf2.hit || pfl.hit || pfl1.hit || pfl2.hit || pfr.hit || pfr1.hit || pfr2.hit)
-                {
-                    // Up if forward rays hit
-                    playerInputComponent->rotYSmooth = glm::mix(0.0f, rotationSpeed2, dt * cameraComponent->cameraSmoothFactor);
-                }
+            //    // Handle avoidance logic based on hit rays
+            //    if (pf.hit || pf1.hit || pf2.hit || pfl.hit || pfl1.hit || pfl2.hit || pfr.hit || pfr1.hit || pfr2.hit)
+            //    {
+            //        // Up if forward rays hit
+            //        playerInputComponent->rotYSmooth = glm::mix(0.0f, rotationSpeed2, dt * cameraComponent->cameraSmoothFactor);
+            //    }
 
-                if (pu.hit || pul.hit || pur.hit)
-                {
-                    // Down if upward rays hit
-                    playerInputComponent->rotYSmooth = glm::mix(0.0f, -rotationSpeed2, dt * cameraComponent->cameraSmoothFactor);
-                }
+            //    if (pu.hit || pul.hit || pur.hit)
+            //    {
+            //        // Down if upward rays hit
+            //        playerInputComponent->rotYSmooth = glm::mix(0.0f, -rotationSpeed2, dt * cameraComponent->cameraSmoothFactor);
+            //    }
 
-                if (pd.hit || pdl.hit || pdr.hit)
-                {
-                    // Up if downward rays hit
-                    playerInputComponent->rotYSmooth = glm::mix(0.0f, rotationSpeed2, dt * cameraComponent->cameraSmoothFactor);
-                }
+            //    if (pd.hit || pdl.hit || pdr.hit)
+            //    {
+            //        // Up if downward rays hit
+            //        playerInputComponent->rotYSmooth = glm::mix(0.0f, rotationSpeed2, dt * cameraComponent->cameraSmoothFactor);
+            //    }
 
-                if (pl.hit || pl1.hit)
-                {
-                    // right if left rays hit
-                    playerInputComponent->rotXSmooth = glm::mix(0.0f, -rotationSpeed2, dt * cameraComponent->cameraSmoothFactor);
-                }
-                else if (pr.hit || pr1.hit)
-                {
-                    // left if right rays hit
-                    playerInputComponent->rotXSmooth = glm::mix(0.0f, rotationSpeed2, dt * cameraComponent->cameraSmoothFactor);
-                }
-            }
+            //    if (pl.hit || pl1.hit)
+            //    {
+            //        // right if left rays hit
+            //        playerInputComponent->rotXSmooth = glm::mix(0.0f, -rotationSpeed2, dt * cameraComponent->cameraSmoothFactor);
+            //    }
+            //    else if (pr.hit || pr1.hit)
+            //    {
+            //        // left if right rays hit
+            //        playerInputComponent->rotXSmooth = glm::mix(0.0f, rotationSpeed2, dt * cameraComponent->cameraSmoothFactor);
+            //    }
+            //}
 
         }
 
@@ -1739,17 +1881,25 @@ inline void World::UpdateAiShip(Entity* entity, float dt)
                 {
                     Debug::DrawDebugText("HIT", payload.hitPoint, glm::vec4(1, 1, 1, 1));
 
-                    particleComponent->particleCanonLeft->data.looping = 0;
-                    particleComponent->particleCanonRight->data.looping = 0;
-                    entity->path.clear();
-                    savedEnemyIDsNrespawning.push();
-                    entity->closestNodeFromShip = nullptr;
-                    DestroyEntity(entity->id, entity->eType);
-                    isRespawnings.push(true);
+                    for (auto entity1 : pureEntityData->Asteroids)
+                    {
+                        auto entComp = entity1->GetComponent<Components::ColliderComponent>();
+                        if (payload.collider == entComp->colliderID && entity1->eType == EntityType::Asteroid)
+                        {
+                            particleComponent->particleCanonLeft->data.looping = 0;
+                            particleComponent->particleCanonRight->data.looping = 0;
 
-                    hit = true;
+
+                            savedEnemyIDs.push(entity->id);
+                          
+                            CreateEnemyShip(true);
+                            DestroyShip(entity->id, entity->eType);
+                            DestroyEntity(entity->id, entity->eType);
+                            return;
+                        }
+                    }
+                   
                 }
-
 
             }
           

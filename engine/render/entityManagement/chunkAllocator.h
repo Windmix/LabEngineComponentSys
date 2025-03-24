@@ -160,8 +160,8 @@ void ChunkAllocator<T, ChunkSize>::DeallocateChunk(size_t chunkIndex)
 {
     Chunk& chunk = chunks[chunkIndex];
 
-    delete[] chunk.data;
-    delete[] chunk.freeList;
+    chunk.data = nullptr;
+    chunk.freeList = nullptr;
 
     chunks.erase(chunks.begin() + chunkIndex);
 }
