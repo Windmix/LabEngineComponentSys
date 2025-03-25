@@ -1,8 +1,8 @@
-# Install script for directory: C:/Users/thesee-3-local/Documents/GitHub/s0011e-game-engine-Windmix
+# Install script for directory: A:/Users/amthe/OneDrive/Dokument/GitHub/LabEngineComponentSys
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/engine-lab-env")
+  set(CMAKE_INSTALL_PREFIX "A:/Program Files (x86)/engine-lab-env")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -34,12 +34,18 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("C:/Users/thesee-3-local/Documents/GitHub/s0011e-game-engine-Windmix/build/exts/cmake_install.cmake")
-  include("C:/Users/thesee-3-local/Documents/GitHub/s0011e-game-engine-Windmix/build/engine/cmake_install.cmake")
-  include("C:/Users/thesee-3-local/Documents/GitHub/s0011e-game-engine-Windmix/build/projects/cmake_install.cmake")
+  include("A:/Users/amthe/OneDrive/Dokument/GitHub/LabEngineComponentSys/build/exts/cmake_install.cmake")
+  include("A:/Users/amthe/OneDrive/Dokument/GitHub/LabEngineComponentSys/build/engine/cmake_install.cmake")
+  include("A:/Users/amthe/OneDrive/Dokument/GitHub/LabEngineComponentSys/build/projects/cmake_install.cmake")
 
 endif()
 
+string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
+       "${CMAKE_INSTALL_MANIFEST_FILES}")
+if(CMAKE_INSTALL_LOCAL_ONLY)
+  file(WRITE "A:/Users/amthe/OneDrive/Dokument/GitHub/LabEngineComponentSys/build/install_local_manifest.txt"
+     "${CMAKE_INSTALL_MANIFEST_CONTENT}")
+endif()
 if(CMAKE_INSTALL_COMPONENT)
   if(CMAKE_INSTALL_COMPONENT MATCHES "^[a-zA-Z0-9_.+-]+$")
     set(CMAKE_INSTALL_MANIFEST "install_manifest_${CMAKE_INSTALL_COMPONENT}.txt")
@@ -53,8 +59,6 @@ else()
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
-  string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
-       "${CMAKE_INSTALL_MANIFEST_FILES}")
-  file(WRITE "C:/Users/thesee-3-local/Documents/GitHub/s0011e-game-engine-Windmix/build/${CMAKE_INSTALL_MANIFEST}"
+  file(WRITE "A:/Users/amthe/OneDrive/Dokument/GitHub/LabEngineComponentSys/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
 endif()

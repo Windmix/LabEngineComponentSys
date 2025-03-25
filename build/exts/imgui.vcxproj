@@ -22,7 +22,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{36A5C395-A59B-3D28-A18A-8D4F0081D21C}</ProjectGuid>
+    <ProjectGuid>{D1620CBA-B625-387F-BABE-FB9A3529549E}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <WindowsTargetPlatformVersion>10.0.22621.0</WindowsTargetPlatformVersion>
     <Platform>x64</Platform>
@@ -59,26 +59,26 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\build\exts\Debug\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\build\exts\Debug\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">imgui.dir\Debug\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">imgui</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.lib</TargetExt>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\build\exts\Release\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\build\exts\Release\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">imgui.dir\Release\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">imgui</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.lib</TargetExt>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\build\exts\MinSizeRel\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\build\exts\MinSizeRel\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">imgui.dir\MinSizeRel\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">imgui</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.lib</TargetExt>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\build\exts\RelWithDebInfo\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\build\exts\RelWithDebInfo\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">imgui.dir\RelWithDebInfo\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">imgui</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.lib</TargetExt>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\imgui;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\enet\include;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\flatbuffers\include;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\include;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glew\include;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\imgui;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\enet\include;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\flatbuffers\include;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\include;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glew\include;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -99,10 +99,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;GLEW_STATIC;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\imgui;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\enet\include;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\flatbuffers\include;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\include;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glew\include;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\imgui;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\enet\include;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\flatbuffers\include;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\include;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glew\include;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\imgui;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\enet\include;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\flatbuffers\include;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\include;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glew\include;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\imgui;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\enet\include;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\flatbuffers\include;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\include;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glew\include;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -115,7 +115,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\imgui;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\enet\include;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\flatbuffers\include;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\include;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glew\include;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\imgui;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\enet\include;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\flatbuffers\include;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\include;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glew\include;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <ExceptionHandling>Sync</ExceptionHandling>
@@ -137,10 +137,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;GLEW_STATIC;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\imgui;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\enet\include;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\flatbuffers\include;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\include;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glew\include;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\imgui;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\enet\include;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\flatbuffers\include;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\include;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glew\include;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\imgui;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\enet\include;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\flatbuffers\include;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\include;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glew\include;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\imgui;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\enet\include;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\flatbuffers\include;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\include;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glew\include;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -153,7 +153,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\imgui;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\enet\include;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\flatbuffers\include;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\include;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glew\include;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\imgui;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\enet\include;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\flatbuffers\include;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\include;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glew\include;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <ExceptionHandling>Sync</ExceptionHandling>
@@ -175,10 +175,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;GLEW_STATIC;CMAKE_INTDIR=\"MinSizeRel\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\imgui;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\enet\include;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\flatbuffers\include;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\include;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glew\include;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\imgui;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\enet\include;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\flatbuffers\include;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\include;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glew\include;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\imgui;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\enet\include;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\flatbuffers\include;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\include;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glew\include;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\imgui;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\enet\include;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\flatbuffers\include;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\include;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glew\include;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -191,7 +191,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\imgui;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\enet\include;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\flatbuffers\include;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\include;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glew\include;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\imgui;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\enet\include;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\flatbuffers\include;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\include;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glew\include;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -212,10 +212,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;GLEW_STATIC;CMAKE_INTDIR=\"RelWithDebInfo\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\imgui;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\enet\include;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\flatbuffers\include;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\include;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glew\include;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\imgui;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\enet\include;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\flatbuffers\include;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\include;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glew\include;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\imgui;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\enet\include;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\flatbuffers\include;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\include;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glew\include;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\imgui;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\enet\include;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\flatbuffers\include;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\include;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glew\include;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -227,11 +227,11 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\CMakeLists.txt">
+    <CustomBuild Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\CMakeLists.txt">
       <UseUtf8Encoding>Always</UseUtf8Encoding>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/Users/thesee-3-local/Documents/GitHub/s0011e-game-engine-Windmix/exts/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule A:/Users/amthe/OneDrive/Dokument/GitHub/LabEngineComponentSys/exts/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/thesee-3-local/Documents/GitHub/s0011e-game-engine-Windmix -BC:/Users/thesee-3-local/Documents/GitHub/s0011e-game-engine-Windmix/build --check-stamp-file C:/Users/thesee-3-local/Documents/GitHub/s0011e-game-engine-Windmix/build/exts/CMakeFiles/generate.stamp
+"A:\Program Files\CMake\bin\cmake.exe" -SA:/Users/amthe/OneDrive/Dokument/GitHub/LabEngineComponentSys -BA:/Users/amthe/OneDrive/Dokument/GitHub/LabEngineComponentSys/build --check-stamp-file A:/Users/amthe/OneDrive/Dokument/GitHub/LabEngineComponentSys/build/exts/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -240,11 +240,11 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\build\exts\CMakeFiles\generate.stamp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\build\exts\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/Users/thesee-3-local/Documents/GitHub/s0011e-game-engine-Windmix/exts/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule A:/Users/amthe/OneDrive/Dokument/GitHub/LabEngineComponentSys/exts/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/thesee-3-local/Documents/GitHub/s0011e-game-engine-Windmix -BC:/Users/thesee-3-local/Documents/GitHub/s0011e-game-engine-Windmix/build --check-stamp-file C:/Users/thesee-3-local/Documents/GitHub/s0011e-game-engine-Windmix/build/exts/CMakeFiles/generate.stamp
+"A:\Program Files\CMake\bin\cmake.exe" -SA:/Users/amthe/OneDrive/Dokument/GitHub/LabEngineComponentSys -BA:/Users/amthe/OneDrive/Dokument/GitHub/LabEngineComponentSys/build --check-stamp-file A:/Users/amthe/OneDrive/Dokument/GitHub/LabEngineComponentSys/build/exts/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -253,11 +253,11 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\build\exts\CMakeFiles\generate.stamp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\build\exts\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule C:/Users/thesee-3-local/Documents/GitHub/s0011e-game-engine-Windmix/exts/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule A:/Users/amthe/OneDrive/Dokument/GitHub/LabEngineComponentSys/exts/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/thesee-3-local/Documents/GitHub/s0011e-game-engine-Windmix -BC:/Users/thesee-3-local/Documents/GitHub/s0011e-game-engine-Windmix/build --check-stamp-file C:/Users/thesee-3-local/Documents/GitHub/s0011e-game-engine-Windmix/build/exts/CMakeFiles/generate.stamp
+"A:\Program Files\CMake\bin\cmake.exe" -SA:/Users/amthe/OneDrive/Dokument/GitHub/LabEngineComponentSys -BA:/Users/amthe/OneDrive/Dokument/GitHub/LabEngineComponentSys/build --check-stamp-file A:/Users/amthe/OneDrive/Dokument/GitHub/LabEngineComponentSys/build/exts/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -266,11 +266,11 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\build\exts\CMakeFiles\generate.stamp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\build\exts\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule C:/Users/thesee-3-local/Documents/GitHub/s0011e-game-engine-Windmix/exts/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule A:/Users/amthe/OneDrive/Dokument/GitHub/LabEngineComponentSys/exts/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/thesee-3-local/Documents/GitHub/s0011e-game-engine-Windmix -BC:/Users/thesee-3-local/Documents/GitHub/s0011e-game-engine-Windmix/build --check-stamp-file C:/Users/thesee-3-local/Documents/GitHub/s0011e-game-engine-Windmix/build/exts/CMakeFiles/generate.stamp
+"A:\Program Files\CMake\bin\cmake.exe" -SA:/Users/amthe/OneDrive/Dokument/GitHub/LabEngineComponentSys -BA:/Users/amthe/OneDrive/Dokument/GitHub/LabEngineComponentSys/build --check-stamp-file A:/Users/amthe/OneDrive/Dokument/GitHub/LabEngineComponentSys/build/exts/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -279,30 +279,31 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\build\exts\CMakeFiles\generate.stamp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\build\exts\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\imgui\imconfig.h" />
-    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\imgui\imgui.cpp" />
-    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\imgui\imgui.h" />
-    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\imgui\imgui_draw.cpp" />
-    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\imgui\imgui_impl_glfw.h" />
-    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\imgui\imgui_impl_glfw.cpp" />
-    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\imgui\imgui_impl_opengl3.h" />
-    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\imgui\imgui_impl_opengl3.cpp" />
-    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\imgui\imgui_impl_opengl3_loader.h" />
-    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\imgui\imgui_internal.h" />
-    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\imgui\imgui_tables.cpp" />
-    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\imgui\imgui_widgets.cpp" />
-    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\imgui\imstb_rectpack.h" />
-    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\imgui\imstb_textedit.h" />
-    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\imgui\imstb_truetype.h" />
+    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\imgui\imconfig.h" />
+    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\imgui\imgui.cpp" />
+    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\imgui\imgui.h" />
+    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\imgui\imgui_draw.cpp" />
+    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\imgui\imgui_impl_glfw.h" />
+    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\imgui\imgui_impl_glfw.cpp" />
+    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\imgui\imgui_impl_opengl3.h" />
+    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\imgui\imgui_impl_opengl3.cpp" />
+    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\imgui\imgui_impl_opengl3_loader.h" />
+    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\imgui\imgui_internal.h" />
+    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\imgui\imgui_tables.cpp" />
+    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\imgui\imgui_widgets.cpp" />
+    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\imgui\imstb_rectpack.h" />
+    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\imgui\imstb_textedit.h" />
+    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\imgui\imstb_truetype.h" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\build\ZERO_CHECK.vcxproj">
-      <Project>{F6716682-69CD-3883-962A-16121919D693}</Project>
+    <ProjectReference Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\build\ZERO_CHECK.vcxproj">
+      <Project>{C9317BFF-DDCD-33DE-B45E-07DC9FBFDC7D}</Project>
       <Name>ZERO_CHECK</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
