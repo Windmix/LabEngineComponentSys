@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\engine\render\window.cc">
+      <Filter>display</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\engine\render\model.cc">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\engine\render\renderdevice.cc">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\engine\render\shaderresource.cc">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\engine\render\textureresource.cc">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\engine\render\lightserver.cc">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\engine\render\cameramanager.cc">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\engine\render\debugrender.cc">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\engine\render\grid.cc">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\engine\render\physics.cc">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\engine\render\particlesystem.cc">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\engine\render\input\gamepad.cc">
+      <Filter>input</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\engine\render\input\inputserver.cc">
+      <Filter>input</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\engine\render\input\key.cc">
+      <Filter>input</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\engine\config.cc">
+      <Filter>pch</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\engine\render\window.h">
+      <Filter>display</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\engine\render\model.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\engine\render\renderdevice.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\engine\render\shaderresource.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\engine\render\textureresource.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\engine\render\lightserver.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\engine\render\cameramanager.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\engine\render\debugrender.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\engine\render\grid.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\engine\render\lightsources.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\engine\render\physics.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\engine\render\resourceid.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\engine\render\particlesystem.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\engine\render\stb_image.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\engine\render\stb_image_write.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\engine\render\json.hpp">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\engine\render\gltf.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\engine\render\input\gamepad.h">
+      <Filter>input</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\engine\render\input\inputserver.h">
+      <Filter>input</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\engine\render\input\key.h">
+      <Filter>input</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\engine\render\input\keyboard.h">
+      <Filter>input</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\engine\render\input\mouse.h">
+      <Filter>input</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\engine\render\entityManagement\entityid.h">
+      <Filter>entityManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\engine\render\entityManagement\entity.h">
+      <Filter>entityManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\engine\render\entityManagement\physicsid.h">
+      <Filter>entityManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\engine\render\entityManagement\chunkAllocator.h">
+      <Filter>entityManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\engine\render\entityManagement\componentBase.h">
+      <Filter>entityManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\engine\render\entityManagement\components.h">
+      <Filter>entityManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\engine\render\entityManagement\world.h">
+      <Filter>entityManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\engine\render\entityManagement\componentType.h">
+      <Filter>entityManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\engine\render\entityManagement\entityType.h">
+      <Filter>entityManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\engine\config.h">
+      <Filter>pch</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\engine\render\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="display">
+      <UniqueIdentifier>{3D077B71-8C42-3B1E-B7E6-A0111921BCA7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="entityManagement">
+      <UniqueIdentifier>{BA0F2D1C-8488-353E-8A8A-2CC5CFB28F1B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="input">
+      <UniqueIdentifier>{EA20EC63-648E-3A7D-B901-2949FB23D4AE}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="pch">
+      <UniqueIdentifier>{E2575CC9-AE19-3188-B549-DA0E03474F30}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="render">
+      <UniqueIdentifier>{795659A2-A07A-3780-8194-15F53F4DD89D}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

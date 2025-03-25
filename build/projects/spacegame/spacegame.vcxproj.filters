@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\projects\spacegame\code\main.cc">
+      <Filter>spacegame</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\projects\spacegame\code\spacegameapp.cc">
+      <Filter>spacegame</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\projects\spacegame\code\spaceship.cc">
+      <Filter>spacegame</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\projects\spacegame\code\spacegameapp.h">
+      <Filter>spacegame</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\projects\spacegame\code\spaceship.h">
+      <Filter>spacegame</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\projects\spacegame\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="spacegame">
+      <UniqueIdentifier>{6B1D2006-2485-3A25-AE4C-CE6C88A9F258}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

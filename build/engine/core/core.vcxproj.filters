@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\engine\core\app.cc">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\engine\core\debug.cc">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\engine\core\random.cc">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\engine\core\cvar.cc">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\engine\config.cc">
+      <Filter>pch</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\engine\core\app.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\engine\core\debug.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\engine\core\random.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\engine\core\cvar.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\engine\core\idpool.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\engine\config.h">
+      <Filter>pch</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\engine\core\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="core">
+      <UniqueIdentifier>{556F2910-7FA9-3108-97EF-8F8683D61C74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="pch">
+      <UniqueIdentifier>{E2575CC9-AE19-3188-B549-DA0E03474F30}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

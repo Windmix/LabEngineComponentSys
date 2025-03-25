@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\build\CMakeFiles\9873fc1290336b877e2ae28f7758b646\INSTALL_force.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{82B4ABAE-2FDA-370F-98C2-C547FD779563}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
