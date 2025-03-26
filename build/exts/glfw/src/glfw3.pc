@@ -1,4 +1,4 @@
-prefix=A:/Program Files (x86)/engine-lab-env
+prefix=C:/Program Files (x86)/engine-lab-env
 exec_prefix=${prefix}
 includedir=${prefix}/include
 libdir=${exec_prefix}/lib

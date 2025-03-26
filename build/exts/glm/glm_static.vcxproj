@@ -22,7 +22,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{269D7AED-B559-323C-8FB7-1E3994EC041F}</ProjectGuid>
+    <ProjectGuid>{D18E9D3D-54F8-3AE3-84B7-CCC78487D598}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <WindowsTargetPlatformVersion>10.0.22621.0</WindowsTargetPlatformVersion>
     <Platform>x64</Platform>
@@ -59,26 +59,26 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\build\exts\glm\Debug\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\build\exts\glm\Debug\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">glm_static.dir\Debug\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">glm_static</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.lib</TargetExt>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\build\exts\glm\Release\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\build\exts\glm\Release\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">glm_static.dir\Release\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">glm_static</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.lib</TargetExt>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\build\exts\glm\MinSizeRel\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\build\exts\glm\MinSizeRel\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">glm_static.dir\MinSizeRel\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">glm_static</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.lib</TargetExt>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\build\exts\glm\RelWithDebInfo\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\build\exts\glm\RelWithDebInfo\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">glm_static.dir\RelWithDebInfo\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">glm_static</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.lib</TargetExt>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\..;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\..;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -101,10 +101,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;GLEW_STATIC;_CRT_SECURE_NO_WARNINGS;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\..;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\..;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\..;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\..;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -117,7 +117,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\..;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\..;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <DisableSpecificWarnings>4309;4324;4389;4127;4267;4146;4201;4464;4514;4701;4820;4365</DisableSpecificWarnings>
@@ -141,10 +141,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;GLEW_STATIC;_CRT_SECURE_NO_WARNINGS;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\..;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\..;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\..;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\..;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -157,7 +157,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\..;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\..;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <DisableSpecificWarnings>4309;4324;4389;4127;4267;4146;4201;4464;4514;4701;4820;4365</DisableSpecificWarnings>
@@ -181,10 +181,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;GLEW_STATIC;_CRT_SECURE_NO_WARNINGS;CMAKE_INTDIR=\"MinSizeRel\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\..;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\..;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\..;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\..;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -197,7 +197,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\..;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\..;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -220,10 +220,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;GLEW_STATIC;_CRT_SECURE_NO_WARNINGS;CMAKE_INTDIR=\"RelWithDebInfo\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\..;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\..;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\..;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\..;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -235,11 +235,11 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <CustomBuild Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\CMakeLists.txt">
+    <CustomBuild Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\CMakeLists.txt">
       <UseUtf8Encoding>Always</UseUtf8Encoding>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule A:/Users/amthe/OneDrive/Dokument/GitHub/LabEngineComponentSys/exts/glm/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/Users/thesee-3-local/Documents/GitHub/s0011e-game-engine-Windmix/exts/glm/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
-"A:\Program Files\CMake\bin\cmake.exe" -SA:/Users/amthe/OneDrive/Dokument/GitHub/LabEngineComponentSys -BA:/Users/amthe/OneDrive/Dokument/GitHub/LabEngineComponentSys/build --check-stamp-file A:/Users/amthe/OneDrive/Dokument/GitHub/LabEngineComponentSys/build/exts/glm/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/thesee-3-local/Documents/GitHub/s0011e-game-engine-Windmix -BC:/Users/thesee-3-local/Documents/GitHub/s0011e-game-engine-Windmix/build --check-stamp-file C:/Users/thesee-3-local/Documents/GitHub/s0011e-game-engine-Windmix/build/exts/glm/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -248,11 +248,11 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\build\exts\glm\CMakeFiles\generate.stamp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\build\exts\glm\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule A:/Users/amthe/OneDrive/Dokument/GitHub/LabEngineComponentSys/exts/glm/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/Users/thesee-3-local/Documents/GitHub/s0011e-game-engine-Windmix/exts/glm/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
-"A:\Program Files\CMake\bin\cmake.exe" -SA:/Users/amthe/OneDrive/Dokument/GitHub/LabEngineComponentSys -BA:/Users/amthe/OneDrive/Dokument/GitHub/LabEngineComponentSys/build --check-stamp-file A:/Users/amthe/OneDrive/Dokument/GitHub/LabEngineComponentSys/build/exts/glm/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/thesee-3-local/Documents/GitHub/s0011e-game-engine-Windmix -BC:/Users/thesee-3-local/Documents/GitHub/s0011e-game-engine-Windmix/build --check-stamp-file C:/Users/thesee-3-local/Documents/GitHub/s0011e-game-engine-Windmix/build/exts/glm/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -261,11 +261,11 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\build\exts\glm\CMakeFiles\generate.stamp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\build\exts\glm\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule A:/Users/amthe/OneDrive/Dokument/GitHub/LabEngineComponentSys/exts/glm/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule C:/Users/thesee-3-local/Documents/GitHub/s0011e-game-engine-Windmix/exts/glm/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
-"A:\Program Files\CMake\bin\cmake.exe" -SA:/Users/amthe/OneDrive/Dokument/GitHub/LabEngineComponentSys -BA:/Users/amthe/OneDrive/Dokument/GitHub/LabEngineComponentSys/build --check-stamp-file A:/Users/amthe/OneDrive/Dokument/GitHub/LabEngineComponentSys/build/exts/glm/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/thesee-3-local/Documents/GitHub/s0011e-game-engine-Windmix -BC:/Users/thesee-3-local/Documents/GitHub/s0011e-game-engine-Windmix/build --check-stamp-file C:/Users/thesee-3-local/Documents/GitHub/s0011e-game-engine-Windmix/build/exts/glm/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -274,11 +274,11 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\build\exts\glm\CMakeFiles\generate.stamp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\build\exts\glm\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule A:/Users/amthe/OneDrive/Dokument/GitHub/LabEngineComponentSys/exts/glm/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule C:/Users/thesee-3-local/Documents/GitHub/s0011e-game-engine-Windmix/exts/glm/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
-"A:\Program Files\CMake\bin\cmake.exe" -SA:/Users/amthe/OneDrive/Dokument/GitHub/LabEngineComponentSys -BA:/Users/amthe/OneDrive/Dokument/GitHub/LabEngineComponentSys/build --check-stamp-file A:/Users/amthe/OneDrive/Dokument/GitHub/LabEngineComponentSys/build/exts/glm/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/thesee-3-local/Documents/GitHub/s0011e-game-engine-Windmix -BC:/Users/thesee-3-local/Documents/GitHub/s0011e-game-engine-Windmix/build --check-stamp-file C:/Users/thesee-3-local/Documents/GitHub/s0011e-game-engine-Windmix/build/exts/glm/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -287,396 +287,395 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\build\exts\glm\CMakeFiles\generate.stamp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\build\exts\glm\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <None Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\CMakeLists.txt">
+    <None Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\CMakeLists.txt">
     </None>
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\common.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\exponential.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\fwd.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\geometric.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\glm.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\integer.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\mat2x2.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\mat2x3.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\mat2x4.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\mat3x2.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\mat3x3.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\mat3x4.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\mat4x2.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\mat4x3.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\mat4x4.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\matrix.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\packing.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\trigonometric.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\vec2.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\vec3.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\vec4.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\vector_relational.hpp" />
-    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\detail\glm.cpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\detail\func_common.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\detail\func_common_simd.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\detail\func_exponential.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\detail\func_exponential_simd.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\detail\func_geometric.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\detail\func_geometric_simd.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\detail\func_integer.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\detail\func_integer_simd.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\detail\func_matrix.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\detail\func_matrix_simd.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\detail\func_packing.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\detail\func_packing_simd.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\detail\func_trigonometric.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\detail\func_trigonometric_simd.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\detail\func_vector_relational.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\detail\func_vector_relational_simd.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\detail\type_half.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\detail\type_mat2x2.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\detail\type_mat2x3.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\detail\type_mat2x4.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\detail\type_mat3x2.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\detail\type_mat3x3.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\detail\type_mat3x4.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\detail\type_mat4x2.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\detail\type_mat4x3.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\detail\type_mat4x4.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\detail\type_mat4x4_simd.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\detail\type_quat.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\detail\type_quat_simd.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\detail\type_vec1.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\detail\type_vec2.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\detail\type_vec3.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\detail\type_vec4.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\detail\type_vec4_simd.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\detail\_features.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\detail\_fixes.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\detail\_noise.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\detail\_swizzle.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\detail\_swizzle_func.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\detail\_vectorize.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\detail\compute_common.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\detail\compute_vector_relational.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\detail\qualifier.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\detail\setup.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\detail\type_float.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\detail\type_half.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\detail\type_mat2x2.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\detail\type_mat2x3.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\detail\type_mat2x4.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\detail\type_mat3x2.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\detail\type_mat3x3.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\detail\type_mat3x4.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\detail\type_mat4x2.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\detail\type_mat4x3.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\detail\type_mat4x4.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\detail\type_quat.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\detail\type_vec1.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\detail\type_vec2.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\detail\type_vec3.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\detail\type_vec4.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\matrix_clip_space.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\matrix_common.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\matrix_projection.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\matrix_relational.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\matrix_transform.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\quaternion_common.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\quaternion_common_simd.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\quaternion_exponential.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\quaternion_geometric.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\quaternion_relational.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\quaternion_transform.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\quaternion_trigonometric.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\scalar_common.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\scalar_constants.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\scalar_integer.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\scalar_relational.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\scalar_ulp.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\vector_common.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\vector_integer.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\vector_relational.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\vector_ulp.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\matrix_clip_space.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\matrix_common.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\matrix_double2x2.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\matrix_double2x2_precision.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\matrix_double2x3.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\matrix_double2x3_precision.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\matrix_double2x4.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\matrix_double2x4_precision.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\matrix_double3x2.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\matrix_double3x2_precision.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\matrix_double3x3.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\matrix_double3x3_precision.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\matrix_double3x4.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\matrix_double3x4_precision.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\matrix_double4x2.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\matrix_double4x2_precision.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\matrix_double4x3.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\matrix_double4x3_precision.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\matrix_double4x4.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\matrix_double4x4_precision.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\matrix_float2x2.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\matrix_float2x2_precision.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\matrix_float2x3.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\matrix_float2x3_precision.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\matrix_float2x4.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\matrix_float2x4_precision.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\matrix_float3x2.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\matrix_float3x2_precision.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\matrix_float3x3.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\matrix_float3x3_precision.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\matrix_float3x4.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\matrix_float3x4_precision.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\matrix_float4x2.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\matrix_float4x2_precision.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\matrix_float4x3.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\matrix_float4x3_precision.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\matrix_float4x4.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\matrix_float4x4_precision.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\matrix_projection.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\matrix_relational.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\matrix_transform.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\quaternion_common.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\quaternion_double.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\quaternion_double_precision.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\quaternion_exponential.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\quaternion_float.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\quaternion_float_precision.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\quaternion_geometric.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\quaternion_relational.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\quaternion_transform.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\quaternion_trigonometric.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\scalar_common.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\scalar_constants.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\scalar_int_sized.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\scalar_integer.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\scalar_relational.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\scalar_uint_sized.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\scalar_ulp.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\vector_bool1.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\vector_bool1_precision.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\vector_bool2.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\vector_bool2_precision.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\vector_bool3.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\vector_bool3_precision.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\vector_bool4.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\vector_bool4_precision.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\vector_common.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\vector_double1.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\vector_double1_precision.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\vector_double2.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\vector_double2_precision.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\vector_double3.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\vector_double3_precision.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\vector_double4.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\vector_double4_precision.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\vector_float1.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\vector_float1_precision.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\vector_float2.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\vector_float2_precision.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\vector_float3.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\vector_float3_precision.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\vector_float4.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\vector_float4_precision.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\vector_int1.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\vector_int1_precision.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\vector_int2.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\vector_int2_precision.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\vector_int3.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\vector_int3_precision.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\vector_int4.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\vector_int4_precision.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\vector_integer.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\vector_relational.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\vector_uint1.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\vector_uint1_precision.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\vector_uint2.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\vector_uint2_precision.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\vector_uint3.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\vector_uint3_precision.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\vector_uint4.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\vector_uint4_precision.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\ext\vector_ulp.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtc\bitfield.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtc\color_space.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtc\constants.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtc\epsilon.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtc\integer.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtc\matrix_access.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtc\matrix_inverse.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtc\matrix_transform.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtc\noise.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtc\packing.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtc\quaternion.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtc\quaternion_simd.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtc\random.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtc\reciprocal.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtc\round.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtc\type_precision.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtc\type_ptr.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtc\ulp.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtc\bitfield.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtc\color_space.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtc\constants.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtc\epsilon.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtc\integer.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtc\matrix_access.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtc\matrix_integer.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtc\matrix_inverse.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtc\matrix_transform.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtc\noise.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtc\packing.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtc\quaternion.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtc\random.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtc\reciprocal.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtc\round.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtc\type_aligned.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtc\type_precision.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtc\type_ptr.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtc\ulp.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtc\vec1.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\associated_min_max.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\bit.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\closest_point.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\color_encoding.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\color_space.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\color_space_YCoCg.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\common.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\compatibility.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\component_wise.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\dual_quaternion.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\easing.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\euler_angles.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\extend.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\extended_min_max.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\exterior_product.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\fast_exponential.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\fast_square_root.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\fast_trigonometry.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\float_notmalize.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\functions.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\gradient_paint.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\handed_coordinate_space.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\hash.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\integer.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\intersect.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\io.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\log_base.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\matrix_cross_product.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\matrix_decompose.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\matrix_factorisation.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\matrix_interpolation.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\matrix_major_storage.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\matrix_operation.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\matrix_query.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\matrix_transform_2d.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\mixed_product.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\norm.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\normal.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\normalize_dot.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\number_precision.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\optimum_pow.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\orthonormalize.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\perpendicular.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\polar_coordinates.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\projection.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\quaternion.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\raw_data.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\rotate_normalized_axis.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\rotate_vector.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\scalar_relational.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\spline.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\std_based_type.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\string_cast.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\texture.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\transform.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\transform2.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\type_aligned.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\type_trait.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\vector_angle.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\vector_query.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\wrap.inl" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\associated_min_max.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\bit.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\closest_point.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\color_encoding.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\color_space.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\color_space_YCoCg.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\common.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\compatibility.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\component_wise.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\dual_quaternion.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\easing.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\euler_angles.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\extend.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\extended_min_max.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\exterior_product.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\fast_exponential.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\fast_square_root.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\fast_trigonometry.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\functions.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\gradient_paint.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\handed_coordinate_space.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\hash.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\integer.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\intersect.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\io.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\log_base.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\matrix_cross_product.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\matrix_decompose.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\matrix_factorisation.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\matrix_interpolation.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\matrix_major_storage.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\matrix_operation.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\matrix_query.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\matrix_transform_2d.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\mixed_product.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\norm.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\normal.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\normalize_dot.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\number_precision.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\optimum_pow.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\orthonormalize.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\perpendicular.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\polar_coordinates.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\projection.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\quaternion.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\range.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\raw_data.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\rotate_normalized_axis.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\rotate_vector.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\scalar_multiplication.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\scalar_relational.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\spline.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\std_based_type.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\string_cast.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\texture.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\transform.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\transform2.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\type_aligned.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\type_trait.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\vec_swizzle.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\vector_angle.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\vector_query.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\gtx\wrap.hpp" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\simd\common.h" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\simd\exponential.h" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\simd\geometric.h" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\simd\integer.h" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\simd\matrix.h" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\simd\packing.h" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\simd\platform.h" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\simd\trigonometric.h" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glm\simd\vector_relational.h" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\common.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\exponential.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\fwd.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\geometric.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\glm.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\integer.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\mat2x2.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\mat2x3.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\mat2x4.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\mat3x2.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\mat3x3.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\mat3x4.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\mat4x2.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\mat4x3.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\mat4x4.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\matrix.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\packing.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\trigonometric.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\vec2.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\vec3.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\vec4.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\vector_relational.hpp" />
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\detail\glm.cpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\detail\func_common.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\detail\func_common_simd.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\detail\func_exponential.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\detail\func_exponential_simd.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\detail\func_geometric.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\detail\func_geometric_simd.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\detail\func_integer.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\detail\func_integer_simd.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\detail\func_matrix.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\detail\func_matrix_simd.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\detail\func_packing.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\detail\func_packing_simd.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\detail\func_trigonometric.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\detail\func_trigonometric_simd.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\detail\func_vector_relational.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\detail\func_vector_relational_simd.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\detail\type_half.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\detail\type_mat2x2.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\detail\type_mat2x3.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\detail\type_mat2x4.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\detail\type_mat3x2.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\detail\type_mat3x3.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\detail\type_mat3x4.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\detail\type_mat4x2.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\detail\type_mat4x3.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\detail\type_mat4x4.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\detail\type_mat4x4_simd.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\detail\type_quat.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\detail\type_quat_simd.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\detail\type_vec1.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\detail\type_vec2.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\detail\type_vec3.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\detail\type_vec4.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\detail\type_vec4_simd.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\detail\_features.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\detail\_fixes.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\detail\_noise.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\detail\_swizzle.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\detail\_swizzle_func.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\detail\_vectorize.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\detail\compute_common.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\detail\compute_vector_relational.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\detail\qualifier.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\detail\setup.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\detail\type_float.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\detail\type_half.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\detail\type_mat2x2.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\detail\type_mat2x3.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\detail\type_mat2x4.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\detail\type_mat3x2.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\detail\type_mat3x3.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\detail\type_mat3x4.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\detail\type_mat4x2.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\detail\type_mat4x3.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\detail\type_mat4x4.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\detail\type_quat.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\detail\type_vec1.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\detail\type_vec2.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\detail\type_vec3.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\detail\type_vec4.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\matrix_clip_space.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\matrix_common.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\matrix_projection.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\matrix_relational.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\matrix_transform.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\quaternion_common.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\quaternion_common_simd.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\quaternion_exponential.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\quaternion_geometric.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\quaternion_relational.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\quaternion_transform.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\quaternion_trigonometric.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\scalar_common.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\scalar_constants.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\scalar_integer.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\scalar_relational.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\scalar_ulp.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\vector_common.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\vector_integer.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\vector_relational.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\vector_ulp.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\matrix_clip_space.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\matrix_common.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\matrix_double2x2.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\matrix_double2x2_precision.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\matrix_double2x3.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\matrix_double2x3_precision.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\matrix_double2x4.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\matrix_double2x4_precision.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\matrix_double3x2.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\matrix_double3x2_precision.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\matrix_double3x3.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\matrix_double3x3_precision.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\matrix_double3x4.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\matrix_double3x4_precision.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\matrix_double4x2.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\matrix_double4x2_precision.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\matrix_double4x3.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\matrix_double4x3_precision.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\matrix_double4x4.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\matrix_double4x4_precision.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\matrix_float2x2.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\matrix_float2x2_precision.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\matrix_float2x3.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\matrix_float2x3_precision.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\matrix_float2x4.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\matrix_float2x4_precision.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\matrix_float3x2.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\matrix_float3x2_precision.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\matrix_float3x3.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\matrix_float3x3_precision.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\matrix_float3x4.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\matrix_float3x4_precision.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\matrix_float4x2.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\matrix_float4x2_precision.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\matrix_float4x3.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\matrix_float4x3_precision.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\matrix_float4x4.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\matrix_float4x4_precision.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\matrix_projection.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\matrix_relational.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\matrix_transform.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\quaternion_common.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\quaternion_double.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\quaternion_double_precision.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\quaternion_exponential.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\quaternion_float.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\quaternion_float_precision.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\quaternion_geometric.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\quaternion_relational.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\quaternion_transform.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\quaternion_trigonometric.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\scalar_common.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\scalar_constants.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\scalar_int_sized.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\scalar_integer.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\scalar_relational.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\scalar_uint_sized.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\scalar_ulp.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\vector_bool1.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\vector_bool1_precision.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\vector_bool2.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\vector_bool2_precision.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\vector_bool3.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\vector_bool3_precision.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\vector_bool4.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\vector_bool4_precision.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\vector_common.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\vector_double1.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\vector_double1_precision.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\vector_double2.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\vector_double2_precision.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\vector_double3.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\vector_double3_precision.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\vector_double4.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\vector_double4_precision.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\vector_float1.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\vector_float1_precision.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\vector_float2.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\vector_float2_precision.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\vector_float3.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\vector_float3_precision.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\vector_float4.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\vector_float4_precision.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\vector_int1.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\vector_int1_precision.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\vector_int2.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\vector_int2_precision.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\vector_int3.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\vector_int3_precision.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\vector_int4.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\vector_int4_precision.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\vector_integer.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\vector_relational.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\vector_uint1.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\vector_uint1_precision.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\vector_uint2.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\vector_uint2_precision.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\vector_uint3.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\vector_uint3_precision.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\vector_uint4.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\vector_uint4_precision.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\ext\vector_ulp.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtc\bitfield.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtc\color_space.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtc\constants.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtc\epsilon.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtc\integer.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtc\matrix_access.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtc\matrix_inverse.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtc\matrix_transform.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtc\noise.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtc\packing.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtc\quaternion.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtc\quaternion_simd.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtc\random.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtc\reciprocal.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtc\round.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtc\type_precision.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtc\type_ptr.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtc\ulp.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtc\bitfield.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtc\color_space.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtc\constants.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtc\epsilon.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtc\integer.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtc\matrix_access.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtc\matrix_integer.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtc\matrix_inverse.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtc\matrix_transform.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtc\noise.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtc\packing.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtc\quaternion.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtc\random.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtc\reciprocal.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtc\round.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtc\type_aligned.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtc\type_precision.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtc\type_ptr.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtc\ulp.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtc\vec1.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\associated_min_max.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\bit.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\closest_point.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\color_encoding.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\color_space.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\color_space_YCoCg.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\common.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\compatibility.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\component_wise.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\dual_quaternion.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\easing.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\euler_angles.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\extend.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\extended_min_max.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\exterior_product.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\fast_exponential.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\fast_square_root.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\fast_trigonometry.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\float_notmalize.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\functions.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\gradient_paint.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\handed_coordinate_space.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\hash.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\integer.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\intersect.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\io.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\log_base.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\matrix_cross_product.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\matrix_decompose.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\matrix_factorisation.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\matrix_interpolation.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\matrix_major_storage.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\matrix_operation.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\matrix_query.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\matrix_transform_2d.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\mixed_product.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\norm.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\normal.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\normalize_dot.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\number_precision.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\optimum_pow.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\orthonormalize.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\perpendicular.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\polar_coordinates.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\projection.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\quaternion.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\raw_data.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\rotate_normalized_axis.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\rotate_vector.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\scalar_relational.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\spline.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\std_based_type.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\string_cast.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\texture.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\transform.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\transform2.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\type_aligned.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\type_trait.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\vector_angle.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\vector_query.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\wrap.inl" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\associated_min_max.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\bit.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\closest_point.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\color_encoding.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\color_space.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\color_space_YCoCg.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\common.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\compatibility.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\component_wise.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\dual_quaternion.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\easing.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\euler_angles.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\extend.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\extended_min_max.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\exterior_product.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\fast_exponential.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\fast_square_root.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\fast_trigonometry.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\functions.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\gradient_paint.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\handed_coordinate_space.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\hash.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\integer.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\intersect.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\io.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\log_base.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\matrix_cross_product.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\matrix_decompose.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\matrix_factorisation.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\matrix_interpolation.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\matrix_major_storage.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\matrix_operation.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\matrix_query.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\matrix_transform_2d.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\mixed_product.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\norm.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\normal.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\normalize_dot.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\number_precision.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\optimum_pow.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\orthonormalize.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\perpendicular.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\polar_coordinates.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\projection.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\quaternion.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\range.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\raw_data.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\rotate_normalized_axis.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\rotate_vector.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\scalar_multiplication.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\scalar_relational.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\spline.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\std_based_type.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\string_cast.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\texture.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\transform.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\transform2.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\type_aligned.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\type_trait.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\vec_swizzle.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\vector_angle.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\vector_query.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\gtx\wrap.hpp" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\simd\common.h" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\simd\exponential.h" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\simd\geometric.h" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\simd\integer.h" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\simd\matrix.h" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\simd\packing.h" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\simd\platform.h" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\simd\trigonometric.h" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glm\simd\vector_relational.h" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\build\ZERO_CHECK.vcxproj">
-      <Project>{C9317BFF-DDCD-33DE-B45E-07DC9FBFDC7D}</Project>
+    <ProjectReference Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\build\ZERO_CHECK.vcxproj">
+      <Project>{F6716682-69CD-3883-962A-16121919D693}</Project>
       <Name>ZERO_CHECK</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>

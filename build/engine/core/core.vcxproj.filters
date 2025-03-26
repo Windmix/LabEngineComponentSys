@@ -1,51 +1,51 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\engine\core\app.cc">
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\engine\core\app.cc">
       <Filter>core</Filter>
     </ClCompile>
-    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\engine\core\debug.cc">
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\engine\core\debug.cc">
       <Filter>core</Filter>
     </ClCompile>
-    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\engine\core\random.cc">
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\engine\core\random.cc">
       <Filter>core</Filter>
     </ClCompile>
-    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\engine\core\cvar.cc">
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\engine\core\cvar.cc">
       <Filter>core</Filter>
     </ClCompile>
-    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\engine\config.cc">
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\engine\config.cc">
       <Filter>pch</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\engine\core\app.h">
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\engine\core\app.h">
       <Filter>core</Filter>
     </ClInclude>
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\engine\core\debug.h">
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\engine\core\debug.h">
       <Filter>core</Filter>
     </ClInclude>
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\engine\core\random.h">
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\engine\core\random.h">
       <Filter>core</Filter>
     </ClInclude>
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\engine\core\cvar.h">
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\engine\core\cvar.h">
       <Filter>core</Filter>
     </ClInclude>
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\engine\core\idpool.h">
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\engine\core\idpool.h">
       <Filter>core</Filter>
     </ClInclude>
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\engine\config.h">
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\engine\config.h">
       <Filter>pch</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\engine\core\CMakeLists.txt" />
+    <CustomBuild Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\engine\core\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="core">
-      <UniqueIdentifier>{F1020A1D-7CDB-32B7-9CD0-3BF523618108}</UniqueIdentifier>
+      <UniqueIdentifier>{556F2910-7FA9-3108-97EF-8F8683D61C74}</UniqueIdentifier>
     </Filter>
     <Filter Include="pch">
-      <UniqueIdentifier>{338A1B10-54DD-3B07-B377-3308E16BC6F6}</UniqueIdentifier>
+      <UniqueIdentifier>{E2575CC9-AE19-3188-B549-DA0E03474F30}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

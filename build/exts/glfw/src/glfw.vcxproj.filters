@@ -1,84 +1,84 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glfw\src\context.c">
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glfw\src\context.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glfw\src\init.c">
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glfw\src\init.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glfw\src\input.c">
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glfw\src\input.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glfw\src\monitor.c">
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glfw\src\monitor.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glfw\src\vulkan.c">
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glfw\src\vulkan.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glfw\src\window.c">
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glfw\src\window.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glfw\src\win32_init.c">
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glfw\src\win32_init.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glfw\src\win32_joystick.c">
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glfw\src\win32_joystick.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glfw\src\win32_monitor.c">
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glfw\src\win32_monitor.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glfw\src\win32_time.c">
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glfw\src\win32_time.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glfw\src\win32_tls.c">
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glfw\src\win32_tls.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glfw\src\win32_window.c">
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glfw\src\win32_window.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glfw\src\wgl_context.c">
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glfw\src\wgl_context.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glfw\src\egl_context.c">
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glfw\src\egl_context.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glfw\src\internal.h">
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glfw\src\internal.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\build\exts\glfw\src\glfw_config.h">
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\build\exts\glfw\src\glfw_config.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glfw\include\GLFW\glfw3.h">
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glfw\include\GLFW\glfw3.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glfw\include\GLFW\glfw3native.h">
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glfw\include\GLFW\glfw3native.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glfw\src\win32_platform.h">
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glfw\src\win32_platform.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glfw\src\win32_joystick.h">
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glfw\src\win32_joystick.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glfw\src\wgl_context.h">
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glfw\src\wgl_context.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glfw\src\egl_context.h">
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glfw\src\egl_context.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glfw\src\CMakeLists.txt" />
+    <CustomBuild Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glfw\src\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
-      <UniqueIdentifier>{04EFFC59-8350-3DC7-8ED0-A1198D11046A}</UniqueIdentifier>
+      <UniqueIdentifier>{C47D0BEF-596E-3823-AC8C-3A4109DD9C5D}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files">
-      <UniqueIdentifier>{C92DFFD1-2754-34C0-B10F-1541A14AD699}</UniqueIdentifier>
+      <UniqueIdentifier>{7BE9FDA4-FFA8-3B81-AB52-AE8DAB6AA71F}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

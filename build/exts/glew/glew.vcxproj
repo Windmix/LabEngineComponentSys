@@ -22,7 +22,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{8A890DAA-D8F6-393D-8DDA-18829AD9EF5C}</ProjectGuid>
+    <ProjectGuid>{FBE4F73D-4ECB-34FA-AD74-C582F8DCDD5E}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <WindowsTargetPlatformVersion>10.0.22621.0</WindowsTargetPlatformVersion>
     <Platform>x64</Platform>
@@ -59,26 +59,26 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\build\exts\glew\Debug\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\build\exts\glew\Debug\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">glew.dir\Debug\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">glew</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.lib</TargetExt>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\build\exts\glew\Release\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\build\exts\glew\Release\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">glew.dir\Release\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">glew</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.lib</TargetExt>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\build\exts\glew\MinSizeRel\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\build\exts\glew\MinSizeRel\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">glew.dir\MinSizeRel\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">glew</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.lib</TargetExt>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\build\exts\glew\RelWithDebInfo\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\build\exts\glew\RelWithDebInfo\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">glew.dir\RelWithDebInfo\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">glew</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.lib</TargetExt>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glew\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glew\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -98,10 +98,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;GLEW_STATIC;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glew\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glew\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glew\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glew\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -114,7 +114,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glew\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glew\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <ExceptionHandling>
@@ -135,10 +135,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;GLEW_STATIC;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glew\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glew\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glew\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glew\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -151,7 +151,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glew\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glew\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <ExceptionHandling>
@@ -172,10 +172,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;GLEW_STATIC;CMAKE_INTDIR=\"MinSizeRel\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glew\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glew\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glew\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glew\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -188,7 +188,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glew\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glew\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -208,10 +208,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;GLEW_STATIC;CMAKE_INTDIR=\"RelWithDebInfo\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glew\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glew\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glew\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glew\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -223,11 +223,11 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <CustomBuild Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glew\CMakeLists.txt">
+    <CustomBuild Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glew\CMakeLists.txt">
       <UseUtf8Encoding>Always</UseUtf8Encoding>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule A:/Users/amthe/OneDrive/Dokument/GitHub/LabEngineComponentSys/exts/glew/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/Users/thesee-3-local/Documents/GitHub/s0011e-game-engine-Windmix/exts/glew/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
-"A:\Program Files\CMake\bin\cmake.exe" -SA:/Users/amthe/OneDrive/Dokument/GitHub/LabEngineComponentSys -BA:/Users/amthe/OneDrive/Dokument/GitHub/LabEngineComponentSys/build --check-stamp-file A:/Users/amthe/OneDrive/Dokument/GitHub/LabEngineComponentSys/build/exts/glew/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/thesee-3-local/Documents/GitHub/s0011e-game-engine-Windmix -BC:/Users/thesee-3-local/Documents/GitHub/s0011e-game-engine-Windmix/build --check-stamp-file C:/Users/thesee-3-local/Documents/GitHub/s0011e-game-engine-Windmix/build/exts/glew/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -235,12 +235,12 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">A:\Program Files\CMake\share\cmake-3.31\Modules\FindOpenGL.cmake;A:\Program Files\CMake\share\cmake-3.31\Modules\FindPackageHandleStandardArgs.cmake;A:\Program Files\CMake\share\cmake-3.31\Modules\FindPackageMessage.cmake;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\build\exts\glew\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Program Files\CMake\share\cmake-3.30\Modules\FindOpenGL.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\FindPackageMessage.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\build\exts\glew\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule A:/Users/amthe/OneDrive/Dokument/GitHub/LabEngineComponentSys/exts/glew/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/Users/thesee-3-local/Documents/GitHub/s0011e-game-engine-Windmix/exts/glew/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
-"A:\Program Files\CMake\bin\cmake.exe" -SA:/Users/amthe/OneDrive/Dokument/GitHub/LabEngineComponentSys -BA:/Users/amthe/OneDrive/Dokument/GitHub/LabEngineComponentSys/build --check-stamp-file A:/Users/amthe/OneDrive/Dokument/GitHub/LabEngineComponentSys/build/exts/glew/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/thesee-3-local/Documents/GitHub/s0011e-game-engine-Windmix -BC:/Users/thesee-3-local/Documents/GitHub/s0011e-game-engine-Windmix/build --check-stamp-file C:/Users/thesee-3-local/Documents/GitHub/s0011e-game-engine-Windmix/build/exts/glew/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -248,12 +248,12 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">A:\Program Files\CMake\share\cmake-3.31\Modules\FindOpenGL.cmake;A:\Program Files\CMake\share\cmake-3.31\Modules\FindPackageHandleStandardArgs.cmake;A:\Program Files\CMake\share\cmake-3.31\Modules\FindPackageMessage.cmake;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\build\exts\glew\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Program Files\CMake\share\cmake-3.30\Modules\FindOpenGL.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\FindPackageMessage.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\build\exts\glew\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule A:/Users/amthe/OneDrive/Dokument/GitHub/LabEngineComponentSys/exts/glew/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule C:/Users/thesee-3-local/Documents/GitHub/s0011e-game-engine-Windmix/exts/glew/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
-"A:\Program Files\CMake\bin\cmake.exe" -SA:/Users/amthe/OneDrive/Dokument/GitHub/LabEngineComponentSys -BA:/Users/amthe/OneDrive/Dokument/GitHub/LabEngineComponentSys/build --check-stamp-file A:/Users/amthe/OneDrive/Dokument/GitHub/LabEngineComponentSys/build/exts/glew/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/thesee-3-local/Documents/GitHub/s0011e-game-engine-Windmix -BC:/Users/thesee-3-local/Documents/GitHub/s0011e-game-engine-Windmix/build --check-stamp-file C:/Users/thesee-3-local/Documents/GitHub/s0011e-game-engine-Windmix/build/exts/glew/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -261,12 +261,12 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">A:\Program Files\CMake\share\cmake-3.31\Modules\FindOpenGL.cmake;A:\Program Files\CMake\share\cmake-3.31\Modules\FindPackageHandleStandardArgs.cmake;A:\Program Files\CMake\share\cmake-3.31\Modules\FindPackageMessage.cmake;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\build\exts\glew\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Program Files\CMake\share\cmake-3.30\Modules\FindOpenGL.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\FindPackageMessage.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\build\exts\glew\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule A:/Users/amthe/OneDrive/Dokument/GitHub/LabEngineComponentSys/exts/glew/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule C:/Users/thesee-3-local/Documents/GitHub/s0011e-game-engine-Windmix/exts/glew/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
-"A:\Program Files\CMake\bin\cmake.exe" -SA:/Users/amthe/OneDrive/Dokument/GitHub/LabEngineComponentSys -BA:/Users/amthe/OneDrive/Dokument/GitHub/LabEngineComponentSys/build --check-stamp-file A:/Users/amthe/OneDrive/Dokument/GitHub/LabEngineComponentSys/build/exts/glew/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/thesee-3-local/Documents/GitHub/s0011e-game-engine-Windmix -BC:/Users/thesee-3-local/Documents/GitHub/s0011e-game-engine-Windmix/build --check-stamp-file C:/Users/thesee-3-local/Documents/GitHub/s0011e-game-engine-Windmix/build/exts/glew/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -274,21 +274,20 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">A:\Program Files\CMake\share\cmake-3.31\Modules\FindOpenGL.cmake;A:\Program Files\CMake\share\cmake-3.31\Modules\FindPackageHandleStandardArgs.cmake;A:\Program Files\CMake\share\cmake-3.31\Modules\FindPackageMessage.cmake;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\build\exts\glew\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Program Files\CMake\share\cmake-3.30\Modules\FindOpenGL.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\FindPackageMessage.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\build\exts\glew\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glew\src\glew.c" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glew\include\GL\glew.h" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glew\include\GL\wglew.h" />
-    <ClInclude Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\glew\include\GL\glxew.h" />
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glew\src\glew.c" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glew\include\GL\glew.h" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glew\include\GL\wglew.h" />
+    <ClInclude Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\glew\include\GL\glxew.h" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\build\ZERO_CHECK.vcxproj">
-      <Project>{C9317BFF-DDCD-33DE-B45E-07DC9FBFDC7D}</Project>
+    <ProjectReference Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\build\ZERO_CHECK.vcxproj">
+      <Project>{F6716682-69CD-3883-962A-16121919D693}</Project>
       <Name>ZERO_CHECK</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>

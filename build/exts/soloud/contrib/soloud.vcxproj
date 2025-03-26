@@ -22,7 +22,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{E97079FA-7A53-3029-9170-1887C5FE2C47}</ProjectGuid>
+    <ProjectGuid>{CEEAE613-7275-3FF2-A1E0-1CB1ED38F37F}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <WindowsTargetPlatformVersion>10.0.22621.0</WindowsTargetPlatformVersion>
     <Platform>x64</Platform>
@@ -59,26 +59,26 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\build\exts\soloud\contrib\Debug\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\build\exts\soloud\contrib\Debug\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">soloud.dir\Debug\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">soloud</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.lib</TargetExt>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\build\exts\soloud\contrib\Release\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\build\exts\soloud\contrib\Release\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">soloud.dir\Release\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">soloud</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.lib</TargetExt>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\build\exts\soloud\contrib\MinSizeRel\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\build\exts\soloud\contrib\MinSizeRel\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">soloud.dir\MinSizeRel\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">soloud</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.lib</TargetExt>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\build\exts\soloud\contrib\RelWithDebInfo\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\build\exts\soloud\contrib\RelWithDebInfo\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">soloud.dir\RelWithDebInfo\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">soloud</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.lib</TargetExt>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\contrib\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\contrib\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -99,10 +99,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;GLEW_STATIC;WITH_NULL;WITH_WINMM;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\contrib\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\contrib\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\contrib\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\contrib\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -115,7 +115,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\contrib\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\contrib\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <ExceptionHandling>Sync</ExceptionHandling>
@@ -137,10 +137,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;GLEW_STATIC;WITH_NULL;WITH_WINMM;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\contrib\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\contrib\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\contrib\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\contrib\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -153,7 +153,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\contrib\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\contrib\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <ExceptionHandling>Sync</ExceptionHandling>
@@ -175,10 +175,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;GLEW_STATIC;WITH_NULL;WITH_WINMM;CMAKE_INTDIR=\"MinSizeRel\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\contrib\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\contrib\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\contrib\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\contrib\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -191,7 +191,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\contrib\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\contrib\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -212,10 +212,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;GLEW_STATIC;WITH_NULL;WITH_WINMM;CMAKE_INTDIR=\"RelWithDebInfo\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\contrib\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\contrib\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\contrib\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\contrib\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -227,11 +227,11 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <CustomBuild Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\contrib\CMakeLists.txt">
+    <CustomBuild Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\contrib\CMakeLists.txt">
       <UseUtf8Encoding>Always</UseUtf8Encoding>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule A:/Users/amthe/OneDrive/Dokument/GitHub/LabEngineComponentSys/exts/soloud/contrib/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/Users/thesee-3-local/Documents/GitHub/s0011e-game-engine-Windmix/exts/soloud/contrib/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
-"A:\Program Files\CMake\bin\cmake.exe" -SA:/Users/amthe/OneDrive/Dokument/GitHub/LabEngineComponentSys -BA:/Users/amthe/OneDrive/Dokument/GitHub/LabEngineComponentSys/build --check-stamp-file A:/Users/amthe/OneDrive/Dokument/GitHub/LabEngineComponentSys/build/exts/soloud/contrib/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/thesee-3-local/Documents/GitHub/s0011e-game-engine-Windmix -BC:/Users/thesee-3-local/Documents/GitHub/s0011e-game-engine-Windmix/build --check-stamp-file C:/Users/thesee-3-local/Documents/GitHub/s0011e-game-engine-Windmix/build/exts/soloud/contrib/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -239,12 +239,12 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\contrib\Configure.cmake;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\contrib\cmake\Install.cmake;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\contrib\cmake\InstallExport.cmake;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\contrib\cmake\OptionDependentOnPackage.cmake;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\contrib\cmake\PrintOptionStatus.cmake;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\contrib\src.cmake;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\build\exts\soloud\contrib\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\contrib\Configure.cmake;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\contrib\cmake\Install.cmake;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\contrib\cmake\InstallExport.cmake;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\contrib\cmake\OptionDependentOnPackage.cmake;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\contrib\cmake\PrintOptionStatus.cmake;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\contrib\src.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\build\exts\soloud\contrib\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule A:/Users/amthe/OneDrive/Dokument/GitHub/LabEngineComponentSys/exts/soloud/contrib/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/Users/thesee-3-local/Documents/GitHub/s0011e-game-engine-Windmix/exts/soloud/contrib/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
-"A:\Program Files\CMake\bin\cmake.exe" -SA:/Users/amthe/OneDrive/Dokument/GitHub/LabEngineComponentSys -BA:/Users/amthe/OneDrive/Dokument/GitHub/LabEngineComponentSys/build --check-stamp-file A:/Users/amthe/OneDrive/Dokument/GitHub/LabEngineComponentSys/build/exts/soloud/contrib/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/thesee-3-local/Documents/GitHub/s0011e-game-engine-Windmix -BC:/Users/thesee-3-local/Documents/GitHub/s0011e-game-engine-Windmix/build --check-stamp-file C:/Users/thesee-3-local/Documents/GitHub/s0011e-game-engine-Windmix/build/exts/soloud/contrib/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -252,12 +252,12 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\contrib\Configure.cmake;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\contrib\cmake\Install.cmake;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\contrib\cmake\InstallExport.cmake;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\contrib\cmake\OptionDependentOnPackage.cmake;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\contrib\cmake\PrintOptionStatus.cmake;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\contrib\src.cmake;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\build\exts\soloud\contrib\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\contrib\Configure.cmake;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\contrib\cmake\Install.cmake;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\contrib\cmake\InstallExport.cmake;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\contrib\cmake\OptionDependentOnPackage.cmake;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\contrib\cmake\PrintOptionStatus.cmake;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\contrib\src.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\build\exts\soloud\contrib\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule A:/Users/amthe/OneDrive/Dokument/GitHub/LabEngineComponentSys/exts/soloud/contrib/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule C:/Users/thesee-3-local/Documents/GitHub/s0011e-game-engine-Windmix/exts/soloud/contrib/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
-"A:\Program Files\CMake\bin\cmake.exe" -SA:/Users/amthe/OneDrive/Dokument/GitHub/LabEngineComponentSys -BA:/Users/amthe/OneDrive/Dokument/GitHub/LabEngineComponentSys/build --check-stamp-file A:/Users/amthe/OneDrive/Dokument/GitHub/LabEngineComponentSys/build/exts/soloud/contrib/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/thesee-3-local/Documents/GitHub/s0011e-game-engine-Windmix -BC:/Users/thesee-3-local/Documents/GitHub/s0011e-game-engine-Windmix/build --check-stamp-file C:/Users/thesee-3-local/Documents/GitHub/s0011e-game-engine-Windmix/build/exts/soloud/contrib/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -265,12 +265,12 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\contrib\Configure.cmake;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\contrib\cmake\Install.cmake;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\contrib\cmake\InstallExport.cmake;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\contrib\cmake\OptionDependentOnPackage.cmake;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\contrib\cmake\PrintOptionStatus.cmake;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\contrib\src.cmake;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\build\exts\soloud\contrib\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\contrib\Configure.cmake;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\contrib\cmake\Install.cmake;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\contrib\cmake\InstallExport.cmake;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\contrib\cmake\OptionDependentOnPackage.cmake;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\contrib\cmake\PrintOptionStatus.cmake;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\contrib\src.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\build\exts\soloud\contrib\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule A:/Users/amthe/OneDrive/Dokument/GitHub/LabEngineComponentSys/exts/soloud/contrib/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule C:/Users/thesee-3-local/Documents/GitHub/s0011e-game-engine-Windmix/exts/soloud/contrib/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
-"A:\Program Files\CMake\bin\cmake.exe" -SA:/Users/amthe/OneDrive/Dokument/GitHub/LabEngineComponentSys -BA:/Users/amthe/OneDrive/Dokument/GitHub/LabEngineComponentSys/build --check-stamp-file A:/Users/amthe/OneDrive/Dokument/GitHub/LabEngineComponentSys/build/exts/soloud/contrib/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/thesee-3-local/Documents/GitHub/s0011e-game-engine-Windmix -BC:/Users/thesee-3-local/Documents/GitHub/s0011e-game-engine-Windmix/build --check-stamp-file C:/Users/thesee-3-local/Documents/GitHub/s0011e-game-engine-Windmix/build/exts/soloud/contrib/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -278,66 +278,65 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\contrib\Configure.cmake;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\contrib\cmake\Install.cmake;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\contrib\cmake\InstallExport.cmake;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\contrib\cmake\OptionDependentOnPackage.cmake;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\contrib\cmake\PrintOptionStatus.cmake;A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\contrib\src.cmake;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\build\exts\soloud\contrib\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\contrib\Configure.cmake;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\contrib\cmake\Install.cmake;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\contrib\cmake\InstallExport.cmake;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\contrib\cmake\OptionDependentOnPackage.cmake;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\contrib\cmake\PrintOptionStatus.cmake;C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\contrib\src.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\build\exts\soloud\contrib\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\src\core\soloud.cpp" />
-    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\src\core\soloud_audiosource.cpp" />
-    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\src\core\soloud_bus.cpp" />
-    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\src\core\soloud_core_3d.cpp" />
-    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\src\core\soloud_core_basicops.cpp" />
-    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\src\core\soloud_core_faderops.cpp" />
-    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\src\core\soloud_core_filterops.cpp" />
-    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\src\core\soloud_core_getters.cpp" />
-    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\src\core\soloud_core_setters.cpp" />
-    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\src\core\soloud_core_voicegroup.cpp" />
-    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\src\core\soloud_core_voiceops.cpp" />
-    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\src\core\soloud_fader.cpp" />
-    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\src\core\soloud_fft.cpp" />
-    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\src\core\soloud_fft_lut.cpp" />
-    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\src\core\soloud_file.cpp" />
-    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\src\core\soloud_filter.cpp" />
-    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\src\core\soloud_misc.cpp" />
-    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\src\core\soloud_queue.cpp" />
-    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\src\core\soloud_thread.cpp" />
-    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\src\audiosource\monotone\soloud_monotone.cpp" />
-    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\src\audiosource\noise\soloud_noise.cpp" />
-    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\src\audiosource\openmpt\soloud_openmpt.cpp" />
-    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\src\audiosource\openmpt\soloud_openmpt_dll.c" />
-    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\src\audiosource\sfxr\soloud_sfxr.cpp" />
-    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\src\audiosource\speech\darray.cpp" />
-    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\src\audiosource\speech\klatt.cpp" />
-    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\src\audiosource\speech\resonator.cpp" />
-    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\src\audiosource\speech\soloud_speech.cpp" />
-    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\src\audiosource\speech\tts.cpp" />
-    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\src\audiosource\tedsid\sid.cpp" />
-    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\src\audiosource\tedsid\soloud_tedsid.cpp" />
-    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\src\audiosource\tedsid\ted.cpp" />
-    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\src\audiosource\vic\soloud_vic.cpp" />
-    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\src\audiosource\vizsn\soloud_vizsn.cpp" />
-    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\src\audiosource\wav\dr_impl.cpp" />
-    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\src\audiosource\wav\soloud_wav.cpp" />
-    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\src\audiosource\wav\soloud_wavstream.cpp" />
-    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\src\audiosource\wav\stb_vorbis.c" />
-    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\src\backend\null\soloud_null.cpp" />
-    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\src\backend\winmm\soloud_winmm.cpp" />
-    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\src\filter\soloud_bassboostfilter.cpp" />
-    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\src\filter\soloud_biquadresonantfilter.cpp" />
-    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\src\filter\soloud_dcremovalfilter.cpp" />
-    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\src\filter\soloud_echofilter.cpp" />
-    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\src\filter\soloud_fftfilter.cpp" />
-    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\src\filter\soloud_flangerfilter.cpp" />
-    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\src\filter\soloud_lofifilter.cpp" />
-    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\src\filter\soloud_robotizefilter.cpp" />
-    <ClCompile Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\exts\soloud\src\filter\soloud_waveshaperfilter.cpp" />
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\src\core\soloud.cpp" />
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\src\core\soloud_audiosource.cpp" />
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\src\core\soloud_bus.cpp" />
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\src\core\soloud_core_3d.cpp" />
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\src\core\soloud_core_basicops.cpp" />
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\src\core\soloud_core_faderops.cpp" />
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\src\core\soloud_core_filterops.cpp" />
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\src\core\soloud_core_getters.cpp" />
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\src\core\soloud_core_setters.cpp" />
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\src\core\soloud_core_voicegroup.cpp" />
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\src\core\soloud_core_voiceops.cpp" />
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\src\core\soloud_fader.cpp" />
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\src\core\soloud_fft.cpp" />
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\src\core\soloud_fft_lut.cpp" />
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\src\core\soloud_file.cpp" />
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\src\core\soloud_filter.cpp" />
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\src\core\soloud_misc.cpp" />
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\src\core\soloud_queue.cpp" />
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\src\core\soloud_thread.cpp" />
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\src\audiosource\monotone\soloud_monotone.cpp" />
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\src\audiosource\noise\soloud_noise.cpp" />
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\src\audiosource\openmpt\soloud_openmpt.cpp" />
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\src\audiosource\openmpt\soloud_openmpt_dll.c" />
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\src\audiosource\sfxr\soloud_sfxr.cpp" />
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\src\audiosource\speech\darray.cpp" />
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\src\audiosource\speech\klatt.cpp" />
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\src\audiosource\speech\resonator.cpp" />
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\src\audiosource\speech\soloud_speech.cpp" />
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\src\audiosource\speech\tts.cpp" />
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\src\audiosource\tedsid\sid.cpp" />
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\src\audiosource\tedsid\soloud_tedsid.cpp" />
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\src\audiosource\tedsid\ted.cpp" />
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\src\audiosource\vic\soloud_vic.cpp" />
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\src\audiosource\vizsn\soloud_vizsn.cpp" />
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\src\audiosource\wav\dr_impl.cpp" />
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\src\audiosource\wav\soloud_wav.cpp" />
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\src\audiosource\wav\soloud_wavstream.cpp" />
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\src\audiosource\wav\stb_vorbis.c" />
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\src\backend\null\soloud_null.cpp" />
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\src\backend\winmm\soloud_winmm.cpp" />
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\src\filter\soloud_bassboostfilter.cpp" />
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\src\filter\soloud_biquadresonantfilter.cpp" />
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\src\filter\soloud_dcremovalfilter.cpp" />
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\src\filter\soloud_echofilter.cpp" />
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\src\filter\soloud_fftfilter.cpp" />
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\src\filter\soloud_flangerfilter.cpp" />
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\src\filter\soloud_lofifilter.cpp" />
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\src\filter\soloud_robotizefilter.cpp" />
+    <ClCompile Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\exts\soloud\src\filter\soloud_waveshaperfilter.cpp" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="A:\Users\amthe\OneDrive\Dokument\GitHub\LabEngineComponentSys\build\ZERO_CHECK.vcxproj">
-      <Project>{C9317BFF-DDCD-33DE-B45E-07DC9FBFDC7D}</Project>
+    <ProjectReference Include="C:\Users\thesee-3-local\Documents\GitHub\s0011e-game-engine-Windmix\build\ZERO_CHECK.vcxproj">
+      <Project>{F6716682-69CD-3883-962A-16121919D693}</Project>
       <Name>ZERO_CHECK</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>

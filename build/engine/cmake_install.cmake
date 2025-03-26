@@ -1,8 +1,8 @@
-# Install script for directory: A:/Users/amthe/OneDrive/Dokument/GitHub/LabEngineComponentSys/engine
+# Install script for directory: C:/Users/thesee-3-local/Documents/GitHub/s0011e-game-engine-Windmix/engine
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "A:/Program Files (x86)/engine-lab-env")
+  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/engine-lab-env")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -34,14 +34,8 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("A:/Users/amthe/OneDrive/Dokument/GitHub/LabEngineComponentSys/build/engine/core/cmake_install.cmake")
-  include("A:/Users/amthe/OneDrive/Dokument/GitHub/LabEngineComponentSys/build/engine/render/cmake_install.cmake")
+  include("C:/Users/thesee-3-local/Documents/GitHub/s0011e-game-engine-Windmix/build/engine/core/cmake_install.cmake")
+  include("C:/Users/thesee-3-local/Documents/GitHub/s0011e-game-engine-Windmix/build/engine/render/cmake_install.cmake")
 
 endif()
 
-string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
-       "${CMAKE_INSTALL_MANIFEST_FILES}")
-if(CMAKE_INSTALL_LOCAL_ONLY)
-  file(WRITE "A:/Users/amthe/OneDrive/Dokument/GitHub/LabEngineComponentSys/build/engine/install_local_manifest.txt"
-     "${CMAKE_INSTALL_MANIFEST_CONTENT}")
-endif()
