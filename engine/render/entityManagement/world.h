@@ -970,7 +970,7 @@ inline Entity* World::CreatePathNode(float xOffset, float yOffset, float zOffset
     node->AddComponent(NodeComp, ComponentType::NAVNODE, EntityType::Node);
     for (int i = 0; i < sizeof(EndPoints) / sizeof(glm::vec3); i++)
     {
-        NodeComp->EndPoints[i];
+        NodeComp->EndPoints[i] = EndPoints[i];
     }
 
     for (int i = 0; i < sizeof(colComp->EndPointsNodes) / sizeof(glm::vec3); i++)
