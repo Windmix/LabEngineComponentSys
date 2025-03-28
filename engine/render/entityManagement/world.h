@@ -31,7 +31,7 @@ public:
 
 
     PureEntityData* pureEntityData;
-   
+
 
     //saving for destroyed ships
     std::queue<uint32_t> savedEnemyIDs;
@@ -57,7 +57,7 @@ public:
     // Update all entities
     void Update(float dt);
 
-   
+
     // Destroy an entity and deallocate all components
     void DestroyEntity(uint32_t entityId, EntityType eType);
     void DestroyShip(uint32_t shipId, EntityType);
@@ -84,8 +84,6 @@ private:
     void drawNode(Entity* entity);
     void draw(Entity* entity);
     void updateCamera(Entity* entity, float dt);
-
-    void HandleAsteroidHit(Entity* entity, Components::ParticleEmitterComponent* particleEmit);
 };
 
 
@@ -95,8 +93,8 @@ static World* _instance; // singleton
 inline World::World()
 {
 
-   pureEntityData = PureEntityData::instance();
-   respawnTimer = 3.0f;
+    pureEntityData = PureEntityData::instance();
+    respawnTimer = 3.0f;
 
 }
 
@@ -107,20 +105,20 @@ inline World::~World()
 
 inline World* World::instance()
 {
-    if (!_instance) 
+    if (!_instance)
     {
         _instance = new World();
     }
     return _instance;
 }
-inline void World::destroy() 
+inline void World::destroy()
 {
     if (_instance)
     {
         delete _instance;
         _instance = nullptr;
     }
-    
+
 }
 
 inline Entity* World::createEntity(EntityType etype, bool isRespawning)
@@ -144,7 +142,7 @@ inline Entity* World::createEntity(EntityType etype, bool isRespawning)
 
         entity->id = count; // This ensures sequential IDs per type
     }
-    else if(entity->eType == EntityType::SpaceShip && isRespawning)
+    else if (entity->eType == EntityType::SpaceShip && isRespawning)
     {
         entity->id = savedIDs.front();
         savedIDs.pop();
@@ -187,29 +185,29 @@ inline void World::Update(float dt)
     {
         UpdateAsteroid(asteroid, dt);
     }
-  
+
     for (auto ship : pureEntityData->ships)
     {
         UpdateAiShip(ship, dt);
         UpdateShip(ship, dt);
         updateCamera(ship, dt);
-        
-       
+
+
     }
-  
+
     for (auto node : pureEntityData->nodes)
     {
         UpdateNode(node, dt);
     }
-   
+
 
     //draw Everything
     for (auto entity : pureEntityData->entities)
     {
         draw(entity);
     }
- 
-    
+
+
 }
 
 inline void World::DestroyShip(uint32_t shipId, EntityType eType)
@@ -298,12 +296,12 @@ inline void World::DestroyShip(uint32_t shipId, EntityType eType)
 inline void World::DestroyEntity(uint32_t entityId, EntityType eType)
 {
     auto it = std::find_if(pureEntityData->entities.begin(), pureEntityData->entities.end(), [entityId, eType](Entity* entity)
-    {
+        {
             return entity->id == entityId && entity->eType == eType;
-    });
-    
-    
-   
+        });
+
+
+
 
     if (it != pureEntityData->entities.end())
     {
@@ -361,7 +359,7 @@ inline void World::DestroyEntity(uint32_t entityId, EntityType eType)
                 Render::ParticleSystem::Instance()->RemoveEmitter(particleEmitterComp->particleEmitterLeft);
                 Render::ParticleSystem::Instance()->RemoveEmitter(particleEmitterComp->particleEmitterRight);
 
-               
+
                 ChunkOfPartcles.Deallocate(particleEmitterComp->particleCanonLeft);
                 ChunkOfPartcles.Deallocate(particleEmitterComp->particleCanonRight);
 
@@ -370,9 +368,9 @@ inline void World::DestroyEntity(uint32_t entityId, EntityType eType)
 
                 particleEmitterChunk.Deallocate(particleEmitterComp);
             }
-            
-       
-          
+
+
+
         }
 
 
@@ -380,11 +378,11 @@ inline void World::DestroyEntity(uint32_t entityId, EntityType eType)
         entityChunk.Deallocate(entityToDelete);
 
         // Remove the entities from the entity vector
-       pureEntityData->entities.erase(it);
-      
-       
+        pureEntityData->entities.erase(it);
 
-       
+
+
+
     }
 
 }
@@ -397,7 +395,7 @@ inline void World::Cleanup()
     {
         for (auto* component : entity->components)
         {
-            if (component) 
+            if (component)
             {
                 // Handle component deallocation for each type
                 if (auto* transformComp = dynamic_cast<Components::TransformComponent*>(component))
@@ -510,66 +508,66 @@ inline  Entity* World::CreatePlayerShip(bool isRespawning)
         glm::vec3(0.0, 0.0, 0.3),
         glm::vec3(0.0, -3.0,20.0),
 
-       // up rays
-       glm::vec3(0.0, 0.0, 0.3), 
-       glm::vec3(0.0, 7.0, 20.0),
+        // up rays
+        glm::vec3(0.0, 0.0, 0.3),
+        glm::vec3(0.0, 7.0, 20.0),
 
-       // down rays
-       glm::vec3(0.0, 0.0, 0.3), 
-       glm::vec3(0.0, -7.0, 20.0), 
+        // down rays
+        glm::vec3(0.0, 0.0, 0.3),
+        glm::vec3(0.0, -7.0, 20.0),
 
-       // Forward rays L
-       glm::vec3(1.33578, 0.0, 0.3),
-       glm::vec3(1.33578, 0.0, 21.0),
+        // Forward rays L
+        glm::vec3(1.33578, 0.0, 0.3),
+        glm::vec3(1.33578, 0.0, 21.0),
 
-       glm::vec3(1.33578, 0.0, 0.3),
-       glm::vec3(1.33578, 3.0, 20.0),
+        glm::vec3(1.33578, 0.0, 0.3),
+        glm::vec3(1.33578, 3.0, 20.0),
 
-       glm::vec3(1.33578, 0.0, 0.3),
-       glm::vec3(1.33578, -3.0,20.0),
+        glm::vec3(1.33578, 0.0, 0.3),
+        glm::vec3(1.33578, -3.0,20.0),
 
-       // up rays L
-       glm::vec3(1.33578, 0.0, 0.3),
-       glm::vec3(1.33578, 7.0, 20.0),
+        // up rays L
+        glm::vec3(1.33578, 0.0, 0.3),
+        glm::vec3(1.33578, 7.0, 20.0),
 
-       // down rays L
-       glm::vec3(1.33578, 0.0, 0.3),
-       glm::vec3(1.33578, -7.0, 20.0),
+        // down rays L
+        glm::vec3(1.33578, 0.0, 0.3),
+        glm::vec3(1.33578, -7.0, 20.0),
 
-       // Forward rays R
-       glm::vec3(-1.33578, 0.0, 0.3),
-       glm::vec3(-1.33578, 0.0, 21.0),
+        // Forward rays R
+        glm::vec3(-1.33578, 0.0, 0.3),
+        glm::vec3(-1.33578, 0.0, 21.0),
 
-       glm::vec3(-1.33578, 0.0, 0.3),
-       glm::vec3(-1.33578, 3.0, 20.0),
+        glm::vec3(-1.33578, 0.0, 0.3),
+        glm::vec3(-1.33578, 3.0, 20.0),
 
-       glm::vec3(-1.33578, 0.0, 0.3),
-       glm::vec3(-1.33578,-3.0,20.0),
+        glm::vec3(-1.33578, 0.0, 0.3),
+        glm::vec3(-1.33578,-3.0,20.0),
 
-       // up rays R
-       glm::vec3(-1.33578, 0.0, 0.3),
-       glm::vec3(-1.33578, 7.0, 20.0),
+        // up rays R
+        glm::vec3(-1.33578, 0.0, 0.3),
+        glm::vec3(-1.33578, 7.0, 20.0),
 
-       // down rays R
-       glm::vec3(-1.33578, 0.0, 0.3),
-       glm::vec3(-1.33578, -7.0, 20.0),
+        // down rays R
+        glm::vec3(-1.33578, 0.0, 0.3),
+        glm::vec3(-1.33578, -7.0, 20.0),
 
-       //left rays
-       glm::vec3(1.33578, 0.0, 0.088893),
-       glm::vec3(1.33578, 0.0, 21.0),
-
+        //left rays
         glm::vec3(1.33578, 0.0, 0.088893),
-       glm::vec3(10.0, 0.0, 21.0),
+        glm::vec3(1.33578, 0.0, 21.0),
 
-       //right rays
-       glm::vec3(-1.33578, 0.0, 0.088893),
-       glm::vec3(-1.33578, 0.0, 21.0),
+         glm::vec3(1.33578, 0.0, 0.088893),
+        glm::vec3(10.0, 0.0, 21.0),
 
+        //right rays
         glm::vec3(-1.33578, 0.0, 0.088893),
-       glm::vec3(-10.0, 0.0, 21.0),
+        glm::vec3(-1.33578, 0.0, 21.0),
+
+         glm::vec3(-1.33578, 0.0, 0.088893),
+        glm::vec3(-10.0, 0.0, 21.0),
 
     };
-    
+
 
     Entity* spaceship;
 
@@ -950,9 +948,10 @@ inline Entity* World::CreatePathNode(float xOffset, float yOffset, float zOffset
 
         glm::vec3(0.0f, 0.0f, -1.0f),  // backward
         glm::vec3(0.0f, 0.0f, 1.0f),  // forward
-       
-        
+
+
     };
+
 
     Entity* node = createEntity(EntityType::Node, false);
     Components::ColliderComponent* colComp = colliderChunk.Allocate();
@@ -965,7 +964,7 @@ inline Entity* World::CreatePathNode(float xOffset, float yOffset, float zOffset
     node->AddComponent(newTransform, ComponentType::TRANSFORM, EntityType::Node);
     newTransform->transform[3] = glm::vec4(-100.0f + xOffset * deltaXYZ, -100.0f + yOffset * deltaXYZ, -100.0f + zOffset * deltaXYZ, 0);
 
-   
+
     Components::AINavNodeComponent* NodeComp = navNodeChunk.Allocate();
     node->AddComponent(NodeComp, ComponentType::NAVNODE, EntityType::Node);
     for (int i = 0; i < sizeof(EndPoints) / sizeof(glm::vec3); i++)
@@ -975,7 +974,6 @@ inline Entity* World::CreatePathNode(float xOffset, float yOffset, float zOffset
 
     for (int i = 0; i < sizeof(colComp->EndPointsNodes) / sizeof(glm::vec3); i++)
     {
-        bool hit = false;
         glm::vec3 pos = glm::vec3(newTransform->transform[3]);
         glm::vec3 dir = newTransform->transform * glm::vec4(glm::normalize(colComp->EndPointsNodes[i]), 0.0f);
         float len = glm::length(colComp->EndPointsNodes[i]);
@@ -987,12 +985,15 @@ inline Entity* World::CreatePathNode(float xOffset, float yOffset, float zOffset
         if (payload.hit)
         {
             Debug::DrawDebugText("Node_hit_asteroids", payload.hitPoint, glm::vec4(1, 1, 1, 1));
-            hit = true;
-        }
-        //if hit asteroid, one shot
-        if (hit)
-        {
-            NodeComp->isCollidedAsteroids = true;
+            for (auto entityIn : pureEntityData->Asteroids)
+            {
+                auto entComp = entityIn->GetComponent<Components::ColliderComponent>();
+                if (payload.collider == entComp->colliderID && entityIn->eType == EntityType::Asteroid)
+                {
+                    NodeComp->isCollidedAsteroids = true;
+
+                }
+            }
         }
 
     }
@@ -1003,7 +1004,7 @@ inline Entity* World::CreatePathNode(float xOffset, float yOffset, float zOffset
 
     return node;
 
-   
+
 }
 inline Entity* World::randomGetNode()
 {
@@ -1039,11 +1040,11 @@ inline Entity* World::getclosestNodeFromAIship(Entity* ship)
 
     return closestNode;
 
-    
+
 }
 inline void World::UpdateNode(Entity* entity, float dt)
 {
-    
+
     drawNode(entity);
 }
 inline void World::UpdateShip(Entity* entity, float dt)
@@ -1104,7 +1105,7 @@ inline void World::UpdateShip(Entity* entity, float dt)
             {
                 cameraComponent->camPos = glm::mix(cameraComponent->camPos, desiredCamPos, dt * cameraComponent->cameraSmoothFactor);
                 cameraComponent->theCam->view = glm::lookAt(cameraComponent->camPos, cameraComponent->camPos + glm::vec3(transformComponent->transform[2]), glm::vec3(transformComponent->transform[1]));
-            }        
+            }
             //particles for thruster of the ship
             const float thrusterPosOffset = 0.365f;
             particleComponent->particleEmitterLeft->data.origin = glm::vec4(glm::vec3(transformComponent->transform[3] + transformComponent->transform[0] * -thrusterPosOffset + transformComponent->transform[2] * particleComponent->emitterOffset), 1);
@@ -1152,48 +1153,70 @@ inline void World::UpdateShip(Entity* entity, float dt)
             glm::mat4 rotation = glm::mat4(transformComponent->orientation);
             bool hit = false;
 
+            bool colliderIsClose = false;
+            Entity* closeEntity;
+            Components::TransformComponent* closeTComp;
+
+            auto shipPos = glm::vec3(transformComponent->transform[3]);
+
+            for (auto entityIn : pureEntityData->Asteroids)
+            {
+                closeTComp = entityIn->GetComponent<Components::TransformComponent>();
+                auto closestPos = glm::vec3(closeTComp->transform[3]);
+
+                auto closestposLenght = glm::length(closestPos - shipPos);
+
+                if (closestposLenght < 8.0f && closeTComp != nullptr)
+                {
+
+                    colliderIsClose = true;
+                    closeEntity = entityIn;
+                    break;
+                }
+            }
+
             for (int i = 0; i < colliderComponent->colliderEndPoints.size(); i++)
             {
                 glm::vec3 pos = glm::vec3(transformComponent->transform[3]);
                 glm::vec3 dir = transformComponent->transform * glm::vec4(glm::normalize(colliderComponent->colliderEndPoints[i]), 0.0f);
                 float len = glm::length(colliderComponent->colliderEndPoints[i]);
-                Physics::RaycastPayload payload = Physics::Raycast(glm::vec3(transformComponent->transform[3]), dir, len);
-
                 // debug draw collision rays
                 int menuIsUsingRayCasts(Core::CVarReadInt(colliderComponent->r_Raycasts));
-                if (menuIsUsingRayCasts == 1.0f)
+
+                if (colliderIsClose)
                 {
-                    Debug::DrawLine(pos, pos + dir * len, 1.0f, glm::vec4(0, 1, 0, 1), glm::vec4(0, 1, 0, 1), Debug::RenderMode::AlwaysOnTop);
-                }
-
-
-                if (payload.hit)
-                {
-                    Debug::DrawDebugText("HIT", payload.hitPoint, glm::vec4(1, 1, 1, 1));
-
-                    for (auto entityIn : pureEntityData->Asteroids)
+                    if (menuIsUsingRayCasts == 1.0f)
                     {
-                        auto entComp = entityIn->GetComponent<Components::ColliderComponent>();
-                        if (payload.collider == entComp->colliderID && entityIn->eType == EntityType::Asteroid)
+                        Debug::DrawLine(pos, pos + dir * len, 1.0f, glm::vec4(0, 1, 0, 1), glm::vec4(0, 1, 0, 1), Debug::RenderMode::AlwaysOnTop);
+                    }
+                    Physics::RaycastPayload payload = Physics::Raycast(glm::vec3(transformComponent->transform[3]), dir, len);
+                    if (payload.hit)
+                    {
+                        Debug::DrawDebugText("HIT", payload.hitPoint, glm::vec4(1, 1, 1, 1));
+
+                        auto entComp = closeEntity->GetComponent<Components::ColliderComponent>();
+                        if (payload.collider == entComp->colliderID && closeEntity->eType == EntityType::Asteroid)
                         {
+                            // Stop particle emitters
                             particleComponent->particleCanonLeft->data.looping = 0;
                             particleComponent->particleCanonRight->data.looping = 0;
 
+                            // Save and flag for respawn
                             savedIDs.push(entity->id);
+                            entity->isRespawning = true;
 
-
+                            CreatePlayerShip(true);
                             DestroyShip(entity->id, entity->eType);
                             DestroyEntity(entity->id, entity->eType);
-                            CreatePlayerShip(true);
+
 
                             return;
                         }
+
                     }
-
                 }
-
             }
-      
+
 
             //glm::mat4 transform = transformComponent->transform;
             //glm::vec3 avoidanceOffset(0.0f);
@@ -1371,7 +1394,7 @@ inline void World::UpdateShip(Entity* entity, float dt)
             //    // Cooldown is over, stop avoiding and resume pathfinding
             //    entity->isAvoidingAsteroids = false;
             //}
-          
+
 
             //// Logic to determine avoidance actions
             //if (
@@ -1468,14 +1491,14 @@ inline void World::UpdateAiShip(Entity* entity, float dt)
         {
             entity->closestNodeFromShip = getclosestNodeFromAIship(entity);
             entity->closestNodeCalled = true;
-            
+
         }
 
         closeNodeTranscomp = entity->closestNodeFromShip->GetComponent<Components::TransformComponent>();
-     
+
         glm::vec3 currentPos = glm::vec3(transformComponent->transform[3]);
 
-     
+
 
         // If the ship hasn't reached the start node, go to start node
         if (!entity->hasReachedTheStartNode && !entity->isAvoidingAsteroids)
@@ -1576,7 +1599,7 @@ inline void World::UpdateAiShip(Entity* entity, float dt)
                 if (aiInputComponent->isForward)
                 {
                     aiInputComponent->currentSpeed = glm::min(aiInputComponent->currentSpeed + dt, 1.0f);
-                    
+
                 }
 
 
@@ -1715,40 +1738,61 @@ inline void World::UpdateAiShip(Entity* entity, float dt)
 
 
 
-           
-          
 
 
-         
-            
+
+
+
+
         }
+
+        bool colliderIsClose = false;
+        Entity* closeEntity;
+        Components::TransformComponent* closeTComp;
+
+        auto shipPos = glm::vec3(transformComponent->transform[3]);
+
+        for (auto entityIn : pureEntityData->Asteroids)
+        {
+            closeTComp = entityIn->GetComponent<Components::TransformComponent>();
+            auto closestPos = glm::vec3(closeTComp->transform[3]);
+
+            auto closestposLenght = glm::length(closestPos - shipPos);
+
+            if (closestposLenght < 8.0f && closeTComp != nullptr)
+            {
+
+                colliderIsClose = true;
+                closeEntity = entityIn;
+                break;
+            }
+        }
+
         for (int i = 0; i < colliderComponent->colliderEndPoints.size(); i++)
         {
             glm::vec3 pos = glm::vec3(transformComponent->transform[3]);
             glm::vec3 dir = transformComponent->transform * glm::vec4(glm::normalize(colliderComponent->colliderEndPoints[i]), 0.0f);
             float len = glm::length(colliderComponent->colliderEndPoints[i]);
-            Physics::RaycastPayload payload = Physics::Raycast(glm::vec3(transformComponent->transform[3]), dir, len);
-
             // debug draw collision rays
             int menuIsUsingRayCasts(Core::CVarReadInt(colliderComponent->r_Raycasts));
-            if (menuIsUsingRayCasts == 1.0f)
+
+            if (colliderIsClose)
             {
-                Debug::DrawLine(pos, pos + dir * len, 1.0f, glm::vec4(0, 1, 0, 1), glm::vec4(0, 1, 0, 1), Debug::RenderMode::AlwaysOnTop);
-            }
-
-
-            if (payload.hit)
-            {
-                Debug::DrawDebugText("HIT", payload.hitPoint, glm::vec4(1, 1, 1, 1));
-
-                for (auto entityIn : pureEntityData->Asteroids)
+                if (menuIsUsingRayCasts == 1.0f)
                 {
-                    auto entComp = entityIn->GetComponent<Components::ColliderComponent>();
-                    if (payload.collider == entComp->colliderID && entityIn->eType == EntityType::Asteroid)
+                    Debug::DrawLine(pos, pos + dir * len, 1.0f, glm::vec4(0, 1, 0, 1), glm::vec4(0, 1, 0, 1), Debug::RenderMode::AlwaysOnTop);
+                }
+                Physics::RaycastPayload payload = Physics::Raycast(glm::vec3(transformComponent->transform[3]), dir, len);
+                if (payload.hit)
+                {
+                    Debug::DrawDebugText("HIT", payload.hitPoint, glm::vec4(1, 1, 1, 1));
+
+                    auto entComp = closeEntity->GetComponent<Components::ColliderComponent>();
+                    if (payload.collider == entComp->colliderID && closeEntity->eType == EntityType::Asteroid)
                     {
-                       // Stop particle emitters
-                       particleComponent->particleCanonLeft->data.looping = 0;
-                       particleComponent->particleCanonRight->data.looping = 0;
+                        // Stop particle emitters
+                        particleComponent->particleCanonLeft->data.looping = 0;
+                        particleComponent->particleCanonRight->data.looping = 0;
 
                         // Save and flag for respawn
                         savedEnemyIDs.push(entity->id);
@@ -1760,12 +1804,14 @@ inline void World::UpdateAiShip(Entity* entity, float dt)
 
                         return;
                     }
-                }
 
+                }
             }
 
         }
-       
+
+
+
 
         //glm::mat4 transform = transformComponent->transform;
         //entity->isAvoidingAsteroids = false;
@@ -2004,11 +2050,11 @@ inline void World::UpdateAiShip(Entity* entity, float dt)
         //}
     }
 }
-inline void World::UpdateAsteroid(Entity* entity, float dt) 
+inline void World::UpdateAsteroid(Entity* entity, float dt)
 {
     if (entity->eType == EntityType::Asteroid) // asteroids
     {
-         auto transformComponent = entity->GetComponent<Components::TransformComponent>();
+        auto transformComponent = entity->GetComponent<Components::TransformComponent>();
         auto colliderComponent = entity->GetComponent<Components::ColliderComponent>();
         auto renderComponent = entity->GetComponent<Components::RenderableComponent>();
 
@@ -2017,10 +2063,10 @@ inline void World::UpdateAsteroid(Entity* entity, float dt)
 
         // Ensure that the rotation is preserved correctly and the matrix remains valid
         // This part normalizes the basis vectors (rows of the transform matrix)
-        transformComponent->transform = glm::mat4(glm::normalize(transformComponent->transform[0]), 
-                                                   glm::normalize(transformComponent->transform[1]), 
-                                                   glm::normalize(transformComponent->transform[2]), 
-                                                   transformComponent->transform[3]);
+        transformComponent->transform = glm::mat4(glm::normalize(transformComponent->transform[0]),
+            glm::normalize(transformComponent->transform[1]),
+            glm::normalize(transformComponent->transform[2]),
+            transformComponent->transform[3]);
 
         // Update the collider's transform with the updated mesh transform
         Physics::SetTransform(colliderComponent->colliderID, transformComponent->transform);
@@ -2077,7 +2123,7 @@ inline void World::drawNode(Entity* entity)
                 }
             }
         }
-       
+
         if (drawId < 0 && drawBool == 1)
         {
             glm::vec3 pos = glm::vec3(transformComponent->transform[3]);
@@ -2111,7 +2157,7 @@ inline void World::drawNode(Entity* entity)
             glm::vec3 dirZplus = transformComponent->transform * glm::vec4(glm::normalize(navNodeComponent->EndPoints[5]), 0.0f);
             float lenZplus = glm::length(navNodeComponent->EndPoints[5]);
             Debug::DrawLine(pos, pos + dirZplus * lenZplus, 1.0f, glm::vec4(0.4f, 0.4f, 1.5f, 1), glm::vec4(0.4f, 0.4f, 1.5f, 1), Debug::RenderMode::AlwaysOnTop);
-           // Debug::DrawDebugText(std::to_string(entity->id).c_str(), entity->GetComponent<Components::TransformComponent>()->transform[3], { 0.9f,0.9f,1,1 });
+            // Debug::DrawDebugText(std::to_string(entity->id).c_str(), entity->GetComponent<Components::TransformComponent>()->transform[3], { 0.9f,0.9f,1,1 });
         }
 
         // Physics::RaycastPayload payload = Physics::Raycast(glm::vec3(transformComponent->transform[3]), dir, len);
@@ -2131,7 +2177,7 @@ inline void World::draw(Entity* entity) // literally draw everything that render
 }
 inline void World::updateCamera(Entity* entity, float dt)
 {
-    
+
 
     if (entity->eType == EntityType::SpaceShip || entity->eType == EntityType::EnemyShip)
     {
@@ -2169,9 +2215,3 @@ inline void World::updateCamera(Entity* entity, float dt)
     }
 }
 
-inline void World::HandleAsteroidHit(Entity* entity, Components::ParticleEmitterComponent* particleEmit)
-{
-   
-
-   
-}
