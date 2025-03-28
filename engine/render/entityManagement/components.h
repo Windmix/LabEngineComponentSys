@@ -52,7 +52,7 @@ namespace Components
 		Physics::ColliderId colliderID;
 		glm::vec3 EndPointsNodes[6];
 		std::vector<glm::vec3> colliderEndPoints;  // Reserve space for 17 elements
-		std::vector<glm::vec3> rayCastPoints;
+		glm::vec3 rayCastPoints[50];
 
 
 		Core::CVar* r_Raycasts = Core::CVarCreate(Core::CVarType::CVar_Int, "r_Raycasts", "0");
