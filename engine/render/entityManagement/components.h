@@ -181,9 +181,10 @@ namespace Components
 	{
 	public:
 		static constexpr ComponentType TYPE = ComponentType::AI_CONTROLLER;
-		//Ai path
-		
 
+		BehaviorType behavior;
+		AIState currentState = AIState::Idle;
+		
 		//ship speed variables
 		float normalSpeed = 1.0f;
 		float boostSpeed = normalSpeed * 10.0f;
