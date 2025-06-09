@@ -129,7 +129,7 @@ LoadColliderMesh(std::string path)
     catch (const std::exception& err)
     {
         printf(err.what());
-        assert(false);
+        //assert(false);
         colliderMeshPool.Deallocate(id);
         return ColliderMeshId();
     }

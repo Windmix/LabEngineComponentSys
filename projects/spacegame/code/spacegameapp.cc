@@ -56,7 +56,7 @@ SpaceGameApp::Open()
     _CrtDumpMemoryLeaks();
 	App::Open();
 	this->window = new Display::Window;
-    this->window->SetSize(2500, 2000);
+    this->window->SetSize(1920, 1080);
 
     if (this->window->Open())
 	{
