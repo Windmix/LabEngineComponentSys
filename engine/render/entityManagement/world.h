@@ -150,12 +150,19 @@ inline Entity* World::createEntity(EntityType etype, bool isRespawning)
         entity->id = savedIDs.front();
         savedIDs.pop();
         pureEntityData->ships.push_back(entity);
+
+        //Random positions
+       auto transformComponent =  entity->GetComponent<Components::TransformComponent>();
+       int randomIndex = rand() % pureEntityData->nodes.size();
+       transformComponent->transform[3] = pureEntityData->nodes[randomIndex]->GetComponent<Components::TransformComponent>()->transform[3];
+
     }
     else if (entity->eType == EntityType::EnemyShip && isRespawning)
     {
         entity->id = savedEnemyIDs.front();
         savedEnemyIDs.pop();
         pureEntityData->ships.push_back(entity);
+
     }
     pureEntityData->entities.push_back(entity);
 
@@ -579,15 +586,19 @@ inline  Entity* World::CreatePlayerShip(bool isRespawning)
         spaceship = createEntity(EntityType::SpaceShip, isRespawning);
 
 
+
     }
     else
     {
         spaceship = createEntity(EntityType::SpaceShip, isRespawning);
     }
-
+    //add random position from the nodes placed out
+    int randomIndex = rand() % pureEntityData->nodes.size();
+    auto nodeTransformComponent = pureEntityData->nodes[randomIndex]->GetComponent<Components::TransformComponent>();
     Components::TransformComponent* newTransform = transformChunk.Allocate();
+    newTransform->transform[3] = nodeTransformComponent->transform[3];
+
     spaceship->AddComponent(newTransform, ComponentType::TRANSFORM, EntityType::SpaceShip);
-    newTransform->transform[3] = glm::vec4(0.0f, 0.0f + 10.0f, 0.0f, 0.0f);
 
     Components::RenderableComponent* renderable = renderableChunk.Allocate(shipModel);
     spaceship->AddComponent(renderable, ComponentType::RENDERABLE, EntityType::SpaceShip);
@@ -784,9 +795,17 @@ inline  Entity* World::CreateEnemyShip(bool isRespawning)
         AIspaceship = createEntity(EntityType::EnemyShip, isRespawning);
     }
 
+   
+
+    //add random position from the nodes placed out
+    int randomIndex = rand() % pureEntityData->nodes.size();
+    auto nodeTransformComponent = pureEntityData->nodes[randomIndex]->GetComponent<Components::TransformComponent>();
     Components::TransformComponent* newTransform = transformChunk.Allocate();
+    newTransform->transform[3] = nodeTransformComponent->transform[3];
+
     AIspaceship->AddComponent(newTransform, ComponentType::TRANSFORM, EntityType::EnemyShip);
-    /* newTransform->transform[3] = glm::vec4(0.0f + i*2, 0.0f + i*2, 0.0f + i*2, 0.0f);*/
+
+   
 
     Components::RenderableComponent* renderable = renderableChunk.Allocate(shipModel);
     AIspaceship->AddComponent(renderable, ComponentType::RENDERABLE, EntityType::EnemyShip);
@@ -1262,71 +1281,6 @@ inline void World::UpdateShip(Entity* entity, float dt)
             glm::vec3 dEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[9], 1.0f));
             float dLength = glm::length(dEnd - dStart);
 
-
-            //// === Forward rays (Left) ===
-            //glm::vec3 flStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[10], 1.0f));
-            //glm::vec3 flEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[11], 1.0f));
-            //float flLength = glm::length(flEnd - flStart);
-
-
-
-            //glm::vec3 fl1Start = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[12], 1.0f));
-            //glm::vec3 fl1End = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[13], 1.0f));
-            //float fl1Length = glm::length(fl1End - fl1Start);
-
-
-
-            //glm::vec3 fl2Start = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[14], 1.0f));
-            //glm::vec3 fl2End = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[15], 1.0f));
-            //float fl2Length = glm::length(fl2End - fl2Start);
-
-
-            //// === Up ray (Left) ===
-            //glm::vec3 ulStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[16], 1.0f));
-            //glm::vec3 ulEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[17], 1.0f));
-            //float ulLength = glm::length(ulEnd - ulStart);
-
-            //
-
-            //// === Down ray (Left) ===
-            //glm::vec3 dlStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[18], 1.0f));
-            //glm::vec3 dlEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[19], 1.0f));
-            //float dlLength = glm::length(dlEnd - dlStart);
-
-
-            //// === Forward rays (Right) ===
-            //glm::vec3 frStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[20], 1.0f));
-            //glm::vec3 frEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[21], 1.0f));
-            //float frLength = glm::length(frEnd - frStart);
-
-            //
-
-            //glm::vec3 fr1Start = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[22], 1.0f));
-            //glm::vec3 fr1End = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[23], 1.0f));
-            //float fr1Length = glm::length(fr1End - fr1Start);
-
-
-
-            //glm::vec3 fr2Start = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[24], 1.0f));
-            //glm::vec3 fr2End = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[25], 1.0f));
-            //float fr2Length = glm::length(fr2End - fr2Start);
-
-
-            //// === Up ray (Right) ===
-            //glm::vec3 urStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[26], 1.0f));
-            //glm::vec3 urEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[27], 1.0f));
-            //float urLength = glm::length(urEnd - urStart);
-
-            //pur = Physics::Raycast(urStart, urEnd, urLength);
-
-            //// === Down ray (Right) ===
-            //glm::vec3 drStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[28], 1.0f));
-            //glm::vec3 drEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[29], 1.0f));
-            //float drLength = glm::length(drEnd - drStart);
-
-
-
-
             // === Left rays ===
             glm::vec3 lStart = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[30], 1.0f));
             glm::vec3 lEnd = glm::vec3(transform * glm::vec4(colliderComponent->rayCastPoints[31], 1.0f));
@@ -1384,15 +1338,6 @@ inline void World::UpdateShip(Entity* entity, float dt)
                     pf2 = Physics::Raycast(f2Start, f2End, f2Length);
                     pu = Physics::Raycast(uStart, uEnd, uLength);
                     pd = Physics::Raycast(dStart, dEnd, dLength);
-                    /*pfl = Physics::Raycast(flStart, flEnd, flLength);
-                    pfl1 = Physics::Raycast(fl1Start, fl1End, fl1Length);
-                    pfl2 = Physics::Raycast(fl2Start, fl2End, fl2Length);
-                    pul = Physics::Raycast(ulStart, ulEnd, ulLength);
-                    pdl = Physics::Raycast(dlStart, dlEnd, dlLength);
-                    pfr = Physics::Raycast(frStart, frEnd, frLength);
-                    pfr1 = Physics::Raycast(fr1Start, fr1End, fr1Length);
-                    pfr2 = Physics::Raycast(fr2Start, fr2End, fr2Length);
-                    pdr = Physics::Raycast(drStart, drEnd, drLength);*/
                     pl = Physics::Raycast(lStart, lEnd, lLength);
                     pl1 = Physics::Raycast(l1Start, l1End, l1Length);
                     pr = Physics::Raycast(rStart, rEnd, rLength);
@@ -1407,16 +1352,6 @@ inline void World::UpdateShip(Entity* entity, float dt)
                     Debug::DrawLine(f2Start, f2End, 1.0f, glm::vec4(1), glm::vec4(1), Debug::RenderMode::AlwaysOnTop);
                     Debug::DrawLine(uStart, uEnd, 1.0f, glm::vec4(0, 1, 1, 1), glm::vec4(0, 1, 1, 1), Debug::RenderMode::AlwaysOnTop);
                     Debug::DrawLine(dStart, dEnd, 1.0f, glm::vec4(0, 1, 1, 1), glm::vec4(0, 1, 1, 1), Debug::RenderMode::AlwaysOnTop);
-                    /*Debug::DrawLine(flStart, flEnd, 1.0f, glm::vec4(0, 0, 1, 1), glm::vec4(0, 0, 1, 1), Debug::RenderMode::AlwaysOnTop);
-                     Debug::DrawLine(fl1Start, fl1End, 1.0f, glm::vec4(0, 0, 1, 1), glm::vec4(0, 0, 1, 1), Debug::RenderMode::AlwaysOnTop);
-                     Debug::DrawLine(fl2Start, fl2End, 1.0f, glm::vec4(0, 0, 1, 1), glm::vec4(0, 0, 1, 1), Debug::RenderMode::AlwaysOnTop);
-                     Debug::DrawLine(ulStart, ulEnd, 1.0f, glm::vec4(0, 1, 1, 1), glm::vec4(0, 1, 1, 1), Debug::RenderMode::AlwaysOnTop);
-                     Debug::DrawLine(dlStart, dlEnd, 1.0f, glm::vec4(0, 1, 1, 1), glm::vec4(0, 1, 1, 1), Debug::RenderMode::AlwaysOnTop);
-                     Debug::DrawLine(frStart, frEnd, 1.0f, glm::vec4(1, 1, 0, 1), glm::vec4(1, 1, 0, 1), Debug::RenderMode::AlwaysOnTop);
-                     Debug::DrawLine(fr1Start, fr1End, 1.0f, glm::vec4(1, 1, 0, 1), glm::vec4(1, 1, 0, 1), Debug::RenderMode::AlwaysOnTop);
-                     Debug::DrawLine(fr2Start, fr2End, 1.0f, glm::vec4(1, 1, 0, 1), glm::vec4(1, 1, 0, 1), Debug::RenderMode::AlwaysOnTop);
-                     Debug::DrawLine(urStart, urEnd, 1.0f, glm::vec4(0, 1, 1, 1), glm::vec4(0, 1, 1, 1), Debug::RenderMode::AlwaysOnTop);
-                     Debug::DrawLine(drStart, drEnd, 1.0f, glm::vec4(0, 1, 1, 1), glm::vec4(0, 1, 1, 1), Debug::RenderMode::AlwaysOnTop);*/
                     Debug::DrawLine(lStart, lEnd, 1.0f, glm::vec4(1, 0, 0, 1), glm::vec4(1, 0, 0, 1), Debug::RenderMode::AlwaysOnTop);
                     Debug::DrawLine(l1Start, l1End, 1.0f, glm::vec4(1, 0, 0, 1), glm::vec4(1, 0, 0, 1), Debug::RenderMode::AlwaysOnTop);
                     Debug::DrawLine(rStart, rEnd, 1.0f, glm::vec4(1, 0, 1, 1), glm::vec4(1, 0, 1, 1), Debug::RenderMode::AlwaysOnTop);
@@ -1502,6 +1437,7 @@ inline void World::UpdateAiShip(Entity* entity, float dt)
 
         if (!aiInputComponent || !transformComponent || !colliderComponent)
             return;
+
         switch (aiInputComponent->currentState)
         {
         case AIState::Roaming:
