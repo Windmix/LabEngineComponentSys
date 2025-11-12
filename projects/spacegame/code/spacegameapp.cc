@@ -160,7 +160,7 @@ SpaceGameApp::Run()
     }
 
     //create aiships
-    for (int i = 0; i < 20; i++)
+    for (int i = 0; i < 3; i++)
     {
         
         auto aiShips = world->CreateEnemyShip(false);

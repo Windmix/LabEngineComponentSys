@@ -132,6 +132,12 @@ namespace Components
 		Render::ParticleEmitter* particleCanonRight = nullptr;
 		float emitterOffset = -0.5f;
 		float canonEmitterOffset = 0.5f;
+
+		glm::vec3 leftCanonPos;   // current position of left cannon particle
+		glm::vec3 rightCanonPos;  // current position of right cannon particle
+		float travelLeft = 0.0f;  // distance traveled by left particle
+		float travelRight = 0.0f; // distance traveled by right particle
+		bool hasFired = false;
 	
 		// Allow external access to the emitter data (either as public member or getter method)
 	
