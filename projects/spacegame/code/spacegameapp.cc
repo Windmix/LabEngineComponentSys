@@ -159,6 +159,11 @@ SpaceGameApp::Run()
         lights[i] = Render::LightServer::CreatePointLight(translation, color, Core::RandomFloat() * 4.0f, 1.0f + (15 + Core::RandomFloat() * 10.0f));
     }
 
+    //must create ship first before ai ship otherwise it breaks
+    //create ship
+    auto ship = world->CreatePlayerShip(false);
+    world->pureEntityData->ships.push_back(ship);
+
     //create aiships
     for (int i = 0; i < 3; i++)
     {
@@ -166,9 +171,7 @@ SpaceGameApp::Run()
         auto aiShips = world->CreateEnemyShip(false);
         world->pureEntityData->ships.push_back(aiShips);
     }
-    //create ship
-    auto ship = world->CreatePlayerShip(false);
-    world->pureEntityData->ships.push_back(ship);
+
 
    
 

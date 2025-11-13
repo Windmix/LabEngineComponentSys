@@ -197,14 +197,24 @@ inline void World::Update(float dt)
         UpdateAsteroid(asteroid, dt);
     }
 
-    for (auto ship : pureEntityData->ships)
+    for (int i = 0; i < pureEntityData->ships.size(); )
     {
+        Entity* ship = pureEntityData->ships[i];
+
         UpdateAiShip(ship, dt);
         UpdateShip(ship, dt);
         updateCamera(ship, dt);
 
-
+        if (ship->isDestroyed)
+        {
+            pureEntityData->ships.erase(pureEntityData->ships.begin() + i);
+        }
+        else {
+            ++i;
+        }
     }
+
+   
 
     for (auto node : pureEntityData->nodes)
     {
@@ -232,6 +242,7 @@ inline void World::DestroyShip(uint32_t shipId, EntityType eType)
     if (it != pureEntityData->ships.end())
     {
         Entity* entityToDelete = *it;
+        entityToDelete->isDestroyed = true;
 
         // Deallocate all components using the appropriate chunk allocators
         for (auto* component : entityToDelete->components)
@@ -1169,41 +1180,27 @@ inline void World::UpdateShip(Entity* entity, float dt)
 
             const float maxDistance = 5000.0f;
 
-            if (isSpacePressed >= 1.0f)
+            static bool lastSpaceState = false;
+            bool currentSpaceState = (isSpacePressed >= 1.0f);
+
+            // Trigger firing only on key press
+            if (currentSpaceState && !lastSpaceState)
             {
                 particleComponent->particleCanonLeft->data.looping = 1;
                 particleComponent->particleCanonRight->data.looping = 1;
                 particleComponent->hasFired = true;
             }
+
+            // Save state for next frame
+            lastSpaceState = currentSpaceState;
+
             // Only set direction when starting a new shot
             if (particleComponent->hasFired)
             {
-                Entity* closeEntity = nullptr;
-                Components::TransformComponent* closeTComp = nullptr;
-                bool colliderIsClose = false;
+                Entity* closestEntity = nullptr;
+                Components::TransformComponent* closestTComp = nullptr;
 
-                // --- Check for nearby ships (potential targets) ---
-                for (auto entityIn : pureEntityData->ships)
-                {
-                    // Only check against player or other AI
-                    if (entityIn->eType == EntityType::SpaceShip)
-                        continue;
-
-                    closeTComp = entityIn->GetComponent<Components::TransformComponent>();
-                    if (!closeTComp) continue;
-
-                    auto targetPos = glm::vec3(closeTComp->transform[3]);
-                    float dist = glm::length(targetPos - glm::vec3(transformComponent->transform[3]));
-
-                    if (dist < 10.0f)
-                    {
-                        colliderIsClose = true;
-                        closeEntity = entityIn;
-                        break;
-                    }
-                }
-
-                // --- Update direction only once when firing ---
+                // --- Update direction once per shot (based on ship rotation) ---
                 if (particleComponent->travelLeft == 0.0f)
                     particleComponent->particleCanonLeft->data.dir = glm::vec4(-glm::vec3(transformComponent->transform[2]), 0);
 
@@ -1216,68 +1213,104 @@ inline void World::UpdateShip(Entity* entity, float dt)
                 float speedLeft = particleComponent->particleCanonLeft->data.startSpeed;
                 float speedRight = particleComponent->particleCanonRight->data.startSpeed;
 
-                // --- Move emitters (simulate bullet travel) ---
+                // --- Simulate bullet travel ---
                 particleComponent->leftCanonPos += leftDir * speedLeft * dt;
                 particleComponent->rightCanonPos += rightDir * speedRight * dt;
 
-                // --- Track travel distance ---
                 particleComponent->travelLeft += glm::abs(speedLeft) * dt * 500.0f;
                 particleComponent->travelRight += glm::abs(speedRight) * dt * 500.0f;
 
-                // --- Raycast from cannon to detect hit ---
-                Physics::RaycastPayload leftHit = Physics::Raycast(particleComponent->leftCanonPos, leftDir, 20.0f);
-                Physics::RaycastPayload rightHit = Physics::Raycast(particleComponent->rightCanonPos, rightDir, 20.0f);
-
-                if (leftHit.hit || rightHit.hit)
+                // --- Find closest target ship ---
+                float minDistSq = std::numeric_limits<float>::max();
+                for (auto entityIn : pureEntityData->ships)
                 {
-                    // If hit, verify target
-                    if (colliderIsClose && closeEntity)
-                    {
-                        auto targetCollider = closeEntity->GetComponent<Components::ColliderComponent>();
-                        if (targetCollider &&
-                            (leftHit.collider == targetCollider->colliderID ||
-                                rightHit.collider == targetCollider->colliderID) && closeEntity->eType == EntityType::EnemyShip)
-                        {
-                            std::cout << "AI CANNON HIT Enemy SHIP! " << closeEntity->id << std::endl;
+                    if (entityIn->eType == EntityType::SpaceShip) // skip self/player
+                        continue;
 
-                            // Destroy target ship
-                            savedIDs.push(closeEntity->id);
-                            closeEntity->isRespawning = true;
-                            CreateEnemyShip(closeEntity->isRespawning);
-                            DestroyShip(closeEntity->id, closeEntity->eType);
-                            DestroyEntity(closeEntity->id, closeEntity->eType);
+                    auto tComp = entityIn->GetComponent<Components::TransformComponent>();
+                    if (!tComp) continue;
+
+                    glm::vec3 targetPos = glm::vec3(tComp->transform[3]);
+                    glm::vec3 originAvg = 0.5f * (
+                        glm::vec3(particleComponent->particleCanonLeft->data.origin) +
+                        glm::vec3(particleComponent->particleCanonRight->data.origin)
+                        );
+
+                    float distSq = glm::length2(targetPos - originAvg);
+                    if (distSq < minDistSq)
+                    {
+                        minDistSq = distSq;
+                        closestEntity = entityIn;
+                        closestTComp = tComp;
+                    }
+                }
+
+                bool colliderIsClose = (closestEntity && glm::sqrt(minDistSq) < 1.5f);
+
+                glm::vec3 leftStart = particleComponent->leftCanonPos;
+                glm::vec3 rightStart = particleComponent->rightCanonPos;
+
+                // --- Debug rays to visualize travel ---
+                Debug::DrawLine(leftStart, leftStart + leftDir * 200.0f, 1.0f, glm::vec4(1, 0, 0, 1), glm::vec4(1, 0, 0, 1));
+                Debug::DrawLine(rightStart, rightStart + rightDir * 200.0f, 1.0f, glm::vec4(0, 1, 0, 1), glm::vec4(0, 1, 0, 1));
+
+                // --- Now target the enemy collider endpoints ---
+                if (closestEntity)
+                {
+                    auto enemyCollider = closestEntity->GetComponent<Components::ColliderComponent>();
+                    if (enemyCollider)
+                    {
+                        for (auto& endpoint : enemyCollider->colliderEndPoints)
+                        {
+                            glm::vec3 worldEndpoint = glm::vec3(closestTComp->transform * glm::vec4(endpoint, 1.0f));
+
+                            // Pick cannon origin (alternate for left/right)
+                            glm::vec3 cannonOrigin = glm::vec3(particleComponent->particleCanonLeft->data.origin);
+                            glm::vec3 dirToEndpoint = glm::normalize(worldEndpoint - cannonOrigin);
+                            float len = glm::length(worldEndpoint - cannonOrigin);
+
+                            Debug::DrawLine(cannonOrigin, cannonOrigin + dirToEndpoint * len, 1.0f,
+                                glm::vec4(0, 0, 1, 1), glm::vec4(0, 0, 1, 1));
                         }
                     }
-
-                    // Reset after hit
-                    particleComponent->leftCanonPos = leftOrigin;
-                    particleComponent->rightCanonPos = rightOrigin;
-                    particleComponent->travelLeft = 0.0f;
-                    particleComponent->travelRight = 0.0f;
-                    particleComponent->hasFired = false;
-                    particleComponent->particleCanonLeft->data.looping = 0;
-                    particleComponent->particleCanonRight->data.looping = 0;
+                   
                 }
+                 if (colliderIsClose && closestEntity->eType == EntityType::EnemyShip && !closestEntity->isRespawning)
+                    {
+
+                        std::cout << "AI CANNON HIT ENEMY ENDPOINT! Ship ID: " << closestEntity->id << std::endl;
+                     
+
+                        particleComponent->hasFired = false;
+                        particleComponent->leftCanonPos = leftOrigin;
+                        particleComponent->rightCanonPos = rightOrigin;
+                        particleComponent->travelLeft = 0.0f;
+                        particleComponent->travelRight = 0.0f;
+                        particleComponent->hasFired = false;
+                        particleComponent->particleCanonLeft->data.looping = 0;
+                        particleComponent->particleCanonRight->data.looping = 0;
+
+                        // Respawn + destroy logic
+                        savedEnemyIDs.push(closestEntity->id);
+                        closestEntity->isRespawning = true;
+                        CreateEnemyShip(true);
+                        DestroyShip(closestEntity->id, closestEntity->eType);
+                        DestroyEntity(closestEntity->id, closestEntity->eType);
+         
+                       
+                    }
 
                 // --- Reset if exceeded max travel distance ---
-                if (particleComponent->travelLeft >= maxDistance)
+                if (particleComponent->travelLeft >= maxDistance || particleComponent->travelRight >= maxDistance)
                 {
                     particleComponent->leftCanonPos = leftOrigin;
-                    particleComponent->travelLeft = 0.0f;
-                    particleComponent->hasFired = false;
-                    particleComponent->particleCanonLeft->data.looping = 0;
-                    particleComponent->particleCanonRight->data.looping = 0;
-                }
-                if (particleComponent->travelRight >= maxDistance)
-                {
                     particleComponent->rightCanonPos = rightOrigin;
+                    particleComponent->travelLeft = 0.0f;
                     particleComponent->travelRight = 0.0f;
                     particleComponent->hasFired = false;
                     particleComponent->particleCanonLeft->data.looping = 0;
                     particleComponent->particleCanonRight->data.looping = 0;
                 }
-
-                
             }
 
             // Update emitter origins
@@ -1287,17 +1320,7 @@ inline void World::UpdateShip(Entity* entity, float dt)
             glm::vec3 leftDir = glm::normalize(glm::vec3(particleComponent->particleCanonLeft->data.dir));
             glm::vec3 rightDir = glm::normalize(glm::vec3(particleComponent->particleCanonRight->data.dir));
 
-            Debug::DrawLine(
-                glm::vec3(particleComponent->particleCanonLeft->data.origin),
-                glm::vec3(particleComponent->particleCanonLeft->data.origin) + leftDir * 0.5f,
-                1.0f, glm::vec4(0, 1, 0, 1), glm::vec4(0, 1, 0, 1)
-            );
-
-            Debug::DrawLine(
-                glm::vec3(particleComponent->particleCanonRight->data.origin),
-                glm::vec3(particleComponent->particleCanonRight->data.origin) + rightDir * 0.5f,
-                1.0f, glm::vec4(1, 0, 0, 1), glm::vec4(1, 0, 0, 1)
-            );
+            
 
             //check collisions asteroids
             glm::mat4 rotation = glm::mat4(transformComponent->orientation);
@@ -1886,15 +1909,15 @@ inline void World::wanderingState(Entity* entity, float dt)
             float rotationSpeed = 1.0f * dt;
             glm::quat newOrientation = glm::slerp(glm::quat(transformComponent->orientation), targetRotation, rotationSpeed);
 
-            // Update the ship's forward direction based on the new orientation
-            glm::vec3 newForward = newOrientation * currentForward;
-            aiInputComponent->rotationInputX = newForward.x;
-            aiInputComponent->rotationInputY = newForward.y;
-            aiInputComponent->rotationInputZ = newForward.z;
-            aiInputComponent->isForward = true; // Ensure the ship is moving forward
+            //// Update the ship's forward direction based on the new orientation
+            //glm::vec3 newForward = newOrientation * currentForward;
+            //aiInputComponent->rotationInputX = newForward.x;
+            //aiInputComponent->rotationInputY = newForward.y;
+            //aiInputComponent->rotationInputZ = newForward.z;
+            //aiInputComponent->isForward = true; // Ensure the ship is moving forward
 
-            // Update the ship's orientation
-            transformComponent->orientation = newOrientation;
+            //// Update the ship's orientation
+            //transformComponent->orientation = newOrientation;
         }
     }
 
@@ -1949,22 +1972,22 @@ inline void World::wanderingState(Entity* entity, float dt)
             }
 
 
-            // Create the target rotation quaternion based on the angle and axis
-            targetRotation = glm::angleAxis(angle, axis);
+            //// Create the target rotation quaternion based on the angle and axis
+            //targetRotation = glm::angleAxis(angle, axis);
 
-            // Interpolate between current and target rotation to smoothly turn
-            float rotationSpeed = 2.0 * dt;
-            glm::quat newOrientation = glm::slerp(glm::quat(transformComponent->orientation), targetRotation, rotationSpeed);
+            //// Interpolate between current and target rotation to smoothly turn
+            //float rotationSpeed = 2.0 * dt;
+            //glm::quat newOrientation = glm::slerp(glm::quat(transformComponent->orientation), targetRotation, rotationSpeed);
 
-            // Update the ship's forward direction based on the new orientation
-            glm::vec3 newForward = newOrientation * currentForward;
-            aiInputComponent->rotationInputX = newForward.x;
-            aiInputComponent->rotationInputY = newForward.y;
-            aiInputComponent->rotationInputZ = newForward.z;
-            aiInputComponent->isForward = true; // Ensure the ship is moving forward
+            //// Update the ship's forward direction based on the new orientation
+            //glm::vec3 newForward = newOrientation * currentForward;
+            //aiInputComponent->rotationInputX = newForward.x;
+            //aiInputComponent->rotationInputY = newForward.y;
+            //aiInputComponent->rotationInputZ = newForward.z;
+            //aiInputComponent->isForward = true; // Ensure the ship is moving forward
 
-            // Update the ship's orientation
-            transformComponent->orientation = newOrientation;
+            //// Update the ship's orientation
+            //transformComponent->orientation = newOrientation;
         }
 
     }
@@ -2104,6 +2127,8 @@ inline void World::wanderingState(Entity* entity, float dt)
             break;
         }
     }
+
+   
     for (int i = 0; i < colliderComponent->colliderEndPoints.size(); i++)
     {
         glm::vec3 pos = glm::vec3(transformComponent->transform[3]);
