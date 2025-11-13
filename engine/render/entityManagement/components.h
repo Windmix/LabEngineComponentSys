@@ -190,7 +190,7 @@ namespace Components
 
 		BehaviorType behavior;
 		AIState currentState = AIState::Idle;
-		
+		void* target;
 		//ship speed variables
 		float normalSpeed = 1.0f;
 		float boostSpeed = normalSpeed * 10.0f;

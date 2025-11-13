@@ -96,13 +96,13 @@ SpaceGameApp::Run()
    
 
     // Setup asteroids far
-    for (int i = 0; i < 100; i++)
+    for (int i = 0; i < 10; i++)
     {
        auto Asteroid = world->CreateAsteroid(200.0f);
        world->pureEntityData->Asteroids.push_back(Asteroid);
     }
     // Setup asteroids near
-    for (int i = 0; i < 100; i++)
+    for (int i = 0; i < 10; i++)
     {
          auto Asteroid = world->CreateAsteroid(70.0f);
          world->pureEntityData->Asteroids.push_back(Asteroid);
@@ -165,7 +165,7 @@ SpaceGameApp::Run()
     world->pureEntityData->ships.push_back(ship);
 
     //create aiships
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < 20; i++)
     {
         
         auto aiShips = world->CreateEnemyShip(false);
