@@ -1895,33 +1895,50 @@ inline void World::wanderingState(Entity* entity, float dt)
        
         AIcomponent->closestNodeCalled = true;
         AIcomponent->closestNodeFromShip = getclosestNodeFromAIship(entity);
-
         // Fallback if closestNodeFromShip was nullptr
         if (!AIcomponent->closestNodeFromShip)
         {
-            if (!pureEntityData->nodes.empty())
-            {
-                int randomIndex = rand() % pureEntityData->nodes.size();
-                AIcomponent->closestNodeFromShip = pureEntityData->nodes[randomIndex];
-                std::cout << "[AI] Fallback node selected at random index " << randomIndex << " for ship ID " << entity->id << "\n";
-            }
-            else
-            {
-                std::cerr << "[wanderingState] ❌ No nodes available, destroying ship ID " << entity->id << "\n";
+            int randomIndex = rand() % pureEntityData->nodes.size();
+            AIcomponent->closestNodeFromShip = pureEntityData->nodes[randomIndex];
+            std::cout << "[AI]Count not find closest node, using Fallback node selected at random index " << randomIndex << " for ship ID " << entity->id << "\n";
+           
+        }
 
+    }
+        closeNodeTranscomp = AIcomponent->closestNodeFromShip->GetComponent<Components::TransformComponent>();
+       
+    // Fallback if closestNodeFromShip was nullptr
+    if (!closeNodeTranscomp)
+    {
+        if (!pureEntityData->nodes.empty())
+        {
+            int randomIndex = rand() % pureEntityData->nodes.size();
+            closeNodeTranscomp = pureEntityData->nodes[randomIndex]->GetComponent<Components::TransformComponent>();
+            if (!closeNodeTranscomp)
+            {
+                std::cerr << "[wanderingState] ❌ Random node transform is nullptr, destroying ship ID " << entity->id << "\n";
+
+       
                 savedEnemyIDs.push(entity->id);
                 stateComponent->isRespawning = true;
                 CreateEnemyShip(true);
                 DestroyShip(entity->id, entity->eType);
                 DestroyEntity(entity->id, entity->eType); // implement or use your existing removal logic
-                return;
+                return; // exit early
             }
         }
-        closeNodeTranscomp = AIcomponent->closestNodeFromShip->GetComponent<Components::TransformComponent>();
-        
+        else
+        {
+            std::cerr << "[wanderingState] ❌ No nodes available, destroying ship ID " << entity->id << "\n";
 
+            savedEnemyIDs.push(entity->id);
+            stateComponent->isRespawning = true;
+            CreateEnemyShip(true);
+            DestroyShip(entity->id, entity->eType);
+            DestroyEntity(entity->id, entity->eType); // implement or use your existing removal logic
+            return;
+        }
     }
-    
     if (transformComponent && glm::any(glm::isnan(glm::vec3(transformComponent->transform[3]))))
     {
         std::cerr << "[wanderingState] ❌ Fallback node transform is NaN! Destroying ship ID " << entity->id << "\n";
