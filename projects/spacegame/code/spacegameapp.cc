@@ -92,7 +92,6 @@ SpaceGameApp::Run()
 
     //síngleton world
     World* world = World::instance();
-    //AstartAlgorithm* aStar = AstartAlgorithm::Instance();
    
 
     // Setup asteroids far
@@ -112,7 +111,7 @@ SpaceGameApp::Run()
     int size3D = 10;
     world->pureEntityData->NodestackSizescubicRoot = size3D;
 
-    float distanceBetweenPoints = 30.0f;
+    float distanceBetweenPoints = 10.0f;
     for (int i = 0; i < size3D; i++)
     {
         for (int j = 0; j < size3D; j++)
@@ -165,7 +164,7 @@ SpaceGameApp::Run()
     world->pureEntityData->ships.push_back(ship);
 
     //create aiships
-    for (int i = 0; i < 20; i++)
+    for (int i = 0; i < 5; i++)
     {
         
         auto aiShips = world->CreateEnemyShip(false);

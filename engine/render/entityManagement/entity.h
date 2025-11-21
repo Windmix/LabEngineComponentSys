@@ -27,23 +27,7 @@ public:
 	template<typename T>
 	T* GetComponent();
 
-	//ai stuff
-	bool isRespawning = false;
-	Entity* parentNode = nullptr;
-	std::vector<Entity*> path;
-	Entity* closestNodeFromShip;
-	int gCost = 0;  // Cost from start to current node
-	int hCost = 0;  // Heuristic cost from current node to end
-	int FCost() const { return gCost + hCost;}
 
-	int pathIndex = 0;
-	float nodeArrivalTimer = 0.0f;
-	bool hasReachedTheStartNode = false;
-	bool closestNodeCalled = false;
-	bool isAvoidingAsteroids = false;
-	bool isDestroyed = false;
-	float avoidanceCooldown = 0.01f;
-	float avoidanceTime = 0.0f;
 };
 //--------------------------------------------------------------------------------------------
 

@@ -19,6 +19,7 @@ enum class BehaviorType
 
 enum class AIState 
 {
+
 	Idle,
 	ChasingEnemy,
 	Roaming,

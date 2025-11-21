@@ -12,5 +12,7 @@ enum class ComponentType : uint32_t
 	INPUT = 1 << 6,				// 01000000 
 	PARTICLE_EMITTER = 1 << 7,	// 10000000
 	NAVNODE = 1 << 8,           // 00000001 00000000
-	AI_CONTROLLER = 1 << 9      // 00000001 00000000 00000000
+	AI_CONTROLLER = 1 << 9,     // 00000010 00000000 
+	STATE = 1 << 10,		    // 00000100 00000000 
+	AI = 1 << 11				// 00001000 00000000 
 };

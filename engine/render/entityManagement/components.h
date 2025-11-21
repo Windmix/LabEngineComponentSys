@@ -12,15 +12,19 @@
 #include "render/input/mouse.h"
 #include "render/input/keyboard.h"
 
+
 // Implementation files (only include if strictly necessary)
 #include <render/physics.cc>
 #include <render/cameramanager.h>
 #include "render/particlesystem.h"
 
 
+class Entity;
 
 namespace Components
 {
+
+
 	class TransformComponent : public ComponentBase
 	{
 
@@ -190,7 +194,7 @@ namespace Components
 
 		BehaviorType behavior;
 		AIState currentState = AIState::Idle;
-		void* target;
+		Entity* target;
 		//ship speed variables
 		float normalSpeed = 1.0f;
 		float boostSpeed = normalSpeed * 10.0f;
@@ -213,13 +217,40 @@ namespace Components
 		bool isForward = false;
 		bool isBoosting = false;
 		bool isShooting = false;
+	};
+	class AI : public ComponentBase
+	{
+	public:
+		static constexpr ComponentType TYPE = ComponentType::AI;
+		//ai stuff
+		Entity* parentNode = nullptr;
 
-		
+		std::vector<Entity*> path;
+		Entity* closestNodeFromShip;
 
+		int gCost = 0;  // Cost from start to current node
+		int hCost = 0;  // Heuristic cost from current node to end
+		int FCost() const { return gCost + hCost; }
 
-		AIinputController() {}
+		int pathIndex = 0;
+		float nodeArrivalTimer = 0.0f;
+		bool hasReachedTheStartNode = false;
+		bool closestNodeCalled = false;
+	};
+
+	class State : public ComponentBase
+	{
+	public:
+		static constexpr ComponentType TYPE = ComponentType::STATE;
+
+		bool isRespawning = false;
+		bool isAvoidingAsteroids = false;
+		bool isDestroyed = false;
+		float avoidanceCooldown = 0.01f;
+		float avoidanceTime = 0.0f;
 
 	};
+
 
 }
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------

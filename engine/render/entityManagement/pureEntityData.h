@@ -47,7 +47,6 @@ inline std::vector<Entity*> PureEntityData::getNeighbors(Entity* entity)
 
     int currentID = entity->id;
     int size = NodestackSizescubicRoot;
-    int maxID = size * size * size - 1;
 
     // Convert current ID to 3D position
     int currentX = currentID % size;
@@ -76,39 +75,37 @@ inline std::vector<Entity*> PureEntityData::getNeighbors(Entity* entity)
                 // Convert back to 1D ID
                 int neighborID = nx + ny * size + nz * size * size;
 
-                // Skip invalid ID
-                if (neighborID < 0 || neighborID > maxID)
-                    continue;
 
                 // Find neighbor in grid
                 auto neighborIt = gridNodes.find(neighborID);
                 if (neighborIt == gridNodes.end())
                     continue;
 
-
-
                 // Check if diagonal
-                bool isDiagonal = (abs(dx) + abs(dy) + abs(dz)) > 1;
+               bool isDiagonal = (abs(dx) + abs(dy) + abs(dz)) > 1;
 
-                if (isDiagonal)
-                {
-                    // Check if all adjacent axis-aligned neighbors exist
-                    int idX = currentX + dx + currentY * size + currentZ * size * size;
-                    int idY = currentX + (currentY + dy) * size + currentZ * size * size;
-                    int idZ = currentX + currentY * size + (currentZ + dz) * size * size;
+               if (isDiagonal)
+               {
+                   // Check if all adjacent axis-aligned neighbors exist
+                   int idX = currentX + dx + currentY * size + currentZ * size * size;
+                   int idY = currentX + (currentY + dy) * size + currentZ * size * size;
+                   int idZ = currentX + currentY * size + (currentZ + dz) * size * size;
 
-                    if (gridNodes.find(idX) == gridNodes.end() ||
-                        gridNodes.find(idY) == gridNodes.end() ||
-                        gridNodes.find(idZ) == gridNodes.end())
-                    {
-                        continue; // Block diagonal if one of the axis-aligned steps is missing
-                    }
-                }
+                   if (gridNodes.find(idX) == gridNodes.end() ||
+                       gridNodes.find(idY) == gridNodes.end() ||
+                       gridNodes.find(idZ) == gridNodes.end())
+                   {
+                       continue; // Block diagonal if one of the axis-aligned steps is missing
+                   }
+               }
 
-                // Optional: skip if node is not walkable
-                // if (!neighborIt->second->walkable) continue;
+               // Optional: skip if node is not walkable
+               // if (!neighborIt->second->walkable) continue;
+               
 
                 neighbors.push_back(neighborIt->second);
+
+               
             }
         }
     }

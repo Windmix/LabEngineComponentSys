@@ -3,6 +3,7 @@
 #include <queue>
 #include "pureEntityData.h"
 
+
 struct CompareGameObjectX
 {
     bool operator()(Entity* a, Entity* b); // min-heap behavior
@@ -38,7 +39,9 @@ AstarAlgorithm* AstarAlgorithm::_instance = nullptr;
 
 inline bool CompareGameObjectX::operator()(Entity* a, Entity* b)
 {
-    return a->FCost() > b->FCost(); // Lower fCost = higher priority
+    auto* aComp = a->GetComponent<Components::AI>();
+    auto* bComp = b->GetComponent<Components::AI>();
+    return aComp->FCost() > bComp->FCost(); // Lower fCost = higher priority
 }
 
 inline bool AstarAlgorithm::containsInOpenList(Entity* gameobject)
@@ -89,12 +92,16 @@ inline std::vector<Entity*> AstarAlgorithm::findPath(Entity* start, Entity* end)
         openList.pop();
         openSet.erase(current);
 
-        closedList.insert(current);
-
         if (current->id == end->id)
         {
             return retracePath(start, end);
         }
+        closedList.insert(current);
+
+        auto* currentNav = current->GetComponent<Components::AI>();
+        if(current->eType == EntityType::Node)
+        if (!currentNav)
+            continue; // skip entities without AI component
 
         for (Entity* neighbor : entityData->getNeighbors(current))
         {
@@ -102,14 +109,19 @@ inline std::vector<Entity*> AstarAlgorithm::findPath(Entity* start, Entity* end)
             if (closedList.contains(neighbor))
                 continue;
 
-            int newMovementCostToNeighbor = current->gCost + getDistance(current, neighbor);
+            auto* neighborNav = neighbor->GetComponent<Components::AI>();
+            if (!neighborNav)
+                continue;
 
-            if (newMovementCostToNeighbor < current->gCost || !containsInOpenList(neighbor))
+
+            int newMovementCostToNeighbor = currentNav->gCost + getDistance(current, neighbor);
+
+            if (newMovementCostToNeighbor < neighborNav->gCost || !containsInOpenList(neighbor))
             {
-                neighbor->gCost = newMovementCostToNeighbor;
-                neighbor->hCost = getDistance(neighbor, end);
+                neighborNav->gCost = newMovementCostToNeighbor;
+                neighborNav->hCost = getDistance(neighbor, end);
 
-                neighbor->parentNode = current;
+                neighborNav->parentNode = current;
 
                 if (!containsInOpenList(neighbor))
                 {
@@ -146,11 +158,16 @@ inline std::vector<Entity*> AstarAlgorithm::retracePath(Entity* startObject, Ent
 {
     std::vector<Entity*> path;
     Entity* current = endObject;
-
     while (current != startObject)
     {
+
+        auto* currentComp = current->GetComponent<Components::AI>();
+        if (!currentComp || currentComp->parentNode == nullptr)
+            break; // prevent infinite loop if broken chain
+
+
         path.push_back(current);
-        current = current->parentNode;
+        current = currentComp->parentNode;
     }
 
     std::reverse(path.begin(), path.end());
