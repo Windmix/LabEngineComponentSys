@@ -1900,7 +1900,7 @@ inline void World::wanderingState(Entity* entity, float dt)
         {
             int randomIndex = rand() % pureEntityData->nodes.size();
             AIcomponent->closestNodeFromShip = pureEntityData->nodes[randomIndex];
-            std::cout << "[AI]Count not find closest node, using Fallback node selected at random index " << randomIndex << " for ship ID " << entity->id << "\n";
+            std::cout << "[AI] Count not find closest node, using Fallback node selected at random index " << randomIndex << " for ship ID " << entity->id << "\n";
            
         }
 
@@ -2255,7 +2255,7 @@ inline void World::attackState(Entity* entity, float dt)
             {
                 minDistSq = currentMinDistSq;
                 closestEntity = entityIn;
-                closestTComp = tComp;
+    
             }
         }
 
